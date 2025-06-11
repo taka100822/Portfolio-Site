@@ -22,7 +22,7 @@ const Works = () => {
       description: '私が立ち上げた学生チーム「TOMSN」で制作した3Dアクションゲーム',
       detailedDescription: '学生5人のチーム「TOMSN」での開発プロジェクト\nプログラマーとプランナーの両方を担当し、ゲームシステムの設計から実装まで幅広く関わりました。チーム開発でのコミュニケーションと進行管理の経験も積むことができました。',
       features: ['チーム開発', 'アジャイル開発', 'Probuilder', '3DCG'],
-      image: '/Image/CrashReport.png',
+      image: `${process.env.PUBLIC_URL}/Image/CrashReport.png`,
       links: {}
     },
     {
@@ -34,7 +34,7 @@ const Works = () => {
       description: '研究室のチームで制作したマルチプレイ脱出ゲーム',
       detailedDescription: '研究室のメンバーとチーム開発で制作した2人協力型脱出ゲーム\nネットワーク機能の実装とゲームバランスの調整を担当。\n私の研究室は数年以内に閉鎖されるため、3Dスキャナーで空間をデジタル保存し、そのデータを使って脱出ゲームを制作しました。',
       features: ['チーム開発', 'マルチプレイ', '協力型謎解き', 'ネットワーク機能', '3Dスキャン'],
-      image: '/Image/MultiEscape.png',
+      image: `${process.env.PUBLIC_URL}/Image/MultiEscape.png`,
       links: {
         github: 'https://github.com/Taka100822/LabEscapeGame'
       }
@@ -60,7 +60,7 @@ const Works = () => {
       description: 'ハートを分け合って町を明るくするゲーム',
       detailedDescription: 'Unity1WeekGameJamの「あい」というテーマで制作した3Dアクションゲーム\nプレイヤーがハートを集めて町の人々に分け与えることで、暗い町を明るくしていくゲームです。限られた時間の中で企画・実装・調整まで一人で担当しました。',
       features: ['個人開発', 'Asset使用', 'Unity1WeekGameJam参加作品'],
-      image: '/Image/Wakeai.png',
+      image: `${process.env.PUBLIC_URL}/Image/Wakeai.png`,
       links: {
         unityroom: 'https://unityroom.com/games/wakeai',
         github: 'https://github.com/Taka100822/Unity1WeekGameJam_1st'
@@ -75,7 +75,7 @@ const Works = () => {
       description: 'ゲームの視覚情報に関する研究のために作成した2Dアクションゲーム',
       detailedDescription: '卒業研究の一環として制作した2Dアクションゲーム\n視覚情報の多寡に関する研究データを収集するためのゲームで、プレイヤーの行動データを詳細に記録・分析できる仕組みを実装しました。遊ぶにはコントローラーが必要です。',
       features: ['Unity初作品', '研究用途', 'データ収集機能', 'TileMap'],
-      image: '/Image/ReserchGame.png',
+      image: `${process.env.PUBLIC_URL}/Image/ReserchGame.png`,
       links: {
         unityroom: 'https://unityroom.com/games/2d_actiongame',
         github: 'https://github.com/Taka100822/Graduation-Study'
@@ -90,7 +90,7 @@ const Works = () => {
       description: 'パズドラのようなパズルゲーム（練習用として制作）',
       detailedDescription: 'パズル＆ドラゴンズのようなパズルゲームを練習として制作\nパズルのロジック実装やUI設計の技術向上を目的として開発しました。基本的なスコアシステムを実装しています。',
       features: ['パズルゲーム', '練習作品', 'UI設計', 'スコアシステム'],
-      image: '/Image/PazzleGame.png',
+      image: `${process.env.PUBLIC_URL}/Image/PazzleGame.png`,
       links: {
         unityroom: 'https://unityroom.com/games/pazlegame_practice'
       }
@@ -104,7 +104,7 @@ const Works = () => {
       description: 'インターンで制作したチャットWebアプリケーション',
       detailedDescription: 'Nuxt.jsを使用して制作したリアルタイムチャットアプリケーション\nフロントエンド開発の技術習得を目的として制作し、リアルタイム通信やユーザー管理機能を実装しました。',
       features: ['リアルタイムチャット', 'ログイン機能', 'データベースを活用したデータの保存'],
-      image: '/Image/chatApp.png',
+      image: `${process.env.PUBLIC_URL}/Image/chatApp.png`,
       links: {
         github: 'https://github.com/Taka100822/chat-app'
       }
@@ -118,7 +118,7 @@ const Works = () => {
       description: 'フロントエンドの一部分を担当したチーム開発プロジェクト',
       detailedDescription: 'チーム開発で制作した冷蔵庫の食材管理アプリケーション\n主にフロントエンドの実装を担当し、UI/UXの設計と実装に携わりました。チーム開発でのGit運用や役割分担の経験も積むことができました。',
       features: ['初チーム開発', 'フロントエンド担当', 'UI/UX設計'],
-      image: '/Image/fridge-manager.png',
+      image: `${process.env.PUBLIC_URL}/Image/fridge-manager.png`,
       links: {
         github: 'https://github.com/KIT-HI-ProgrammingContestGroupC/fridge-manager'
       }

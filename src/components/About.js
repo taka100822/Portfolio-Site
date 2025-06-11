@@ -92,7 +92,7 @@ const About = () => {
                 animate={inView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
                 transition={{ duration: 1, delay: 0.6 }}
               >
-                <img src="/Image/me.jpeg" alt="Profile" className="profile-image" />
+                <img src={`${process.env.PUBLIC_URL}/Image/me.jpeg`} alt="Profile" className="profile-image" />
               </motion.div>
 
               <motion.div 

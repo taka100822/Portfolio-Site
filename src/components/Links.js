@@ -35,7 +35,7 @@ const Links = () => {
     {
       title: 'unityroom',
       description: '制作したゲームを公開・配信しているプラットフォーム',
-      url: 'https://unityroom.com/users/Taka_unityroom',
+      url: 'https://unityroom.com/users/taka_unityroom',
       icon: FaGamepad,
       color: '#e60012'
     }

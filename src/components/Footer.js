@@ -49,7 +49,7 @@ const Footer = () => {
                 <li><a href="https://note.com/Taka10822" target="_blank" rel="noopener noreferrer">note</a></li>
                 <li><a href="https://github.com/Taka100822" target="_blank" rel="noopener noreferrer">GitHub</a></li>
                 <li><a href="https://qiita.com/Taka10822" target="_blank" rel="noopener noreferrer">Qiita</a></li>
-                <li><a href="https://unityroom.com/users/Taka_unityroom" target="_blank" rel="noopener noreferrer">unityroom</a></li>
+                <li><a href="https://unityroom.com/users/taka_unityroom" target="_blank" rel="noopener noreferrer">unityroom</a></li>
               </ul>
             </div>
           </motion.div>
