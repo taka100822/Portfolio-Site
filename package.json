@@ -1,6 +1,6 @@
 {
   "name": "portfolio-site",
-  "homepage": "https://taka100822.github.io/Portfolio-Site",
+  "homepage": "./",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
