@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaExternalLinkAlt, FaGithub, FaGamepad } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaGithub, FaGamepad, FaPenFancy, FaSteam, FaGlobe } from 'react-icons/fa';
 import './Works.css';
 
 const Works = () => {
@@ -22,8 +22,11 @@ const Works = () => {
       description: '私が立ち上げた学生チーム「TOMSN」で制作した3Dアクションゲーム',
       detailedDescription: '学生5人のチーム「TOMSN」での開発プロジェクト\nプログラマーとプランナーの両方を担当し、ゲームシステムの設計から実装まで幅広く関わりました。チーム開発でのコミュニケーションと進行管理の経験も積むことができました。',
       features: ['チーム開発', 'アジャイル開発', 'Probuilder', '3DCG'],
-      image: '/Image/CrashReport.png',
-      links: {}
+      image: `${process.env.PUBLIC_URL}/Image/CrashReport.png`,
+      links: {
+        github: 'https://github.com/TOMSNtomsn/CRASH-REPORT',
+        unityroom: 'https://unityroom.com/games/crash_report',
+      }
     },
     {
       id: 2,
@@ -32,11 +35,12 @@ const Works = () => {
       duration: '2ヶ月',
       technology: ['Unity', 'C#', '3D Scan', 'Photon PUN2'],
       description: '研究室のチームで制作したマルチプレイ脱出ゲーム',
-      detailedDescription: '研究室のメンバーとチーム開発で制作した2人協力型脱出ゲーム\nネットワーク機能の実装とゲームバランスの調整を担当。\n私の研究室は数年以内に閉鎖されるため、3Dスキャナーで空間をデジタル保存し、そのデータを使って脱出ゲームを制作しました。',
-      features: ['チーム開発', 'マルチプレイ', '協力型謎解き', 'ネットワーク機能', '3Dスキャン'],
-      image: '/Image/MultiEscape.png',
+      detailedDescription: '研究室のメンバーとチーム開発で制作した2人協力型脱出ゲーム\nネットワーク機能の実装とゲームバランスの調整を担当。\n私の研究室は数年以内に閉鎖されるため、3Dスキャナーで空間をデジタル保存し、そのデータを使って脱出ゲームを制作しました。\n研究室をそのままデータとして使用しており、個人情報保護の観点によりゲームは公開していません。',
+      features: ['チーム開発', '協力型謎解き', 'マルチプレイ機能', '3Dスキャン'],
+      image: `${process.env.PUBLIC_URL}/Image/MultiEscape.png`,
       links: {
-        github: 'https://github.com/Taka100822/LabEscapeGame'
+        github: 'https://github.com/Taka100822/LabEscapeGame',
+        note: 'https://note.com/taka10822/n/n9031b5fbc073?sub_rt=share_pw'
       }
     },
     {
@@ -46,13 +50,28 @@ const Works = () => {
       duration: '制作中',
       technology: ['Unity', 'C#'],
       description: 'BitSummitGameJam 2025にて制作中',
-      detailedDescription: 'BitSummitGameJam 2025で現在制作中のプロジェクト\nプランナーとしてチームの進行管理&仕様書作成を担当しつつ、プログラマーとしてシステムの制御を実装。\n詳細は開発完了後に公開予定です。',
+      detailedDescription: 'BitSummitGameJam 2025で現在制作中のプロジェクト\nプランナーとしてチームの進行管理&仕様書作成を担当しつつ、プログラマーとしてシステムの制御を実装。\n球状モニターを使用予定です。\n詳細は開発完了後に公開予定です。',
       features: ['チーム開発', 'BSGM2025', '球状モニター', '2画面',　'マルチプレイ'],
-      image: 'https://via.placeholder.com/400x250/1a1a1a/f59e0b?text=DreamMayDay',
+      image: `${process.env.PUBLIC_URL}/Image/DreamMayday.png`,
       links: {}
     },
     {
       id: 4,
+      title: 'POGO・Stadium',
+      category: 'Action & Strategy',
+      duration: '10ヶ月',
+      technology: ['Unity', 'C#'],
+      description: '新感覚のホッピング陣取りバトルゲーム',
+      detailedDescription: 'アルバイトで企画・実装に携わったゲーム\n企画面では、主に演出の仕様作成、ローカライズデータ作成、ステージ制作を担当しました。実装面では、自ら設計した演出の実装や、背景の制作などを行いました。実際に収益が発生するタイトルの開発に関わることで、ゲーム制作におけるプロセスの流れや、マーケティングの重要性を実感しました。また、中規模のチームでの共同制作を通じて、他職種との連携やスケジュール管理といった実践的な開発経験を積むことができました。',
+      features: ['学生アルバイト', '収益化タイトル', '中規模チーム開発'],
+      image: `${process.env.PUBLIC_URL}/Image/PogoStadium.jpg`,
+      links: {
+        steam: 'https://store.steampowered.com/app/3672410/POGO_Stadium',
+        website: 'https://pogostadium.com',
+      }
+    },
+    {
+      id: 5,
       title: 'わけあい',
       category: '3D Action',
       duration: '1週間',
@@ -63,11 +82,12 @@ const Works = () => {
       image: '/Image/Wakeai.png',
       links: {
         unityroom: 'https://unityroom.com/games/wakeai',
-        github: 'https://github.com/Taka100822/Unity1WeekGameJam_1st'
+        github: 'https://github.com/Taka100822/Unity1WeekGameJam_1st',
+        note: 'https://note.com/taka10822/n/n25c7fc449fc2?sub_rt=share_pw'
       }
     },
     {
-      id: 5,
+      id: 6,
       title: '研究用ゲーム',
       category: '2D Action',
       duration: '5ヶ月',
@@ -82,7 +102,7 @@ const Works = () => {
       }
     },
     {
-      id: 6,
+      id: 7,
       title: 'パズルゲーム',
       category: 'Puzzle',
       duration: '2週間',
@@ -92,11 +112,26 @@ const Works = () => {
       features: ['パズルゲーム', '練習作品', 'UI設計', 'スコアシステム'],
       image: '/Image/PazzleGame.png',
       links: {
-        unityroom: 'https://unityroom.com/games/pazlegame_practice'
+        unityroom: 'https://unityroom.com/games/puzzlegame_practice',
+        github: 'https://github.com/taka100822/puzzle-game'
       }
     },
     {
-      id: 7,
+      id: 8,
+      title: 'MALWARE BUSTER 企画書',
+      category: 'Proposal',
+      duration: '3週間',
+      technology: ['PowerPoint'],
+      description: '初めて作成したゲーム企画書',
+      detailedDescription: '25卒就職活動用に作成したゲーム企画書\n企画書の書き方を書籍とネットで勉強し、3週間かけて作成しました。',
+      features: ['企画書', '2Dアクション'],
+      image: `${process.env.PUBLIC_URL}/Image/Proposal1.png`,
+      links: {
+        pdf: `${process.env.PUBLIC_URL}/PDF/Proposal1.pdf`
+      }
+    },
+    {
+      id: 9,
       title: 'チャットアプリ',
       category: 'Web App',
       duration: '1週間',
@@ -110,7 +145,7 @@ const Works = () => {
       }
     },
     {
-      id: 8,
+      id: 10,
       title: '冷蔵庫管理アプリ',
       category: 'WebApp',
       duration: '3ヶ月',
@@ -207,9 +242,29 @@ const Works = () => {
                       <FaGamepad /> unityroom
                     </a>
                   )}
+                  {work.links.steam && (
+                    <a href={work.links.steam} target="_blank" rel="noopener noreferrer" className="work-link">
+                      <FaSteam /> Steam
+                    </a>
+                  )}
+                  {work.links.website && (
+                    <a href={work.links.website} target="_blank" rel="noopener noreferrer" className="work-link">
+                      <FaGlobe /> Website
+                    </a>
+                  )}
                   {work.links.github && (
                     <a href={work.links.github} target="_blank" rel="noopener noreferrer" className="work-link">
                       <FaGithub /> GitHub
+                    </a>
+                  )}
+                  {work.links.pdf && (
+                    <a href={work.links.pdf} target="_blank" rel="noopener noreferrer" className="work-link">
+                      <FaExternalLinkAlt /> PDF
+                    </a>
+                  )}
+                  {work.links.note && (
+                    <a href={work.links.note} target="_blank" rel="noopener noreferrer" className="work-link">
+                      <FaPenFancy /> note
                     </a>
                   )}
                 </div>
@@ -267,9 +322,29 @@ const Works = () => {
                         <FaGamepad /> unityroomで遊ぶ
                       </a>
                     )}
+                    {selectedWork.links.steam && (
+                      <a href={selectedWork.links.steam} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                        <FaSteam /> Steamで遊ぶ
+                      </a>
+                    )}
+                    {selectedWork.links.website && (
+                      <a href={selectedWork.links.website} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                        <FaGlobe /> Webサイトを見る
+                      </a>
+                    )}
                     {selectedWork.links.github && (
                       <a href={selectedWork.links.github} target="_blank" rel="noopener noreferrer" className="btn-secondary">
                         <FaGithub /> GitHubで見る
+                      </a>
+                    )}
+                    {selectedWork.links.pdf && (
+                      <a href={selectedWork.links.pdf} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                        <FaExternalLinkAlt /> PDFを見る
+                      </a>
+                    )}
+                    {selectedWork.links.note && (
+                      <a href={selectedWork.links.note} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                        <FaPenFancy /> noteを見る
                       </a>
                     )}
                   </div>

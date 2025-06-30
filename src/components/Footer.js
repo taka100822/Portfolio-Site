@@ -20,7 +20,7 @@ const Footer = () => {
             viewport={{ once: true }}
           >
             <div className="footer-logo">
-              <span className="logo-text gradient-text">Taka’s Portfolio</span>
+              <span className="logo-text gradient-text">Taka10’s Portfolio</span>
             </div>
             <p className="footer-description">
               ゲーム業界でプランナー、Web業界でプロダクトマネージャーを目指し、日々成長中です。
@@ -46,10 +46,10 @@ const Footer = () => {
             <div className="link-group">
               <h4>External</h4>
               <ul>
-                <li><a href="https://note.com/Taka10822" target="_blank" rel="noopener noreferrer">note</a></li>
                 <li><a href="https://github.com/Taka100822" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a href="https://unityroom.com/users/taka_unityroom" target="_blank" rel="noopener noreferrer">unityroom</a></li>
+                <li><a href="https://note.com/Taka10822" target="_blank" rel="noopener noreferrer">note</a></li>
                 <li><a href="https://qiita.com/Taka10822" target="_blank" rel="noopener noreferrer">Qiita</a></li>
-                <li><a href="https://unityroom.com/users/Taka_unityroom" target="_blank" rel="noopener noreferrer">unityroom</a></li>
               </ul>
             </div>
           </motion.div>
@@ -76,7 +76,7 @@ const Footer = () => {
           viewport={{ once: true }}
         >
           <p className="copyright">
-            © 2025 Taka’s Portfolio. Made with{' '}
+            © 2025 Taka10’s Portfolio. Made with{' '}
             <FaHeart className="heart-icon" /> by Taka10
           </p>
         </motion.div>

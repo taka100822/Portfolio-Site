@@ -52,7 +52,7 @@ const Hero = () => {
           animate={inView ? "visible" : "hidden"}
         >
           <motion.h1 className="hero-title" variants={itemVariants}>
-            <span className="title-line">Taka’s</span>
+            <span className="title-line">Taka10’s</span>
             <span className="title-line gradient-text">Portfolio</span>
             <span className="title-line">Site</span>
           </motion.h1>

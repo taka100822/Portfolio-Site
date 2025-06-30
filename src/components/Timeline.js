@@ -108,7 +108,8 @@ const Timeline = () => {
       description: '初めてゲームジャム（Unity1Week）に参加し、企画から開発までを1人で経験しました。短期間での開発の難しさを実感しました。',
       icon: FaCode,
       type: 'project',
-      details: ['個人開発', 'unity', 'C#']
+      details: ['個人開発', 'unity', 'C#'],
+      noteLink: 'https://note.com/taka10822/n/n25c7fc449fc2?sub_rt=share_pw'
     },
     {
       year: '2025',
@@ -117,13 +118,14 @@ const Timeline = () => {
       description: '私の研究室が数年で閉鎖になることを知り、思い出を残すために、3Dスキャンデータを活用したマルチプレイ脱出ゲームを開発しました。',
       icon: FaCode,
       type: 'project',
-      details: ['チーム開発', 'unity', 'C#']
+      details: ['チーム開発', 'unity', 'C#'],
+      noteLink: 'https://note.com/taka10822/n/n9031b5fbc073?sub_rt=share_pw'
     },
     {
       year: '2025',
       month: '05',
       title: 'BitSummitGameJam2025の参加',
-      description: '他の開発者との交友関係を得るため、BitSummit Game Jam 2025に参加しました。（※2025年6月時点で制作継続中）',
+      description: '他の開発者との交友関係を得るため、BitSummit Game Jam 2025に参加しました。（※2025年7月時点で制作継続中）',
       icon: FaCode,
       type: 'project',
       details: ['チーム開発', 'unity', 'C#']
@@ -146,7 +148,17 @@ const Timeline = () => {
       icon: FaCode,
       type: 'experience',
       details: ['Claude Code', 'React']
-    }
+    },
+    {
+      year: '2025',
+      month: '06',
+      title: 'TOMSN第1弾「CRASH REPORT」をリリース',
+      description: 'ゲーム制作チームTOMSNで開発したゲームを公開しました。リーダーとしてチームの進行管理を行い、長期のチーム開発経験を得ました。',
+      icon: FaCode,
+      type: 'project',
+      details: ['Unity', 'C#', 'Blender'],
+      noteLink: ''
+    },
   ];
 
   const containerVariants = {

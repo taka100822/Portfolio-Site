@@ -103,8 +103,8 @@ const About = () => {
               >
                 <div className="card-inner">
                   <div className="card-icon">🎮</div>
-                  <h4>感動を生む体験設計</h4>
-                  <p>　</p>
+                  <h4>コンテンツ設計</h4>
+                  <p> </p>
                   <div className="card-glow"></div>
                 </div>
               </motion.div>

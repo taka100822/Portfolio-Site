@@ -18,7 +18,7 @@ const LoadingScreen = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <div className="logo-text">
-            <span className="logo-char">Taka</span>
+            <span className="logo-char">Taka10</span>
           </div>
         </motion.div>
         

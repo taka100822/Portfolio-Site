@@ -12,18 +12,25 @@ const Links = () => {
 
   const links = [
     {
-      title: 'note',
-      description: 'ゲーム開発の記録や読んだ書籍に関する記事などを投稿しています',
-      url: 'https://note.com/Taka10822',
-      icon: FaStickyNote,
-      color: '#41c9b4'
-    },
-    {
       title: 'GitHub',
       description: '制作物のソースコードを公開しています',
       url: 'https://github.com/Taka100822',
       icon: FaGithub,
       color: '#333333'
+    },
+    {
+      title: 'unityroom',
+      description: '制作したゲームを公開・配信しているプラットフォーム',
+      url: 'https://unityroom.com/users/taka_unityroom',
+      icon: FaGamepad,
+      color: '#e60012'
+    },
+    {
+      title: 'note',
+      description: 'ゲーム開発の記録や読んだ書籍に関する記事などを投稿しています',
+      url: 'https://note.com/Taka10822',
+      icon: FaStickyNote,
+      color: '#41c9b4'
     },
     {
       title: 'Qiita',
@@ -32,17 +39,9 @@ const Links = () => {
       icon: FaBook,
       color: '#55c500'
     },
-    {
-      title: 'unityroom',
-      description: '制作したゲームを公開・配信しているプラットフォーム',
-      url: 'https://unityroom.com/users/Taka_unityroom',
-      icon: FaGamepad,
-      color: '#e60012'
-    }
   ];
 
   const containerVariants = {
-    hidden: {},
     visible: {
       transition: {
         staggerChildren: 0.15

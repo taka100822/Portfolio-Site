@@ -47,7 +47,7 @@ const Header = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <span className="logo-text gradient-text">Taka’s Portfolio</span>
+            <span className="logo-text gradient-text">Taka10’s Portfolio</span>
           </motion.div>
 
           <nav className="desktop-nav">
