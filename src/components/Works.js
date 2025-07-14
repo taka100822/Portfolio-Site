@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaExternalLinkAlt, FaGithub, FaGamepad, FaPenFancy, FaSteam, FaGlobe } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaGithub, FaGamepad, FaPenFancy, FaSteam, FaGlobe, FaYoutube, FaDesktop } from 'react-icons/fa';
 import './Works.css';
 
 const Works = () => {
@@ -51,9 +51,12 @@ const Works = () => {
       technology: ['Unity', 'C#'],
       description: 'BitSummitGameJam 2025にて制作中',
       detailedDescription: 'BitSummitGameJam 2025で現在制作中のプロジェクト\nプランナーとしてチームの進行管理&仕様書作成を担当しつつ、プログラマーとしてシステムの制御を実装。\n球状モニターを使用予定です。\n詳細は開発完了後に公開予定です。',
-      features: ['チーム開発', 'BSGM2025', '球状モニター', '2画面',　'マルチプレイ'],
+      features: ['チーム開発', 'BSGM2025', '球状モニター', '2画面', 'マルチプレイ'],
       image: `${process.env.PUBLIC_URL}/Image/DreamMayday.png`,
-      links: {}
+      links: {
+        Youtube: 'https://youtu.be/t4DQaSw2VJk?si=8auwvXWbhMSgRNEL',
+        itch: 'https://bitsummit-gamejam.itch.io/dreammayday'
+      }
     },
     {
       id: 4,
@@ -68,6 +71,7 @@ const Works = () => {
       links: {
         steam: 'https://store.steampowered.com/app/3672410/POGO_Stadium',
         website: 'https://pogostadium.com',
+        Youtube: 'https://youtu.be/1p6bkLrbkSs?si=lP8HiRBbq7188G88',
       }
     },
     {
@@ -239,7 +243,12 @@ const Works = () => {
                 <div className="work-links">
                   {work.links.unityroom && (
                     <a href={work.links.unityroom} target="_blank" rel="noopener noreferrer" className="work-link">
-                      <FaGamepad /> unityroom
+                      <FaDesktop /> unityroom
+                    </a>
+                  )}
+                  {work.links.itch && (
+                    <a href={work.links.itch} target="_blank" rel="noopener noreferrer" className="work-link">
+                      <FaGamepad /> itch.io
                     </a>
                   )}
                   {work.links.steam && (
@@ -265,6 +274,11 @@ const Works = () => {
                   {work.links.note && (
                     <a href={work.links.note} target="_blank" rel="noopener noreferrer" className="work-link">
                       <FaPenFancy /> note
+                    </a>
+                  )}
+                  {work.links.Youtube && (
+                    <a href={work.links.Youtube} target="_blank" rel="noopener noreferrer" className="work-link">
+                      <FaYoutube /> YouTube
                     </a>
                   )}
                 </div>
@@ -319,7 +333,12 @@ const Works = () => {
                   <div className="modal-links">
                     {selectedWork.links.unityroom && (
                       <a href={selectedWork.links.unityroom} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                        <FaGamepad /> unityroomで遊ぶ
+                        <FaDesktop /> unityroomで遊ぶ
+                      </a>
+                    )}
+                    {selectedWork.links.itch && (
+                      <a href={selectedWork.links.itch} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                        <FaGamepad /> itch.ioで遊ぶ
                       </a>
                     )}
                     {selectedWork.links.steam && (
@@ -328,7 +347,7 @@ const Works = () => {
                       </a>
                     )}
                     {selectedWork.links.website && (
-                      <a href={selectedWork.links.website} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                      <a href={selectedWork.links.website} target="_blank" rel="noopener noreferrer" className="btn-secondary">
                         <FaGlobe /> Webサイトを見る
                       </a>
                     )}
@@ -345,6 +364,11 @@ const Works = () => {
                     {selectedWork.links.note && (
                       <a href={selectedWork.links.note} target="_blank" rel="noopener noreferrer" className="btn-secondary">
                         <FaPenFancy /> noteを見る
+                      </a>
+                    )}
+                    {selectedWork.links.Youtube && (
+                      <a href={selectedWork.links.Youtube} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                        <FaYoutube /> YouTubeを見る
                       </a>
                     )}
                   </div>
