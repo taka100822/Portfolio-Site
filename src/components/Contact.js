@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaTwitter } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import './Contact.css';
 
 const Contact = () => {
@@ -32,8 +32,8 @@ const Contact = () => {
             <div className="info-text">
               <h3 className="gradient-text">ご連絡について</h3>
               <p>
-                ゲーム業界・Web業界での新卒採用に関するご相談や、
-                ポートフォリオについてのご質問など、
+                ゲームプランナー新卒採用に関するご相談や、
+                ポートフォリオについてのご質問など
                 はXのDMでお受けしております。
               </p>
               <p>
@@ -55,7 +55,7 @@ const Contact = () => {
               whileTap={{ scale: 0.95 }}
             >
               <div className="twitter-icon">
-                <FaTwitter />
+                <FaXTwitter />
               </div>
               <div className="twitter-info">
                 <span className="twitter-label">X (Twitter) </span>
