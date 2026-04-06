@@ -68,8 +68,8 @@ const Hero = () => {
           </motion.h1>
 
           <motion.p className="hero-subtitle" variants={itemVariants}>
-            ゲームとWebアプリでユーザに響く体験をつくる<br />
-            27卒プランナー・プロダクトマネージャー志望の<br />
+            ゲームを通じてユーザの心に響く体験をつくる<br />
+            27卒ゲームプランナー志望の<br />
             ポートフォリオへようこそ！！
           </motion.p>
 
@@ -106,19 +106,22 @@ const Hero = () => {
         >
           <div className="visual-element">
             <div className="floating-card card-1">
-              <span>Game Design</span>
+              <span>Game Creation</span>
             </div>
             <div className="floating-card card-2">
-              <span>Planning</span>
+              <span>Research</span>
             </div>
             <div className="floating-card card-3">
               <span>Teamwork</span>
             </div>
             <div className="floating-card card-4">
-              <span>Web App</span>
+              <span>Cross-cultural Experience</span>
             </div>
             <div className="floating-card card-5">
               <span>User Experience</span>
+            </div>
+            <div className="floating-card card-6">
+              <span>Leadership</span>
             </div>
           </div>
         </motion.div>

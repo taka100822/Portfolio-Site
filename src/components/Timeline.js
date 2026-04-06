@@ -22,15 +22,6 @@ const Timeline = () => {
     },
     {
       year: '2022',
-      month: '09',
-      title: 'TOEICで710点を取得',
-      description: '英語が苦手だった私が努力し、TOEIC Listening & Readingで710点を取得しました。',
-      icon: FaGamepad,
-      type: 'education',
-      details: ['英語学習']
-    },
-    {
-      year: '2022',
       month: '12',
       title: 'さまざまなエンタメに触れる',
       description: '感動を生むコンテンツを作るため、ジャンルを問わず多様なエンタメ作品に触れるようになりました。',
@@ -64,15 +55,6 @@ const Timeline = () => {
       icon: FaCode,
       type: 'project',
       details: ['個人開発', '卒業研究', '視覚情報', 'unity', 'C#']
-    },
-    {
-      year: '2024',
-      month: '08',
-      title: 'インターンに参加',
-      description: '大学院進学が決まり時間ができたため、インターンに2社参加しました。スマホ電卓アプリやチャットアプリなどを開発しました。',
-      icon: FaGraduationCap,
-      type: 'experience',
-      details: ['Kotlin', 'Android Studio', 'Nuxt.js', 'FireBase']
     },
     {
       year: '2024',

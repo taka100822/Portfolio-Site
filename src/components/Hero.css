@@ -118,32 +118,44 @@
 }
 
 .card-1 {
+  /* Game Creation */
   top: 15%;
-  left: 8%;
+  left: 15%;
   animation-delay: 0s;
 }
 
 .card-2 {
+  /* Research */
   top: 10%;
-  right: 12%;
+  right: 35%;
   animation-delay: 1.5s;
 }
 
 .card-3 {
-  bottom: 40%;
-  left: 40%;
+  /* Teamwork */
+  bottom: 35%;
+  left: 35%;
   animation-delay: 3s;
 }
 
 .card-4 {
+  /* Cross-cultural Experience */
   top: 65%;
-  left: 10%;
+  left: 0%;
   animation-delay: 4.5s;
 }
 
 .card-5 {
-  bottom: 20%;
-  right: 8%;
+  /* User experience */
+  bottom: 10%;
+  right: 20%;
+  animation-delay: 6s;
+}
+
+.card-6 {
+  /* Leadership */
+  bottom: 50%;
+  right: 3%;
   animation-delay: 6s;
 }
 

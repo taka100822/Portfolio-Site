@@ -23,7 +23,7 @@ const Footer = () => {
               <span className="logo-text gradient-text">Taka10’s Portfolio</span>
             </div>
             <p className="footer-description">
-              ゲーム業界でプランナー、Web業界でプロダクトマネージャーを目指し、日々成長中です。
+              人生を彩るゲームを創るクリエイターを目指し、日々勉強中です。
             </p>
           </motion.div>
 

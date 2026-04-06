@@ -113,20 +113,6 @@ const Works = () => {
     },
     {
       id: 7,
-      title: 'MALWARE BUSTER （企画書）',
-      category: 'Proposal',
-      duration: '3週間',
-      technology: ['PowerPoint'],
-      description: '初めて作成したゲーム企画書',
-      detailedDescription: '25卒就職活動用に作成したゲーム企画書\n企画書の書き方を書籍とネットで勉強し、3週間かけて作成しました。',
-      features: ['企画書', '2Dアクション'],
-      image: `${process.env.PUBLIC_URL}/Image/Proposal1.png`,
-      links: {
-        pdf: `${process.env.PUBLIC_URL}/PDF/Proposal1.pdf`
-      }
-    },
-    {
-      id: 8,
       title: 'Dear you, FROM FAN （ペラ1）',
       category: 'Proposal',
       duration: '1週間',
@@ -140,7 +126,7 @@ const Works = () => {
       }
     },
     {
-      id: 9,
+      id: 8,
       title: 'チャットアプリ',
       category: 'Web App',
       duration: '1週間',
@@ -154,7 +140,7 @@ const Works = () => {
       }
     },
     {
-      id: 10,
+      id: 9,
       title: '冷蔵庫管理アプリ',
       category: 'WebApp',
       duration: '3ヶ月',
