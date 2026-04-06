@@ -29,50 +29,32 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="text-block">
-              <h3 className="gradient-text">
-                {'簡単な自己紹介'.split('\n').map((line, index) => (
-                  <span key={index}>
-                    {line}
-                    {index < '簡単な自己紹介'.split('\n').length - 1 && <br />}
-                  </span>
-                ))}
-              </h3>
+              <div className="text-block-number">01 — Profile</div>
+              <h3>簡単な自己紹介</h3>
               <p>
-              京都にある大学院でゲームのインタラクションに関する研究を行いながら、ゲーム制作に取り組んでいます。  
-              ゲーム制作団体「TOMSN」の代表としてチームを率い、第2弾タイトルの開発を進めています。
+              京都にある<strong>大学院でゲームのインタラクションに関する研究</strong>を行いながら、ゲーム制作に取り組んでいます。
+              <strong>ゲーム制作団体「TOMSN」の代表</strong>としてチームを率い、第2弾タイトルの開発を進めています。
               </p>
             </div>
 
             <div className="text-block">
-              <h3 className="gradient-text">
-                {'これまでの経験'.split('\n').map((line, index) => (
-                  <span key={index}>
-                    {line}
-                    {index < 'これまでの経験'.split('\n').length - 1 && <br />}
-                  </span>
-                ))}
-              </h3>
+              <div className="text-block-number">02 — Experience</div>
+              <h3>これまでの経験</h3>
               <p>
               個人でUnityを用いたゲーム開発からスタートし、チームでの進行管理や、
-              企業でのアルバイト・インターンシップを通して、企画を実際の形にする経験を積んできました。   
-              また、学会発表に参加するなど研究活動にも注力しており、理論と実践の両面からゲームに向き合っています。  
-              さらに、2025年秋にはタイへ6週間の留学を行い、海外での経験を通して視野を広げました。
+              <strong>企業でのアルバイト・インターンシップ</strong>を通して、企画を実際の形にする経験を積んできました。
+              また、<strong>学会発表</strong>に参加するなど研究活動にも注力しており、<strong>理論と実践の両面</strong>からゲームに向き合っています。
+              さらに、<strong>2025年秋にはタイへ6週間の留学</strong>を行い、海外での経験を通して視野を広げました。
               </p>
             </div>
 
             <div className="text-block">
-              <h3 className="gradient-text">
-                {'目指すビジョン'.split('\n').map((line, index) => (
-                  <span key={index}>
-                    {line}
-                    {index < '目指すビジョン'.split('\n').length - 1 && <br />}
-                  </span>
-                ))}
-              </h3>
+              <div className="text-block-number">03 — Vision</div>
+              <h3>目指すビジョン</h3>
               <p>
-              私は、ゲーム体験を通じてユーザの心を動かす価値を届けたいと考えています。  
+              私は、<strong>ゲーム体験を通じてユーザの心を動かす価値を届けたい</strong>と考えています。
               そのゲームに出会ったことが、後から振り返ったときに意味を持つような、
-              人生の一部として記憶に残る体験を生み出したいです。
+              <strong>人生の一部として記憶に残る体験</strong>を生み出したいです。
               その実現に向け、ゲーム制作や研究活動を通じて、
               体験設計に関する知見のインプットと実践的なアウトプットを継続しています。
               </p>
@@ -95,7 +77,7 @@ const About = () => {
                 <img src={`${process.env.PUBLIC_URL}/Image/me.jpeg`} alt="Profile" className="profile-image" />
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="passion-card main-card"
                 initial={{ rotateY: 180, opacity: 0 }}
                 animate={inView ? { rotateY: 0, opacity: 1 } : { rotateY: 180, opacity: 0 }}
@@ -103,8 +85,10 @@ const About = () => {
               >
                 <div className="card-inner">
                   <div className="card-icon">🎮</div>
-                  <h4>コンテンツ設計</h4>
-                  <p> </p>
+                  <div>
+                    <h4>コンテンツ設計</h4>
+                    <p>ゲームクリエイター志望</p>
+                  </div>
                   <div className="card-glow"></div>
                 </div>
               </motion.div>
