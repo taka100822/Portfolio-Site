@@ -16,18 +16,14 @@ import './App.css';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
 
   return (
     <div className="App">
       <AnimatePresence>
-        {isLoading && <LoadingScreen />}
+        {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
       </AnimatePresence>
       
       {!isLoading && (

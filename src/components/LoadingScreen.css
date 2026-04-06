@@ -1,66 +1,198 @@
-.loading-screen {
+/* Stylish Modern Loading Screen */
+.loading-screen.stylish-loading {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #0a0a0a;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, #0f1419 0%, #060913 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
+  overflow: hidden;
 }
 
+/* Animated background grid */
+.grid-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+}
+
+.grid-dot {
+  width: 2px;
+  height: 2px;
+  background: #60a5fa;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #60a5fa50;
+}
+
+/* Main content */
 .loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  z-index: 10;
+  position: relative;
 }
 
-.loading-logo {
+/* Sparkle icon */
+.loading-icon {
+  font-size: 4rem;
+  color: #60a5fa;
   margin-bottom: 2rem;
+  filter: drop-shadow(0 0 20px #60a5fa50);
+}
+
+/* Logo styling */
+.loading-logo {
+  margin-bottom: 4rem;
 }
 
 .logo-text {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-}
-
-.logo-char {
-  font-size: 4rem;
-  font-weight: 900;
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-size: 4.5rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 25%, #1d4ed8 50%, #1e40af 75%, #60a5fa 100%);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: pulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px #60a5fa30);
 }
 
-.logo-char:nth-child(2) {
-  animation-delay: 0.2s;
+.logo-subtitle {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #94a3b8;
+  margin: 0.5rem 0 0 0;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
 }
 
-.loading-bar {
+/* Progress section */
+.progress-section {
+  width: 100%;
+  max-width: 400px;
+}
+
+.progress-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.progress-track {
+  flex: 1;
+  height: 2px;
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #60a5fa, #3b82f6);
+  border-radius: 1px;
+  position: relative;
+  transition: width 0.3s ease;
+}
+
+.progress-glow {
+  position: absolute;
+  top: -1px;
+  left: 0;
   height: 4px;
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
+  background: linear-gradient(90deg, #60a5fa, #3b82f6);
   border-radius: 2px;
-  margin: 2rem auto;
-  max-width: 200px;
+  filter: blur(2px);
+  opacity: 0.6;
 }
 
-.loading-text {
-  color: #a0a0a0;
-  font-size: 1.1rem;
-  font-weight: 500;
+.progress-text {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #60a5fa;
+  min-width: 50px;
+  text-align: right;
+}
+
+.loading-message {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #64748b;
+  margin: 0;
   letter-spacing: 0.05em;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
+/* Floating particles */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #60a5fa;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #60a5fa;
+}
+
+.particle:nth-child(3n) {
+  background: #3b82f6;
+  box-shadow: 0 0 6px #3b82f6;
+}
+
+.particle:nth-child(5n) {
+  background: #1d4ed8;
+  box-shadow: 0 0 6px #1d4ed8;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .logo-text {
+    font-size: 3rem;
   }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.05);
+  
+  .logo-subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 0.2em;
+  }
+  
+  .loading-icon {
+    font-size: 3rem;
+  }
+  
+  .progress-section {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 2.5rem;
+  }
+  
+  .logo-subtitle {
+    font-size: 1rem;
+  }
+  
+  .loading-icon {
+    font-size: 2.5rem;
   }
 }
