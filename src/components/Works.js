@@ -194,14 +194,14 @@ const Works = () => {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          {works.map((work) => (
+          {works.map((work, index) => (
             <motion.div
               key={work.id}
-              className="work-card card"
+              className="work-card"
               variants={itemVariants}
-              whileHover={{ y: -8 }}
               onClick={() => setSelectedWork(work)}
             >
+              <span className="work-number">{String(index + 1).padStart(2, '0')}</span>
               <div className="work-image">
                 <img src={work.image} alt={work.title} />
                 <div className="work-overlay">
