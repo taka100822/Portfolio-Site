@@ -176,6 +176,16 @@ const Timeline = () => {
     }
   };
 
+  const getTypeLabel = (type) => {
+    switch (type) {
+      case 'education': return 'Education';
+      case 'project': return 'Project';
+      case 'experience': return 'Experience';
+      case 'achievement': return 'Achievement';
+      default: return type;
+    }
+  };
+
   return (
     <section id="timeline" className="section timeline-section" ref={ref}>
       <div className="container">
@@ -202,39 +212,44 @@ const Timeline = () => {
               className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}
               variants={itemVariants}
             >
-              <div className="timeline-content card">
-                <div className="timeline-date">
-                  <span className="year">{item.year}</span>
-                  <span className="month">{item.month}</span>
-                </div>
-                
-
-                <div className="timeline-info">
-                  <h3 className="timeline-title">{item.title}</h3>
-                  <p className="timeline-description">{item.description}</p>
-                  
-                  <div className="timeline-details">
-                    {item.details.map((detail, detailIndex) => (
-                      <span key={detailIndex} className="detail-tag">
-                        {detail}
-                      </span>
-                    ))}
+              <div
+                className="timeline-content"
+                style={{ '--type-color': getTypeColor(item.type) }}
+              >
+                <div className="timeline-header">
+                  <div className="timeline-date">
+                    <span className="year">{item.year}</span>
+                    <span className="month">/{item.month}</span>
                   </div>
-                  
-                  {item.noteLink && (
-                    <div className="timeline-link">
-                      <a href={item.noteLink} target="_blank" rel="noopener noreferrer" className="note-link">
-                        📝 noteで詳しく見る
-                      </a>
-                    </div>
-                  )}
+                  <span className="type-badge">{getTypeLabel(item.type)}</span>
                 </div>
+
+                <h3 className="timeline-title">{item.title}</h3>
+                <p className="timeline-description">{item.description}</p>
+
+                <div className="timeline-details">
+                  {item.details.map((detail, detailIndex) => (
+                    <span key={detailIndex} className="detail-tag">
+                      {detail}
+                    </span>
+                  ))}
+                </div>
+
+                {item.noteLink && (
+                  <div className="timeline-link">
+                    <a href={item.noteLink} target="_blank" rel="noopener noreferrer" className="note-link">
+                      📝 noteで詳しく見る
+                    </a>
+                  </div>
+                )}
               </div>
 
-              <div 
+              <div
                 className="timeline-dot"
                 style={{ backgroundColor: getTypeColor(item.type) }}
-              ></div>
+              >
+                <item.icon />
+              </div>
             </motion.div>
           ))}
         </motion.div>

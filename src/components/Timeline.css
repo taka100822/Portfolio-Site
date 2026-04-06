@@ -14,8 +14,13 @@
   left: 50%;
   top: 0;
   bottom: 0;
-  width: 4px;
-  background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
+  width: 2px;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    #60a5fa 10%,
+    #3b82f6 50%,
+    #1d4ed8 90%,
+    transparent 100%);
   transform: translateX(-50%);
   z-index: 1;
 }
@@ -23,136 +28,175 @@
 .timeline-item {
   position: relative;
   width: 50%;
-  margin-bottom: 0.8rem;
+  margin-bottom: 2rem;
 }
 
 .timeline-item.left {
   left: 0;
-  padding-right: 1rem;
+  padding-right: 3rem;
 }
 
 .timeline-item.right {
   left: 50%;
-  padding-left: 1rem;
+  padding-left: 3rem;
 }
 
 .timeline-content {
   position: relative;
-  padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
+  padding: 1.25rem 1.5rem;
+  background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
   transition: all 0.3s ease;
+  border-left: 3px solid var(--type-color, #3b82f6);
 }
 
 .timeline-content:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.15);
+  border-left-color: var(--type-color, #3b82f6);
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(96, 165, 250, 0.05);
+}
+
+.timeline-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .timeline-date {
   display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  margin-bottom: 0.4rem;
+  align-items: baseline;
+  gap: 0.3rem;
   color: #60a5fa;
-  font-weight: 600;
-}
-
-.year {
-  font-size: 0.85rem;
   font-weight: 700;
 }
 
-.month {
-  font-size: 0.7rem;
-  opacity: 0.8;
+.year {
+  font-size: 1rem;
 }
 
+.month {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.type-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.6);
+}
 
 .timeline-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
   color: #ffffff;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 .timeline-description {
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.25;
-  margin-bottom: 0.5rem;
-  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  font-size: 0.8rem;
 }
 
 .timeline-details {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.3rem;
+  gap: 0.35rem;
 }
 
 .detail-tag {
-  background: rgba(96, 165, 250, 0.2);
-  color: #60a5fa;
-  padding: 0.1rem 0.4rem;
-  border-radius: 0.6rem;
-  font-size: 0.65rem;
+  background: rgba(96, 165, 250, 0.12);
+  color: #93c5fd;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
   font-weight: 500;
-  border: 1px solid rgba(96, 165, 250, 0.3);
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  transition: all 0.2s ease;
+}
+
+.detail-tag:hover {
+  background: rgba(96, 165, 250, 0.2);
+  border-color: rgba(96, 165, 250, 0.4);
 }
 
 .timeline-link {
-  margin-top: 0.4rem;
+  margin-top: 0.75rem;
 }
 
 .note-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  color: rgba(255, 255, 255, 0.7);
+  gap: 0.3rem;
+  color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 500;
-  padding: 0.15rem 0.4rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.4rem;
-  background: rgba(255, 255, 255, 0.05);
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
   transition: all 0.3s ease;
 }
 
 .note-link:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.3);
-  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.85);
   transform: translateY(-1px);
 }
 
+/* Dot with icon */
 .timeline-dot {
   position: absolute;
-  top: 0.75rem;
-  width: 8px;
-  height: 8px;
+  top: 1.25rem;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   z-index: 2;
-  box-shadow: 0 0 8px rgba(96, 165, 250, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.4);
+  transition: all 0.3s ease;
+}
+
+.timeline-dot:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 20px rgba(96, 165, 250, 0.6);
 }
 
 .timeline-item.left .timeline-dot {
-  right: -4px;
+  right: calc(3rem - 18px);
 }
 
 .timeline-item.right .timeline-dot {
-  left: -4px;
+  left: calc(3rem - 18px);
 }
 
-/* Arrow pointing to timeline */
+/* Arrow */
 .timeline-content::before {
   content: '';
   position: absolute;
-  top: 0.75rem;
+  top: 1.4rem;
   width: 0;
   height: 0;
   border: 6px solid transparent;
@@ -160,12 +204,12 @@
 
 .timeline-item.left .timeline-content::before {
   right: -12px;
-  border-left-color: rgba(255, 255, 255, 0.1);
+  border-left-color: rgba(255, 255, 255, 0.08);
 }
 
 .timeline-item.right .timeline-content::before {
   left: -12px;
-  border-right-color: rgba(255, 255, 255, 0.1);
+  border-right-color: rgba(255, 255, 255, 0.08);
 }
 
 @media (max-width: 768px) {
@@ -176,45 +220,44 @@
   .timeline-item {
     width: 100%;
     left: 0 !important;
-    padding-left: 3rem;
+    padding-left: 4rem;
     padding-right: 0;
-    margin-bottom: 0.6rem;
+    margin-bottom: 1.25rem;
   }
 
   .timeline-content {
-    padding: 0.6rem;
+    padding: 1rem 1.25rem;
   }
 
   .timeline-title {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 
   .timeline-description {
-    font-size: 0.7rem;
-    margin-bottom: 0.4rem;
+    font-size: 0.75rem;
   }
 
   .detail-tag {
-    font-size: 0.6rem;
-    padding: 0.08rem 0.3rem;
+    font-size: 0.63rem;
+    padding: 0.12rem 0.45rem;
   }
 
   .note-link {
-    font-size: 0.6rem;
-    padding: 0.1rem 0.3rem;
+    font-size: 0.68rem;
   }
 
   .timeline-content::before {
     left: -12px !important;
     right: auto !important;
     border-left-color: transparent !important;
-    border-right-color: rgba(255, 255, 255, 0.1) !important;
+    border-right-color: rgba(255, 255, 255, 0.08) !important;
   }
 
   .timeline-dot {
-    left: 1.1rem !important;
+    left: calc(1.5rem - 18px) !important;
     right: auto !important;
-    width: 6px;
-    height: 6px;
+    width: 32px;
+    height: 32px;
+    font-size: 0.75rem;
   }
 }
