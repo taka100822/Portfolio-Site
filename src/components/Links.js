@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FaStickyNote, FaGithub, FaBook, FaGamepad, FaExternalLinkAlt } from 'react-icons/fa';
+import { CiWavePulse1 } from "react-icons/ci";
 import './Links.css';
 
 const Links = () => {
@@ -19,6 +20,13 @@ const Links = () => {
       color: '#333333'
     },
     {
+      title: 'note',
+      description: 'ゲーム開発の記録や読んだ書籍に関する記事などを投稿しています',
+      url: 'https://note.com/Taka10822',
+      icon: FaStickyNote,
+      color: '#ffffff'
+    },
+    {
       title: 'unityroom',
       description: '制作したゲームを公開・配信しているプラットフォーム',
       url: 'https://unityroom.com/users/taka_unityroom',
@@ -26,18 +34,11 @@ const Links = () => {
       color: '#e60012'
     },
     {
-      title: 'note',
-      description: 'ゲーム開発の記録や読んだ書籍に関する記事などを投稿しています',
-      url: 'https://note.com/Taka10822',
-      icon: FaStickyNote,
-      color: '#41c9b4'
-    },
-    {
-      title: 'Qiita',
-      description: 'Unity開発に関する技術記事・開発Tips',
-      url: 'https://qiita.com/Taka10822',
-      icon: FaBook,
-      color: '#55c500'
+      title: 'PULSE',
+      description: '今までプレイしたゲームの記録を公開',
+      url: 'https://plsdb.com/profile/taka10822',
+      icon: CiWavePulse1,
+      color: '#baeb34'
     },
   ];
 
