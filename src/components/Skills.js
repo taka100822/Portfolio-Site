@@ -97,27 +97,27 @@ const Skills = () => {
           {skills.map((skill, index) => (
             <motion.div
               key={index}
-              className="skill-card card"
+              className="skill-card"
               variants={itemVariants}
-              whileHover={{ y: -8, scale: 1.02 }}
+              whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300 }}
+              style={{ '--skill-color': skill.color }}
             >
-              <div className="skill-icon" style={{ color: skill.color }}>
+              <div className="skill-icon-wrap">
                 <skill.icon />
               </div>
-              
-              <h3 className="skill-title">{skill.title}</h3>
-              <p className="skill-description">{skill.description}</p>
-              
-              <div className="skill-details">
-                {skill.details.map((detail, detailIndex) => (
-                  <span key={detailIndex} className="skill-tag">
-                    {detail}
-                  </span>
-                ))}
+
+              <div className="skill-body">
+                <h3 className="skill-title">{skill.title}</h3>
+                <p className="skill-description">{skill.description}</p>
+                <div className="skill-details">
+                  {skill.details.map((detail, detailIndex) => (
+                    <span key={detailIndex} className="skill-tag">{detail}</span>
+                  ))}
+                </div>
               </div>
 
-              <div className="skill-glow" style={{ background: `radial-gradient(circle, ${skill.color}20 0%, transparent 70%)` }}></div>
+              <div className="skill-glow" style={{ background: `radial-gradient(ellipse at 0% 50%, ${skill.color}18 0%, transparent 65%)` }}></div>
             </motion.div>
           ))}
         </motion.div>
