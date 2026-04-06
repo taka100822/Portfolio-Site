@@ -19,8 +19,8 @@ const Works = () => {
       category: '2D & HD-2D Action',
       duration: '3ヶ月',
       technology: ['Unity', 'C#'],
-      description: 'BitSummitGameJam 2025にて制作。ゲームジャム総合グランプリを受賞',
-      detailedDescription: 'BitSummitGameJam 2025で現在制作したプロジェクト\nプランナーとしてチームの進行管理&仕様書作成を担当しつつ、プログラマーとしてシステムの制御を実装。\n球状モニターを使用。\nBitSummitゲームジャム総合グランプリを受賞しました。',
+      description: 'BitSummit Gamejam2025にてゲームジャム総合グランプリを受賞した2人協力ゲーム',
+      detailedDescription: 'BitSummitGameJam 2025で制作したプロジェクト\nプランナーとしてチームの進行管理&仕様書作成を担当しつつ、プログラマーとしてシステムの制御を実装。\n球状モニターを使用。\nBitSummitゲームジャム総合グランプリを受賞しました。',
       features: ['チーム開発', 'BSGM2025', '球状モニター', '2画面', 'マルチプレイ'],
       image: `${process.env.PUBLIC_URL}/Image/DreamMayday.png`,
       links: {
@@ -37,7 +37,7 @@ const Works = () => {
       category: '3D Action',
       duration: '3ヶ月',
       technology: ['Unity', 'C#', 'Blender'],
-      description: '私が立ち上げた学生チーム「TOMSN」で制作した3Dアクションゲーム',
+      description: '自身で立ち上げた学生チーム「TOMSN」で制作した3Dアクションゲーム',
       detailedDescription: '学生5人のチーム「TOMSN」での開発プロジェクト\nプログラマーとプランナーの両方を担当し、ゲームシステムの設計から実装まで幅広く関わりました。チーム開発でのコミュニケーションと進行管理の経験も積むことができました。',
       features: ['チーム開発', 'アジャイル開発', 'Probuilder', '3DCG'],
       image: `${process.env.PUBLIC_URL}/Image/CrashReport.png`,
@@ -303,6 +303,13 @@ const Works = () => {
 
                 <div className="modal-info">
                   <h3 className="modal-title">{selectedWork.title}</h3>
+                  <div className="modal-meta">
+                    <span className="modal-category">{selectedWork.category}</span>
+                    <span className="modal-duration">{selectedWork.duration}</span>
+                  </div>
+
+                  <div className="modal-divider" />
+
                   <div className="modal-detailed-description">
                     {selectedWork.detailedDescription.split('\n').map((line, index) => (
                       <span key={index}>
@@ -312,14 +319,18 @@ const Works = () => {
                     ))}
                   </div>
 
+                  <div className="modal-divider" />
+
                   <div className="modal-features">
-                    <h4>主な機能・特徴</h4>
+                    <h4>特徴 / キーワード</h4>
                     <ul>
                       {selectedWork.features.map((feature, index) => (
                         <li key={index}>{feature}</li>
                       ))}
                     </ul>
                   </div>
+
+                  <div className="modal-divider" />
 
                   <div className="modal-links">
                     {selectedWork.links.unityroom && (
