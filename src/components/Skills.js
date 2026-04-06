@@ -15,14 +15,14 @@ const Skills = () => {
       icon: FaGamepad,
       title: 'Game Planning',
       description: 'ゲーム企画・仕様書作成',
-      details: ['企画立案', '仕様書作成', 'バランス調整', 'レベルデザイン', 'ローカライズ'],
+      details: ['企画立案', '仕様書作成',  'レベルデザイン', 'ローカライズ'],
       color: '#ef4444'
     },
     {
       icon: FaUnity,
-      title: 'Unity Development',
+      title: 'Game Development',
       description: 'Unity 2D/3D開発',
-      details: ['Unity Engine', 'C# Scripting', 'プロトタイプ作成', 'デバッグ'],
+      details: ['Unity Engine', 'Photon PUN2', 'プロトタイプ作成', 'デバッグ'],
       color: '#3b82f6'
     },
     {
@@ -36,21 +36,21 @@ const Skills = () => {
       icon: FaUsers,
       title: 'Team Management',
       description: 'チーム開発・進行管理',
-      details: ['プロジェクト管理', 'スケジュール調整', 'コミュニケーション', 'プレゼンテーション'],
+      details: [ 'リーダーシップ', 'プロジェクト管理', 'スケジュール調整', 'プレゼンテーション'],
       color: '#f59e0b'
     },
     {
       icon: FaCode,
       title: 'Technical Skills',
       description: 'プログラミング・技術スキル',
-      details: ['C', 'C#', 'Python', 'kotlin', 'Vue.js', 'Nuxt.js', 'Git/GitHub'],
+      details: ['C', 'C#', 'Python', 'kotlin', 'JavaScript', 'React', 'Git/GitHub'],
       color: '#8b5cf6'
     },
     {
       icon: FaLayerGroup,
       title: 'Other Skills',
       description: 'その他スキル',
-      details: ['Blender', 'Google Workspace', 'Slack', 'Discord', 'Notion'],
+      details: ['Blender', 'Google Workspace', 'Latex', 'Notion', '動画制作'],
       color: '#ec4899'
     }
   ];

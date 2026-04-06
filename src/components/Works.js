@@ -15,6 +15,24 @@ const Works = () => {
   const works = [
     {
       id: 1,
+      title: 'DreamMayday',
+      category: '2D & HD-2D Action',
+      duration: '3ヶ月',
+      technology: ['Unity', 'C#'],
+      description: 'BitSummitGameJam 2025にて制作。ゲームジャム総合グランプリを受賞',
+      detailedDescription: 'BitSummitGameJam 2025で現在制作したプロジェクト\nプランナーとしてチームの進行管理&仕様書作成を担当しつつ、プログラマーとしてシステムの制御を実装。\n球状モニターを使用。\nBitSummitゲームジャム総合グランプリを受賞しました。',
+      features: ['チーム開発', 'BSGM2025', '球状モニター', '2画面', 'マルチプレイ'],
+      image: `${process.env.PUBLIC_URL}/Image/DreamMayday.png`,
+      links: {
+        itch: 'https://bitsummit-gamejam.itch.io/dreammayday',
+        github: 'https://github.com/BSGJ2025-w-12/DreamMayday_Scripts',
+        Youtube: 'https://youtu.be/t4DQaSw2VJk?si=8auwvXWbhMSgRNEL',
+        note: 'https://note.com/taka10822/n/nd1916fb6d500',
+        website: 'https://gameparade.creators-guild.com/works/3186',
+      }
+    },
+    {
+      id: 2,
       title: 'CRASH REPORT',
       category: '3D Action',
       duration: '3ヶ月',
@@ -24,12 +42,15 @@ const Works = () => {
       features: ['チーム開発', 'アジャイル開発', 'Probuilder', '3DCG'],
       image: `${process.env.PUBLIC_URL}/Image/CrashReport.png`,
       links: {
-        github: 'https://github.com/TOMSNtomsn/CRASH-REPORT',
         unityroom: 'https://unityroom.com/games/crash_report',
+        github: 'https://github.com/TOMSNtomsn/CRASH-REPORT',
+        Youtube: 'https://youtu.be/TGv2T4rzuc0?si=Gj0YHfU6Lz7dcp_I',
+        note: 'https://note.com/taka10822/n/n9265ce5cd160',
+        website: 'https://gameparade.creators-guild.com/works/3163',
       }
     },
     {
-      id: 2,
+      id: 3,
       title: '研究室からの脱出',
       category: 'Escape',
       duration: '2ヶ月',
@@ -41,21 +62,6 @@ const Works = () => {
       links: {
         github: 'https://github.com/Taka100822/LabEscapeGame',
         note: 'https://note.com/taka10822/n/n9031b5fbc073?sub_rt=share_pw'
-      }
-    },
-    {
-      id: 3,
-      title: 'DreamMayDay',
-      category: '2D & HD2D Action',
-      duration: '制作中',
-      technology: ['Unity', 'C#'],
-      description: 'BitSummitGameJam 2025にて制作中',
-      detailedDescription: 'BitSummitGameJam 2025で現在制作中のプロジェクト\nプランナーとしてチームの進行管理&仕様書作成を担当しつつ、プログラマーとしてシステムの制御を実装。\n球状モニターを使用予定です。\n詳細は開発完了後に公開予定です。',
-      features: ['チーム開発', 'BSGM2025', '球状モニター', '2画面', 'マルチプレイ'],
-      image: `${process.env.PUBLIC_URL}/Image/DreamMayday.png`,
-      links: {
-        Youtube: 'https://youtu.be/t4DQaSw2VJk?si=8auwvXWbhMSgRNEL',
-        itch: 'https://bitsummit-gamejam.itch.io/dreammayday'
       }
     },
     {
@@ -107,22 +113,7 @@ const Works = () => {
     },
     {
       id: 7,
-      title: 'パズルゲーム',
-      category: 'Puzzle',
-      duration: '2週間',
-      technology: ['Unity', 'C#'],
-      description: 'パズドラのようなパズルゲーム（練習用として制作）',
-      detailedDescription: 'パズル＆ドラゴンズのようなパズルゲームを練習として制作\nパズルのロジック実装やUI設計の技術向上を目的として開発しました。基本的なスコアシステムを実装しています。',
-      features: ['パズルゲーム', '練習作品', 'UI設計', 'スコアシステム'],
-      image: `${process.env.PUBLIC_URL}/Image/PazzleGame.png`,
-      links: {
-        unityroom: 'https://unityroom.com/games/puzzlegame_practice',
-        github: 'https://github.com/taka100822/puzzle-game'
-      }
-    },
-    {
-      id: 8,
-      title: 'MALWARE BUSTER 企画書',
+      title: 'MALWARE BUSTER （企画書）',
       category: 'Proposal',
       duration: '3週間',
       technology: ['PowerPoint'],
@@ -132,6 +123,20 @@ const Works = () => {
       image: `${process.env.PUBLIC_URL}/Image/Proposal1.png`,
       links: {
         pdf: `${process.env.PUBLIC_URL}/PDF/Proposal1.pdf`
+      }
+    },
+    {
+      id: 8,
+      title: 'Dear you, FROM FAN （ペラ1）',
+      category: 'Proposal',
+      duration: '1週間',
+      technology: ['PowerPoint', 'Unity'],
+      description: 'バンダイナムコスタジオ様の主催の「ゲームアイディア創造コンテスト！」にて入賞',
+      detailedDescription: '株式会社バンダイナムコスタジオ様の「ゲームデザイナーから学ぶ、ゲームアイディア創造コンテスト！」にて入賞しました。',
+      features: ['企画書', 'アドベンチャーパズルゲーム'],
+      image: `${process.env.PUBLIC_URL}/Image/Dear.png`,
+      links: {
+        pdf: `${process.env.PUBLIC_URL}/PDF/Dear.pdf`
       }
     },
     {

@@ -41,20 +41,11 @@ const Timeline = () => {
     {
       year: '2023',
       month: '01',
-      title: 'サークルの代表に就任',
+      title: 'バスケサークルの代表に就任',
       description: '周囲からの推薦を受け、100人規模のサークル代表に就任しました。引き継ぎがない中で新歓や合宿を企画し、大人数をまとめる難しさを学びました。',
       icon: FaProjectDiagram,
       type: 'experience',
       details: ['リーダー経験', '企画', '留学生との交流']
-    },
-    {
-      year: '2024',
-      month: '01',
-      title: '初の企画書制作',
-      description: '初めてゲームの企画書を作成しました。書き方を書籍やネットで学び、1ヶ月かけて完成させました。',
-      icon: FaTrophy,
-      type: 'experience',
-      details: ['企画書', 'デザイン', '文章力']
     },
     {
       year: '2024',
@@ -94,15 +85,6 @@ const Timeline = () => {
     },
     {
       year: '2025',
-      month: '03',
-      title: '「TOMSN」を設立',
-      description: 'ゲーム制作に熱意を持つ学生5人で、開発チーム「TOMSN」を設立しました。',
-      icon: FaCode,
-      type: 'project',
-      details: ['チーム開発', 'unity', 'C#', 'Blender']
-    },
-    {
-      year: '2025',
       month: '04',
       title: 'unity1weekjamに参加',
       description: '初めてゲームジャム（Unity1Week）に参加し、企画から開発までを1人で経験しました。短期間での開発の難しさを実感しました。',
@@ -123,21 +105,12 @@ const Timeline = () => {
     },
     {
       year: '2025',
-      month: '05',
-      title: 'BitSummitGameJam2025の参加',
-      description: '他の開発者との交友関係を得るため、BitSummit Game Jam 2025に参加しました。（※2025年7月時点で制作継続中）',
-      icon: FaCode,
-      type: 'project',
-      details: ['チーム開発', 'unity', 'C#']
-    },
-    {
-      year: '2025',
       month: '06',
       title: '学会発表',
       description: '学術的な挑戦として、1人で沖縄県にて学会発表と質疑応答を行いました。',
       icon: FaCode,
       type: 'education',
-      details: ['Latex', 'スライド発表'],
+      details: ['Latex', 'スライド発表', '論文'],
       noteLink: 'https://note.com/Taka10822/n/nfbef8b80eae1'
     },
     {
@@ -147,17 +120,46 @@ const Timeline = () => {
       description: 'これまでの経験と制作物を整理し、ポートフォリオサイトを制作しました。',
       icon: FaCode,
       type: 'experience',
-      details: ['Claude Code', 'React']
+      details: ['Claude Code', 'JavaScript', 'React']
     },
     {
       year: '2025',
       month: '06',
       title: 'TOMSN第1弾「CRASH REPORT」をリリース',
-      description: 'ゲーム制作チームTOMSNで開発したゲームを公開しました。リーダーとしてチームの進行管理を行い、長期のチーム開発経験を得ました。',
+      description: '私が設立した学生ゲーム制作チーム「TOMSNで」開発したゲームを公開しました。リーダーとしてチームの進行管理を行い、長期のチーム開発経験を得ました。',
       icon: FaCode,
       type: 'project',
-      details: ['Unity', 'C#', 'Blender'],
-      noteLink: ''
+      details: ['Unity', 'C#', 'Blender', 'ゲームクリエイター甲子園2025'],
+      noteLink: 'https://note.com/taka10822/n/n9265ce5cd160?sub_rt=share_pw'
+    },
+    {
+      year: '2025',
+      month: '07',
+      title: 'BitSummit the 13th ゲームジャムアワードを受賞',
+      description: 'BitSummitGameJamにプランナー兼プログラマーとして参加したW-12チームの「DreamMayday」がBitSummitゲームジャムアワードを受賞しました。',
+      icon: FaCode,
+      type: 'project',
+      details: ['Unity', 'C#', 'ゲームジャム', '最優秀賞'],
+      noteLink: 'https://note.com/taka10822/n/nd1916fb6d500?sub_rt=share_pw'
+    },
+    {
+      year: '2025',
+      month: '09',
+      title: 'タイの研究室へ短期留学',
+      description: '学内のグローバルインターンシッププログラムで、タイのバンコクに6週間短期留学しました。',
+      icon: FaCode,
+      type: 'education',
+      details: ['短期留学','語学力向上','文化理解'],
+      noteLink: 'https://note.com/taka10822/n/n1e5e70ccd7fd?sub_rt=share_pw'
+    },
+    {
+      year: '2026',
+      month: '03',
+      title: '株式会社Colorful Paletteのカスタムインターンゲームプランナーに参加',
+      description: '（サイバーエージェントグループ）株式会社Colorful Paletteにて2週間、『プロジェクトセカイ カラフルステージ！ feat. 初音ミク』の企画チームに参加し、課題型のインターンシップを行いました。',
+      icon: FaCode,
+      type: 'project',
+      details: ['運営プランナー','ゲーム内新企画','開発現場'],
     },
   ];
 

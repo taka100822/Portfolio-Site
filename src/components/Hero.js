@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+// import VisitorCounter from './VisitorCounter';
 import './Hero.css';
 
 const Hero = () => {
@@ -45,6 +46,15 @@ const Hero = () => {
       </div>
       
       <div className="container">
+        <motion.div 
+          className="hero-visitor-counter" 
+          variants={itemVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          {/* <VisitorCounter /> */}
+        </motion.div>
+        
         <motion.div
           className="hero-content"
           variants={containerVariants}
@@ -52,7 +62,7 @@ const Hero = () => {
           animate={inView ? "visible" : "hidden"}
         >
           <motion.h1 className="hero-title" variants={itemVariants}>
-            <span className="title-line">Taka10’s</span>
+            <span className="title-line">Taka10's</span>
             <span className="title-line gradient-text">Portfolio</span>
             <span className="title-line">Site</span>
           </motion.h1>
