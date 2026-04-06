@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { FaGamepad, FaFlask, FaUsers, FaGlobe, FaHeart, FaCrown } from 'react-icons/fa';
 // import VisitorCounter from './VisitorCounter';
 import './Hero.css';
 
@@ -106,21 +107,27 @@ const Hero = () => {
         >
           <div className="visual-element">
             <div className="floating-card card-1">
+              <FaGamepad className="fc-icon" />
               <span>Game Creation</span>
             </div>
             <div className="floating-card card-2">
+              <FaFlask className="fc-icon" />
               <span>Research</span>
             </div>
             <div className="floating-card card-3">
+              <FaUsers className="fc-icon" />
               <span>Teamwork</span>
             </div>
             <div className="floating-card card-4">
-              <span>Cross-cultural Experience</span>
+              <FaGlobe className="fc-icon" />
+              <span>Cross-cultural</span>
             </div>
             <div className="floating-card card-5">
+              <FaHeart className="fc-icon" />
               <span>User Experience</span>
             </div>
             <div className="floating-card card-6">
+              <FaCrown className="fc-icon" />
               <span>Leadership</span>
             </div>
           </div>
