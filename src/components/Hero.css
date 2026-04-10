@@ -25,12 +25,6 @@
   background: radial-gradient(ellipse at center, rgba(96, 165, 250, 0.15) 0%, rgba(10, 10, 10, 0.8) 70%);
 }
 
-.hero-visitor-counter {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 3rem;
-  padding-right: 2rem;
-}
 
 .hero-content {
   display: grid;
@@ -203,11 +197,7 @@
     padding-top: 100px;
   }
   
-  .hero-visitor-counter {
-    justify-content: center;
-    padding-right: 0;
-    margin-bottom: 2rem;
-  }
+
 
   .hero-content {
     grid-template-columns: 1fr;
