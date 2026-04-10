@@ -19,11 +19,15 @@ const LINK_CONFIG = {
   Youtube:   { icon: <FaYoutube />,         cardLabel: 'YouTube',   modalLabel: 'YouTubeを見る' },
 };
 
+const BLUE_KEYS = ['itch', 'unityroom', 'steam', 'nintendo'];
+
 const WorkLinks = ({ links, variant = 'card' }) => (
   <>
     {Object.entries(LINK_CONFIG).map(([key, { icon, cardLabel, modalLabel }]) => {
       if (!links[key]) return null;
-      const cls = variant === 'modal' ? 'btn-primary' : 'work-link';
+      const cls = variant === 'modal'
+        ? (BLUE_KEYS.includes(key) ? 'btn-primary' : 'btn-secondary')
+        : 'work-link';
       const label = variant === 'modal' ? modalLabel : cardLabel;
       return (
         <a key={key} href={links[key]} target="_blank" rel="noopener noreferrer" className={cls} data-key={key}>
