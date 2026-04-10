@@ -4,6 +4,29 @@ import useScrollAnimation from '../hooks/useScrollAnimation';
 import { titleMotionProps } from '../constants/animations';
 import './About.css';
 
+const renderText = (text) => text.split('\n').map((line, i, arr) => (
+  <span key={i}>
+    {line.split(/\*\*(.*?)\*\*/g).map((part, j) =>
+      j % 2 === 1 ? <strong key={j}>{part}</strong> : part
+    )}
+    {i < arr.length - 1 && <br />}
+  </span>
+));
+
+const ABOUT_TEXT = {
+  profile:
+    `京都にある**大学院**で**ゲームのインタラクションに関する研究**を行いながら、ゲーム制作に取り組んでいます。
+    また、**ゲーム制作団体「TOMSN」の代表**としてチームを率い、第2弾タイトルの開発を進めています。`,
+
+  experience:
+    `個人でのゲーム開発からスタートし、**ゲームジャムの参加**や**「TOMSN」設立によるチーム開発・マネジメント**を経験してきました。さらに、**企業でのアルバイト・インターンシップ**で企画を実際の形にする経験を積んできました。
+    また、**学会発表**に登壇するなど研究活動にも注力しています。加えて、**タイへ短期留学**を通じて、視野を広げました。`,
+
+  vision:
+    `私は、ゲーム体験を通じて**人々の心に残り続ける価値**を届けたいと考えています。プレイした瞬間の楽しさにとどまらず、「出会えてよかった」と思えるような、**人生の中で意味を持つ体験**を生み出したいです。
+    これまで、ゲーム制作や研究活動を通じてプレイヤー体験の設計に向き合い、実際に人の感情を動かす経験を積んできました。今後は、体験の根幹を設計し、**人々の記憶に残り続けるコンテンツ**を創り続けていきます。`,
+};
+
 const About = () => {
   const [ref, inView] = useScrollAnimation({ threshold: 0.3 });
 
@@ -24,36 +47,19 @@ const About = () => {
             <div className="text-block">
               <div className="text-block-number">01 — Profile</div>
               <h3>簡単な自己紹介</h3>
-              <p>
-              京都にある<strong>大学院</strong>で<strong>ゲームのインタラクションに関する研究</strong>を行いながら、ゲーム制作に取り組んでいます。
-              <strong>ゲーム制作団体「TOMSN」の代表</strong>としてチームを率い、第2弾タイトルの開発を進めています。
-              </p>
+              <p>{renderText(ABOUT_TEXT.profile)}</p>
             </div>
 
             <div className="text-block">
               <div className="text-block-number">02 — Experience</div>
               <h3>これまでの経験</h3>
-              <p>
-              個人でUnityを用いたゲーム開発からスタートし、<strong>ゲームジャムへの参加</strong>や
-              <strong>「TOMSN」設立によるチーム開発・マネジメント</strong>を経験してきました。
-              さらに、<strong>企業でのアルバイト・インターンシップ</strong>を通して、企画を実際の形にする経験を積んできました。
-              また、<strong>学会発表</strong>に参加するなど研究活動にも注力しており、
-              理論と実践の両面からゲームに向き合っています。
-              加えて、<strong>タイへ短期留学</strong>を通じて、海外での経験を通して視野を広げました。
-              </p>
+              <p>{renderText(ABOUT_TEXT.experience)}</p>
             </div>
 
             <div className="text-block">
               <div className="text-block-number">03 — Vision</div>
               <h3>目指すビジョン</h3>
-              <p>
-              私は、ゲーム体験を通じて<strong>人々の心に残り続ける価値</strong>を届けたいと考えています。  
-              プレイした瞬間の楽しさにとどまらず、「出会えてよかった」と思えるような、
-              <strong>人生の中で意味を持つ体験</strong>を生み出したいです。
-              これまで、ゲーム制作や研究活動を通じてプレイヤー体験の設計に向き合い、
-              実際に人の感情を動かす経験を積んできました。
-              今後は、体験の根幹を設計し、<strong>人々の記憶に残り続けるコンテンツ</strong>を創り続けていきます。
-              </p>
+              <p>{renderText(ABOUT_TEXT.vision)}</p>
             </div>
           </motion.div>
 
