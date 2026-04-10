@@ -1,23 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import useScrollAnimation from '../hooks/useScrollAnimation';
+import { titleMotionProps } from '../constants/animations';
 import './About.css';
 
 const About = () => {
-  const [ref, inView] = useInView({
-    threshold: 0.3,
-    triggerOnce: true
-  });
+  const [ref, inView] = useScrollAnimation({ threshold: 0.3 });
 
   return (
     <section id="about" className="section about-section" ref={ref}>
       <div className="container">
-        <motion.h2
-          className="section-title"
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.8 }}
-        >
+        <motion.h2 className="section-title" {...titleMotionProps(inView)}>
           About Me
         </motion.h2>
 
