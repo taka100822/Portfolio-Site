@@ -32,7 +32,7 @@ const About = () => {
               <div className="text-block-number">01 — Profile</div>
               <h3>簡単な自己紹介</h3>
               <p>
-              京都にある<strong>大学院でゲームのインタラクションに関する研究</strong>を行いながら、ゲーム制作に取り組んでいます。
+              京都にある<strong>大学院</strong>で<strong>ゲームのインタラクションに関する研究</strong>を行いながら、ゲーム制作に取り組んでいます。
               <strong>ゲーム制作団体「TOMSN」の代表</strong>としてチームを率い、第2弾タイトルの開発を進めています。
               </p>
             </div>
@@ -41,10 +41,12 @@ const About = () => {
               <div className="text-block-number">02 — Experience</div>
               <h3>これまでの経験</h3>
               <p>
-              個人でUnityを用いたゲーム開発からスタートし、チームでの進行管理や、
-              <strong>企業でのアルバイト・インターンシップ</strong>を通して、企画を実際の形にする経験を積んできました。
-              また、<strong>学会発表</strong>に参加するなど研究活動にも注力しており、<strong>理論と実践の両面</strong>からゲームに向き合っています。
-              さらに、<strong>2025年秋にはタイへ6週間の留学</strong>を行い、海外での経験を通して視野を広げました。
+              個人でUnityを用いたゲーム開発からスタートし、<strong>ゲームジャムへの参加</strong>や
+              <strong>「TOMSN」設立によるチーム開発・マネジメント</strong>を経験してきました。
+              さらに、<strong>企業でのアルバイト・インターンシップ</strong>を通して、企画を実際の形にする経験を積んできました。
+              また、<strong>学会発表</strong>に参加するなど研究活動にも注力しており、
+              理論と実践の両面からゲームに向き合っています。
+              加えて、<strong>タイへ短期留学</strong>を通じて、海外での経験を通して視野を広げました。
               </p>
             </div>
 
@@ -52,11 +54,12 @@ const About = () => {
               <div className="text-block-number">03 — Vision</div>
               <h3>目指すビジョン</h3>
               <p>
-              私は、<strong>ゲーム体験を通じてユーザの心を動かす価値を届けたい</strong>と考えています。
-              そのゲームに出会ったことが、後から振り返ったときに意味を持つような、
-              <strong>人生の一部として記憶に残る体験</strong>を生み出したいです。
-              その実現に向け、ゲーム制作や研究活動を通じて、
-              体験設計に関する知見のインプットと実践的なアウトプットを継続しています。
+              私は、ゲーム体験を通じて<strong>人々の心に残り続ける価値</strong>を届けたいと考えています。  
+              プレイした瞬間の楽しさにとどまらず、「出会えてよかった」と思えるような、
+              <strong>人生の中で意味を持つ体験</strong>を生み出したいです。
+              これまで、ゲーム制作や研究活動を通じてプレイヤー体験の設計に向き合い、
+              実際に人の感情を動かす経験を積んできました。
+              今後は、体験の根幹を設計し、<strong>人々の記憶に残り続けるコンテンツ</strong>を創り続けていきます。
               </p>
             </div>
           </motion.div>
@@ -87,7 +90,7 @@ const About = () => {
                   <div className="card-icon">🎮</div>
                   <div>
                     <h4>コンテンツ設計</h4>
-                    <p>ゲームクリエイター志望</p>
+                    <p>ゲームプランナー（デザイナー）</p>
                   </div>
                   <div className="card-glow"></div>
                 </div>
@@ -132,38 +135,45 @@ const About = () => {
                 transition={{ duration: 0.8, delay: 1.4 }}
               >
                 <div className="stat-item">
-                  <div className="stat-number gradient-text">1.5+</div>
+                  <div className="stat-number gradient-text">2+</div>
                   <div className="stat-label">年の経験</div>
                 </div>
                 <div className="stat-item">
-                  <div className="stat-number gradient-text">10+</div>
+                  <div className="stat-number gradient-text">9</div>
                   <div className="stat-label">制作物</div>
                 </div>
               </motion.div>
 
-              <motion.div 
-                className="passion-grid"
+              <motion.div
+                className="hobby-photos"
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.8, delay: 1.6 }}
               >
-                <div className="passion-item">
-                  <div className="passion-label">趣味</div>
-                  <div className="passion-tags">
-                    <span className="passion-tag">ピアノ</span>
-                    <span className="passion-tag">バイク</span>
-                    <span className="passion-tag">バスケ</span>
-                    <span className="passion-tag">読書</span>
-                  </div>
+                <div className="hobby-photos-label">趣味</div>
+                <div className="hobby-photos-grid">
+                  {[
+                    { src: 'hobby-piano.jpg',   emoji: '🎹', label: 'ピアノ' },
+                    { src: 'hobby-bike.jpg',    emoji: '🏍️', label: 'バイク' },
+                    { src: 'hobby-basket.jpg',  emoji: '🏀', label: 'バスケ' },
+                    { src: 'hobby-travel.jpg',  emoji: '✈️', label: '旅行'   },
+                  ].map(({ src, emoji, label }) => (
+                    <div className="hobby-photo-item" key={label}>
+                      <div className="hobby-photo-frame">
+                        <img
+                          src={`${process.env.PUBLIC_URL}/Image/${src}`}
+                          alt={label}
+                          className="hobby-photo-img"
+                          onError={e => { e.currentTarget.style.display = 'none'; e.currentTarget.nextSibling.style.display = 'flex'; }}
+                        />
+                        <div className="hobby-photo-placeholder" style={{ display: 'none' }}>
+                          <span>{emoji}</span>
+                        </div>
+                      </div>
+                      <span className="hobby-photo-label">{label}</span>
+                    </div>
+                  ))}
                 </div>
-                {/* <div className="passion-item">
-                  <div className="passion-label">好きな言葉</div>
-                  <div className="passion-tags">
-                    <span className="passion-tag">有言実行</span>
-                    <span className="passion-tag">日々成長</span>
-                    <span className="passion-tag">結束は無限の力を生む</span>
-                  </div>
-                </div> */}
               </motion.div>
             </div>
           </motion.div>
