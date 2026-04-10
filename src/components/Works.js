@@ -1,40 +1,124 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaExternalLinkAlt, FaGithub, FaGamepad, FaPenFancy, FaSteam, FaGlobe, FaYoutube, FaDesktop } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaGithub, FaGamepad, FaPenFancy, FaSteam, FaGlobe, FaYoutube, FaDesktop, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { SiNintendoswitch } from 'react-icons/si';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 import { fadeUpVariants, staggerContainer, titleMotionProps } from '../constants/animations';
 import { worksData } from '../constants/works';
 import './Works.css';
 
-const WorkLinks = ({ links, variant = 'card' }) => {
-  const isPrimary = (key) => ['unityroom', 'itch', 'steam', 'nintendo'].includes(key);
-  const linkConfig = {
-    unityroom: { icon: <FaDesktop />, label: variant === 'card' ? 'unityroom'      : 'unityroomで遊ぶ' },
-    itch:      { icon: <FaGamepad />, label: variant === 'card' ? 'itch.io'        : 'itch.ioで遊ぶ' },
-    steam:     { icon: <FaSteam />,   label: variant === 'card' ? 'Steam'          : 'Steamで遊ぶ' },
-    nintendo:  { icon: <SiNintendoswitch />, label: variant === 'card' ? 'Nintendo'     : 'ニンテンドーeショップで見る' },
-    website:   { icon: <FaGlobe />,   label: variant === 'card' ? 'Website'        : 'Webサイトを見る' },
-    github:    { icon: <FaGithub />,  label: variant === 'card' ? 'GitHub'         : 'GitHubで見る' },
-    pdf:       { icon: <FaExternalLinkAlt />, label: variant === 'card' ? 'PDF'   : 'PDFを見る' },
-    note:      { icon: <FaPenFancy />, label: variant === 'card' ? 'note'          : 'noteを見る' },
-    Youtube:   { icon: <FaYoutube />,         label: variant === 'card' ? 'YouTube'      : 'YouTubeを見る' },
-  };
+const LINK_CONFIG = {
+  unityroom: { icon: <FaDesktop />,         cardLabel: 'unityroom', modalLabel: 'unityroomで遊ぶ' },
+  itch:      { icon: <FaGamepad />,         cardLabel: 'itch.io',   modalLabel: 'itch.ioで遊ぶ' },
+  steam:     { icon: <FaSteam />,           cardLabel: 'Steam',     modalLabel: 'Steamで遊ぶ' },
+  nintendo:  { icon: <SiNintendoswitch />,  cardLabel: 'Nintendo',  modalLabel: 'ニンテンドーeショップで見る' },
+  website:   { icon: <FaGlobe />,           cardLabel: 'Website',   modalLabel: 'Webサイトを見る' },
+  github:    { icon: <FaGithub />,          cardLabel: 'GitHub',    modalLabel: 'GitHubで見る' },
+  pdf:       { icon: <FaExternalLinkAlt />, cardLabel: 'PDF',       modalLabel: 'PDFを見る' },
+  note:      { icon: <FaPenFancy />,        cardLabel: 'note',      modalLabel: 'noteを見る' },
+  Youtube:   { icon: <FaYoutube />,         cardLabel: 'YouTube',   modalLabel: 'YouTubeを見る' },
+};
+
+const WorkLinks = ({ links, variant = 'card' }) => (
+  <>
+    {Object.entries(LINK_CONFIG).map(([key, { icon, cardLabel, modalLabel }]) => {
+      if (!links[key]) return null;
+      const cls = variant === 'modal' ? 'btn-primary' : 'work-link';
+      const label = variant === 'modal' ? modalLabel : cardLabel;
+      return (
+        <a key={key} href={links[key]} target="_blank" rel="noopener noreferrer" className={cls} data-key={key}>
+          {icon} {label}
+        </a>
+      );
+    })}
+  </>
+);
+
+const useGalleryImages = (baseImage) => {
+  const [images, setImages] = useState([baseImage]);
+
+  useEffect(() => {
+    setImages([baseImage]);
+    const match = baseImage.match(/^(.+)(\.[^.]+)$/);
+    if (!match) return;
+    const [, base, ext] = match;
+    let cancelled = false;
+
+    const tryLoad = (n) => {
+      if (cancelled) return;
+      const src = `${base}${n}${ext}`;
+      const img = new Image();
+      img.onload = () => {
+        if (!cancelled) {
+          setImages(prev => [...prev, src]);
+          tryLoad(n + 1);
+        }
+      };
+      img.src = src;
+    };
+    tryLoad(2);
+    return () => { cancelled = true; };
+  }, [baseImage]);
+
+  return images;
+};
+
+const ModalGallery = ({ work }) => {
+  const allImages = useGalleryImages(work.image);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => { setIndex(0); }, [work]);
+
+  const hasMultiple = allImages.length > 1;
 
   return (
-    <>
-      {Object.entries(linkConfig).map(([key, { icon, label }]) => {
-        if (!links[key]) return null;
-        const cls = variant === 'modal'
-          ? (isPrimary(key) ? 'btn-primary' : 'btn-secondary')
-          : 'work-link';
-        return (
-          <a key={key} href={links[key]} target="_blank" rel="noopener noreferrer" className={cls} data-key={key}>
-            {icon} {label}
-          </a>
-        );
-      })}
-    </>
+    <div className="modal-gallery">
+      <div className="modal-gallery-main">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={index}
+            src={allImages[index]}
+            alt={`${work.title} ${index + 1}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          />
+        </AnimatePresence>
+        {hasMultiple && (
+          <>
+            <button
+              className="gallery-arrow gallery-prev"
+              onClick={() => setIndex(i => Math.max(0, i - 1))}
+              disabled={index === 0}
+            >
+              <FaChevronLeft />
+            </button>
+            <button
+              className="gallery-arrow gallery-next"
+              onClick={() => setIndex(i => Math.min(allImages.length - 1, i + 1))}
+              disabled={index === allImages.length - 1}
+            >
+              <FaChevronRight />
+            </button>
+            <div className="gallery-counter">{index + 1} / {allImages.length}</div>
+          </>
+        )}
+      </div>
+      {hasMultiple && (
+        <div className="modal-gallery-thumbs">
+          {allImages.map((img, i) => (
+            <button
+              key={i}
+              className={`gallery-thumb ${i === index ? 'active' : ''}`}
+              onClick={() => setIndex(i)}
+            >
+              <img src={img} alt={`${work.title} ${i + 1}`} />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 
@@ -108,9 +192,7 @@ const Works = () => {
               >
                 <button className="modal-close" onClick={() => setSelectedWork(null)}>×</button>
 
-                <div className="modal-image">
-                  <img src={selectedWork.image} alt={selectedWork.title} />
-                </div>
+                <ModalGallery work={selectedWork} />
 
                 <div className="modal-info">
                   <h3 className="modal-title">{selectedWork.title}</h3>
