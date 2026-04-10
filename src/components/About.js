@@ -153,10 +153,10 @@ const About = () => {
                 <div className="hobby-photos-label">趣味</div>
                 <div className="hobby-photos-grid">
                   {[
-                    { src: 'hobby-piano.jpg',   emoji: '🎹', label: 'ピアノ' },
-                    { src: 'hobby-bike.jpg',    emoji: '🏍️', label: 'バイク' },
-                    { src: 'hobby-basket.jpg',  emoji: '🏀', label: 'バスケ' },
-                    { src: 'hobby-travel.jpg',  emoji: '✈️', label: '旅行'   },
+                    { src: 'hobby/hobby-piano.jpg',   emoji: '🎹', label: 'ピアノ' },
+                    { src: 'hobby/hobby-bike.jpg',    emoji: '🏍️', label: 'バイク' },
+                    { src: 'hobby/hobby-basket.jpg',  emoji: '🏀', label: 'バスケ' },
+                    { src: 'hobby/hobby-travel.jpg',  emoji: '✈️', label: '旅行'   },
                   ].map(({ src, emoji, label }) => (
                     <div className="hobby-photo-item" key={label}>
                       <div className="hobby-photo-frame">

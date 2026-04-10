@@ -22,7 +22,7 @@ const Works = () => {
       description: 'BitSummit Gamejam2025にてゲームジャム総合グランプリを受賞した2人協力ゲーム',
       detailedDescription: 'BitSummitGameJam 2025で制作したプロジェクト\nプランナーとしてチームの進行管理&仕様書作成を担当しつつ、プログラマーとしてシステムの制御を実装。\n球状モニターを使用。\nBitSummitゲームジャム総合グランプリを受賞しました。',
       features: ['チーム開発', 'BSGM2025', '球状モニター', '2画面', 'マルチプレイ'],
-      image: `${process.env.PUBLIC_URL}/Image/DreamMayday.png`,
+      image: `${process.env.PUBLIC_URL}/Image/works/DreamMayday.png`,
       links: {
         itch: 'https://bitsummit-gamejam.itch.io/dreammayday',
         github: 'https://github.com/BSGJ2025-w-12/DreamMayday_Scripts',
@@ -40,7 +40,7 @@ const Works = () => {
       description: '自身で立ち上げた学生チーム「TOMSN」で制作した3Dアクションゲーム',
       detailedDescription: '学生5人のチーム「TOMSN」での開発プロジェクト\nプログラマーとプランナーの両方を担当し、ゲームシステムの設計から実装まで幅広く関わりました。チーム開発でのコミュニケーションと進行管理の経験も積むことができました。',
       features: ['チーム開発', 'アジャイル開発', 'Probuilder', '3DCG'],
-      image: `${process.env.PUBLIC_URL}/Image/CrashReport.png`,
+      image: `${process.env.PUBLIC_URL}/Image/works/CrashReport.png`,
       links: {
         unityroom: 'https://unityroom.com/games/crash_report',
         github: 'https://github.com/TOMSNtomsn/CRASH-REPORT',
@@ -58,7 +58,7 @@ const Works = () => {
       description: '研究室のチームで制作したマルチプレイ脱出ゲーム',
       detailedDescription: '研究室のメンバーとチーム開発で制作した2人協力型脱出ゲーム\nネットワーク機能の実装とゲームバランスの調整を担当。\n私の研究室は数年以内に閉鎖されるため、3Dスキャナーで空間をデジタル保存し、そのデータを使って脱出ゲームを制作しました。\n研究室をそのままデータとして使用しており、個人情報保護の観点によりゲームは公開していません。',
       features: ['チーム開発', '協力型謎解き', 'マルチプレイ機能', '3Dスキャン'],
-      image: `${process.env.PUBLIC_URL}/Image/MultiEscape.png`,
+      image: `${process.env.PUBLIC_URL}/Image/works/MultiEscape.png`,
       links: {
         github: 'https://github.com/Taka100822/LabEscapeGame',
         note: 'https://note.com/taka10822/n/n9031b5fbc073?sub_rt=share_pw'
@@ -73,7 +73,7 @@ const Works = () => {
       description: '新感覚のホッピング陣取りバトルゲーム',
       detailedDescription: 'アルバイトで企画・実装に携わったゲーム\n企画面では、主に演出の仕様作成、ローカライズデータ作成、ステージ制作を担当しました。実装面では、自ら設計した演出の実装や、背景の制作などを行いました。実際に収益が発生するタイトルの開発に関わることで、ゲーム制作におけるプロセスの流れや、マーケティングの重要性を実感しました。また、中規模のチームでの共同制作を通じて、他職種との連携やスケジュール管理といった実践的な開発経験を積むことができました。',
       features: ['学生アルバイト', '収益化タイトル', '中規模チーム開発'],
-      image: `${process.env.PUBLIC_URL}/Image/PogoStadium.jpg`,
+      image: `${process.env.PUBLIC_URL}/Image/works/PogoStadium.jpg`,
       links: {
         steam: 'https://store.steampowered.com/app/3672410/POGO_Stadium',
         website: 'https://pogostadium.com',
@@ -89,7 +89,7 @@ const Works = () => {
       description: 'ハートを分け合って町を明るくするゲーム',
       detailedDescription: 'Unity1WeekGameJamの「あい」というテーマで制作した3Dアクションゲーム\nプレイヤーがハートを集めて町の人々に分け与えることで、暗い町を明るくしていくゲームです。限られた時間の中で企画・実装・調整まで一人で担当しました。',
       features: ['個人開発', 'Asset使用', 'Unity1WeekGameJam参加作品'],
-      image: `${process.env.PUBLIC_URL}/Image/Wakeai.png`,
+      image: `${process.env.PUBLIC_URL}/Image/works/Wakeai.png`,
       links: {
         unityroom: 'https://unityroom.com/games/wakeai',
         github: 'https://github.com/Taka100822/Unity1WeekGameJam_1st',
@@ -105,7 +105,7 @@ const Works = () => {
       description: 'ゲームの視覚情報に関する研究のために作成した2Dアクションゲーム',
       detailedDescription: '卒業研究の一環として制作した2Dアクションゲーム\n視覚情報の多寡に関する研究データを収集するためのゲームで、プレイヤーの行動データを詳細に記録・分析できる仕組みを実装しました。遊ぶにはコントローラーが必要です。',
       features: ['Unity初作品', '研究用途', 'データ収集機能', 'TileMap'],
-      image: `${process.env.PUBLIC_URL}/Image/ReserchGame.png`,
+      image: `${process.env.PUBLIC_URL}/Image/works/ReserchGame.png`,
       links: {
         unityroom: 'https://unityroom.com/games/2d_actiongame',
         github: 'https://github.com/Taka100822/Graduation-Study'
@@ -120,7 +120,7 @@ const Works = () => {
       description: 'バンダイナムコスタジオ様の主催の「ゲームアイディア創造コンテスト！」にて入賞',
       detailedDescription: '株式会社バンダイナムコスタジオ様の「ゲームデザイナーから学ぶ、ゲームアイディア創造コンテスト！」にて入賞しました。',
       features: ['企画書', 'アドベンチャーパズルゲーム'],
-      image: `${process.env.PUBLIC_URL}/Image/Dear.png`,
+      image: `${process.env.PUBLIC_URL}/Image/works/Dear.png`,
       links: {
         pdf: `${process.env.PUBLIC_URL}/PDF/Dear.pdf`
       }
@@ -134,7 +134,7 @@ const Works = () => {
       description: 'インターンで制作したチャットWebアプリケーション',
       detailedDescription: 'Nuxt.jsを使用して制作したリアルタイムチャットアプリケーション\nフロントエンド開発の技術習得を目的として制作し、リアルタイム通信やユーザー管理機能を実装しました。',
       features: ['リアルタイムチャット', 'ログイン機能', 'データベースを活用したデータの保存'],
-      image: `${process.env.PUBLIC_URL}/Image/chatApp.png`,
+      image: `${process.env.PUBLIC_URL}/Image/works/chatApp.png`,
       links: {
         github: 'https://github.com/Taka100822/chat-app'
       }
@@ -148,7 +148,7 @@ const Works = () => {
       description: 'フロントエンドの一部分を担当したチーム開発プロジェクト',
       detailedDescription: 'チーム開発で制作した冷蔵庫の食材管理アプリケーション\n主にフロントエンドの実装を担当し、UI/UXの設計と実装に携わりました。チーム開発でのGit運用や役割分担の経験も積むことができました。',
       features: ['初チーム開発', 'フロントエンド担当', 'UI/UX設計'],
-      image: `${process.env.PUBLIC_URL}/Image/fridge-manager.png`,
+      image: `${process.env.PUBLIC_URL}/Image/works/fridge-manager.png`,
       links: {
         github: 'https://github.com/KIT-HI-ProgrammingContestGroupC/fridge-manager'
       }
