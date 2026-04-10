@@ -48,19 +48,23 @@ const useGalleryImages = (baseImage) => {
     const [, base, ext] = match;
     let cancelled = false;
 
-    const tryLoad = (n) => {
-      if (cancelled) return;
-      const src = `${base}${n}${ext}`;
+    const ALT_EXTS = [ext, ...['.png', '.jpg', '.jpeg'].filter(e => e !== ext)];
+
+    const tryExts = (n, exts) => {
+      if (cancelled || exts.length === 0) return;
+      const [first, ...rest] = exts;
+      const src = `${base}${n}${first}`;
       const img = new Image();
       img.onload = () => {
         if (!cancelled) {
           setImages(prev => [...prev, src]);
-          tryLoad(n + 1);
+          tryExts(n + 1, ALT_EXTS);
         }
       };
+      img.onerror = () => { if (!cancelled) tryExts(n, rest); };
       img.src = src;
     };
-    tryLoad(2);
+    tryExts(2, ALT_EXTS);
     return () => { cancelled = true; };
   }, [baseImage]);
 
