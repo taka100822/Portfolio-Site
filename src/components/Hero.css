@@ -123,6 +123,8 @@
   animation: float 6s ease-in-out infinite;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.08);
   white-space: nowrap;
+  line-height: 1;
+  height: 2.8rem;
 }
 
 .fc-icon {
