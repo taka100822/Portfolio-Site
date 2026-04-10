@@ -226,7 +226,7 @@
   }
 
   .hero-visual {
-    height: 300px;
+    height: 360px;
     order: -1;
   }
 
@@ -235,13 +235,13 @@
     flex-wrap: wrap;
   }
 
-  /* モバイルでのカード位置調整 */
-  .card-1 { top: 5%; left: 2%; }
-  .card-2 { top: 5%; right: 2%; }
-  .card-3 { top: 38%; left: 0%; }
-  .card-4 { top: 60%; left: 4%; }
-  .card-5 { bottom: 5%; right: 2%; }
-  .card-6 { top: 38%; right: 0%; }
+  /* モバイルでのカード位置調整 — 3行2列 */
+  .card-1 { top: 4%;  left: 2%;  right: auto; transform: none; }
+  .card-2 { top: 4%;  left: auto; right: 2%; transform: none; }
+  .card-3 { top: 38%; left: 2%;  right: auto; transform: none; }
+  .card-6 { top: 38%; left: auto; right: 2%; transform: none; }
+  .card-4 { top: 60%; left: 0%;  right: auto; transform: none; }
+  .card-5 { top: 80%; left: auto; right: 0%; transform: none; }
 
   .floating-card {
     padding: 0.5rem 1rem 0.5rem 0.7rem;
