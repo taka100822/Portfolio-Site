@@ -206,6 +206,25 @@
   background: rgba(96,165,250,0.08);
 }
 
+.work-link[data-key="itch"],
+.work-link[data-key="unityroom"],
+.work-link[data-key="steam"],
+.work-link[data-key="nintendo"] {
+  color: #93c5fd;
+  border-color: rgba(59, 130, 246, 0.3);
+  background: rgba(59, 130, 246, 0.1);
+  font-weight: 600;
+}
+
+.work-link[data-key="itch"]:hover,
+.work-link[data-key="unityroom"]:hover,
+.work-link[data-key="steam"]:hover,
+.work-link[data-key="nintendo"]:hover {
+  color: #fff;
+  border-color: rgba(96, 165, 250, 0.6);
+  background: rgba(59, 130, 246, 0.25);
+}
+
 /* ── Modal ── */
 .modal-overlay {
   position: fixed;

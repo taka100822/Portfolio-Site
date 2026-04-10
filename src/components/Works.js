@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaExternalLinkAlt, FaGithub, FaGamepad, FaPenFancy, FaSteam, FaGlobe, FaYoutube, FaDesktop } from 'react-icons/fa';
+import { SiNintendoswitch } from 'react-icons/si';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 import { fadeUpVariants, staggerContainer, titleMotionProps } from '../constants/animations';
 import { worksData } from '../constants/works';
 import './Works.css';
 
 const WorkLinks = ({ links, variant = 'card' }) => {
-  const isPrimary = (key) => ['unityroom', 'itch', 'steam'].includes(key);
+  const isPrimary = (key) => ['unityroom', 'itch', 'steam', 'nintendo'].includes(key);
   const linkConfig = {
     unityroom: { icon: <FaDesktop />, label: variant === 'card' ? 'unityroom'      : 'unityroomで遊ぶ' },
     itch:      { icon: <FaGamepad />, label: variant === 'card' ? 'itch.io'        : 'itch.ioで遊ぶ' },
     steam:     { icon: <FaSteam />,   label: variant === 'card' ? 'Steam'          : 'Steamで遊ぶ' },
+    nintendo:  { icon: <SiNintendoswitch />, label: variant === 'card' ? 'Nintendo'     : 'ニンテンドーeショップで見る' },
     website:   { icon: <FaGlobe />,   label: variant === 'card' ? 'Website'        : 'Webサイトを見る' },
     github:    { icon: <FaGithub />,  label: variant === 'card' ? 'GitHub'         : 'GitHubで見る' },
     pdf:       { icon: <FaExternalLinkAlt />, label: variant === 'card' ? 'PDF'   : 'PDFを見る' },
     note:      { icon: <FaPenFancy />, label: variant === 'card' ? 'note'          : 'noteを見る' },
-    Youtube:   { icon: <FaYoutube />, label: variant === 'card' ? 'YouTube'        : 'YouTubeを見る' },
+    Youtube:   { icon: <FaYoutube />,         label: variant === 'card' ? 'YouTube'      : 'YouTubeを見る' },
   };
 
   return (
@@ -27,7 +29,7 @@ const WorkLinks = ({ links, variant = 'card' }) => {
           ? (isPrimary(key) ? 'btn-primary' : 'btn-secondary')
           : 'work-link';
         return (
-          <a key={key} href={links[key]} target="_blank" rel="noopener noreferrer" className={cls}>
+          <a key={key} href={links[key]} target="_blank" rel="noopener noreferrer" className={cls} data-key={key}>
             {icon} {label}
           </a>
         );

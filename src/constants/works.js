@@ -64,6 +64,7 @@ export const worksData = [
     image: `${BASE}/Image/works/PogoStadium.jpg`,
     links: {
       steam: 'https://store.steampowered.com/app/3672410/POGO_Stadium',
+      nintendo: 'https://store-jp.nintendo.com/item/software/D70010000104217',
       website: 'https://pogostadium.com',
       Youtube: 'https://youtu.be/1p6bkLrbkSs?si=lP8HiRBbq7188G88',
     },
