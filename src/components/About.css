@@ -68,27 +68,41 @@
 .passion-showcase {
   width: 100%;
   max-width: 380px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(8, 10, 22, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 1.75rem;
   padding: 2rem 1.75rem;
   position: relative;
   overflow: hidden;
   justify-content: space-between;
+  backdrop-filter: blur(12px);
+  box-sizing: border-box;
 }
 
 .passion-showcase::before {
   content: '';
   position: absolute;
-  top: -60px;
-  right: -60px;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+  top: -70px;
+  right: -70px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.16) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.passion-showcase::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  left: -60px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -96,6 +110,17 @@
 .profile-image-container {
   display: flex;
   justify-content: center;
+  padding: 3px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+  border-radius: 50%;
+  width: fit-content;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.25), 0 12px 32px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+}
+
+.profile-image-container:hover {
+  box-shadow: 0 0 32px rgba(59, 130, 246, 0.4), 0 16px 40px rgba(0,0,0,0.5);
+  transform: scale(1.03);
 }
 
 .profile-image {
@@ -103,15 +128,8 @@
   height: 130px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid rgba(96, 165, 250, 0.4);
-  box-shadow: 0 0 0 6px rgba(96, 165, 250, 0.08), 0 12px 32px rgba(0,0,0,0.4);
-  transition: all 0.3s ease;
-}
-
-.profile-image:hover {
-  border-color: rgba(96, 165, 250, 0.8);
-  box-shadow: 0 0 0 8px rgba(96, 165, 250, 0.12), 0 16px 40px rgba(96, 165, 250, 0.2);
-  transform: scale(1.04);
+  border: 3px solid #080a16;
+  display: block;
 }
 
 /* Main card */
@@ -130,12 +148,15 @@
   height: 90px;
   transform-style: preserve-3d;
   perspective: 1000px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(255,255,255,0.04) 100%);
+  border-left: 3px solid rgba(96, 165, 250, 0.55);
 }
 
 .main-card:hover {
   transform: rotateY(4deg) rotateX(3deg);
-  box-shadow: 0 16px 36px rgba(96, 165, 250, 0.15);
-  border-color: rgba(96, 165, 250, 0.3);
+  box-shadow: 0 16px 36px rgba(96, 165, 250, 0.18);
+  border-color: rgba(96, 165, 250, 0.4);
+  border-left-color: #60a5fa;
 }
 
 .card-inner {
@@ -195,12 +216,26 @@
   transition: all 0.3s ease;
 }
 
+.mini-cards .mini-card:nth-child(1) {
+  background: rgba(251, 191, 36, 0.06);
+  border-color: rgba(251, 191, 36, 0.15);
+}
+.mini-cards .mini-card:nth-child(2) {
+  background: rgba(6, 182, 212, 0.06);
+  border-color: rgba(6, 182, 212, 0.15);
+}
+.mini-cards .mini-card:nth-child(3) {
+  background: rgba(244, 114, 182, 0.06);
+  border-color: rgba(244, 114, 182, 0.15);
+}
+
 .mini-card:hover {
   transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(96, 165, 250, 0.25);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
+.mini-cards .mini-card:nth-child(1):hover { background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.3); }
+.mini-cards .mini-card:nth-child(2):hover { background: rgba(6, 182, 212, 0.12);  border-color: rgba(6, 182, 212, 0.3);  }
+.mini-cards .mini-card:nth-child(3):hover { background: rgba(244, 114, 182, 0.12); border-color: rgba(244, 114, 182, 0.3); }
 
 .mini-icon {
   font-size: 1.4rem;
@@ -225,9 +260,17 @@
   flex: 1;
   text-align: center;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid rgba(96, 165, 250, 0.2);
   border-radius: 1rem;
   padding: 0.75rem 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  background: rgba(59, 130, 246, 0.06);
+  border-color: rgba(96, 165, 250, 0.2);
+  border-top-color: rgba(96, 165, 250, 0.45);
 }
 
 .stat-number {
