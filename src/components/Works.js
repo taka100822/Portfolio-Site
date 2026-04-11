@@ -7,6 +7,10 @@ import { fadeUpVariants, staggerContainer, titleMotionProps } from '../constants
 import { worksData } from '../constants/works';
 import './Works.css';
 
+const nl = (text) => text.split('\n').map((line, i, arr) => (
+  <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+));
+
 const LINK_CONFIG = {
   unityroom: { icon: <FaDesktop />,         cardLabel: 'unityroom', modalLabel: 'unityroomで遊ぶ' },
   itch:      { icon: <FaGamepad />,         cardLabel: 'itch.io',   modalLabel: 'itch.ioで遊ぶ' },
@@ -212,17 +216,24 @@ const Works = () => {
                   <div className="modal-divider" />
                   <div className="modal-detailed-description">
                     {selectedWork.detailedDescription.overview && (
-                      <p className="modal-desc-intro">{selectedWork.detailedDescription.overview}</p>
+                      <p className="modal-desc-intro">{nl(selectedWork.detailedDescription.overview)}</p>
                     )}
-                    {[
-                      { label: 'ゲーム内容', key: 'gameContent' },
-                      { label: '担当箇所', key: 'role' },
-                    ].map(({ label, key }) => selectedWork.detailedDescription[key] && (
-                      <div key={key} className="modal-desc-section">
-                        <span className="modal-desc-label">{label}</span>
-                        <p>{selectedWork.detailedDescription[key]}</p>
+                    {selectedWork.detailedDescription.gameContent && (
+                      <div className="modal-desc-section">
+                        <span className="modal-desc-label">ゲーム内容</span>
+                        <p>{nl(selectedWork.detailedDescription.gameContent)}</p>
                       </div>
-                    ))}
+                    )}
+                    {selectedWork.detailedDescription.role && (
+                      <div className="modal-desc-section">
+                        <span className="modal-desc-label">担当箇所</span>
+                        <ul className="modal-desc-role">
+                          {selectedWork.detailedDescription.role.split('\n').map((item, i) => (
+                            <li key={i}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
 
                   <div className="modal-divider" />
