@@ -1,5 +1,7 @@
 .works-section {
   background: rgba(255, 255, 255, 0.02);
+  position: relative;
+  z-index: 2;
 }
 
 .works-grid {
@@ -12,7 +14,7 @@
 /* ── Card ── */
 .work-card {
   position: relative;
-  background: rgba(255, 255, 255, 0.04);
+  background: #0d0d14;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 1.25rem;
   overflow: hidden;
