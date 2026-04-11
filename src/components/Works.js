@@ -76,27 +76,59 @@ const useGalleryImages = (baseImage) => {
   return images;
 };
 
+const getYouTubeId = (url) => {
+  if (!url) return null;
+  const m = url.match(/youtu\.be\/([^?&]+)/) || url.match(/[?&]v=([^&]+)/);
+  return m ? m[1] : null;
+};
+
 const ModalGallery = ({ work }) => {
   const allImages = useGalleryImages(work.image);
-  const [index, setIndex] = useState(0);
+  const youtubeId = getYouTubeId(work.links.Youtube);
 
+  // items: youtube first (if exists), then images
+  const items = [
+    ...(youtubeId ? [{ type: 'youtube', id: youtubeId }] : []),
+    ...allImages.map(src => ({ type: 'image', src })),
+  ];
+
+  const [index, setIndex] = useState(0);
   useEffect(() => { setIndex(0); }, [work]);
 
-  const hasMultiple = allImages.length > 1;
+  const hasMultiple = items.length > 1;
+  const current = items[index];
 
   return (
     <div className="modal-gallery">
       <div className="modal-gallery-main">
         <AnimatePresence mode="wait">
-          <motion.img
-            key={index}
-            src={allImages[index]}
-            alt={`${work.title} ${index + 1}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          />
+          {current.type === 'youtube' ? (
+            <motion.div
+              key="youtube"
+              className="gallery-youtube"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <iframe
+                src={`https://www.youtube.com/embed/${current.id}`}
+                title="YouTube"
+                allowFullScreen
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              />
+            </motion.div>
+          ) : (
+            <motion.img
+              key={current.src}
+              src={current.src}
+              alt={`${work.title}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            />
+          )}
         </AnimatePresence>
         {hasMultiple && (
           <>
@@ -109,24 +141,34 @@ const ModalGallery = ({ work }) => {
             </button>
             <button
               className="gallery-arrow gallery-next"
-              onClick={() => setIndex(i => Math.min(allImages.length - 1, i + 1))}
-              disabled={index === allImages.length - 1}
+              onClick={() => setIndex(i => Math.min(items.length - 1, i + 1))}
+              disabled={index === items.length - 1}
             >
               <FaChevronRight />
             </button>
-            <div className="gallery-counter">{index + 1} / {allImages.length}</div>
+            <div className="gallery-counter">{index + 1} / {items.length}</div>
           </>
         )}
       </div>
       {hasMultiple && (
         <div className="modal-gallery-thumbs">
-          {allImages.map((img, i) => (
+          {items.map((item, i) => (
             <button
               key={i}
               className={`gallery-thumb ${i === index ? 'active' : ''}`}
               onClick={() => setIndex(i)}
             >
-              <img src={img} alt={`${work.title} ${i + 1}`} />
+              {item.type === 'youtube' ? (
+                <div className="gallery-thumb-youtube">
+                  <img
+                    src={`https://img.youtube.com/vi/${item.id}/mqdefault.jpg`}
+                    alt="YouTube"
+                  />
+                  <div className="gallery-thumb-play">▶</div>
+                </div>
+              ) : (
+                <img src={item.src} alt={`${work.title} ${i + 1}`} />
+              )}
             </button>
           ))}
         </div>
