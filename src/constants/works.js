@@ -138,7 +138,7 @@ export const worksData = [
     features: ['企画書', '入賞作品'],
     image: `${BASE}/Image/works/Dear/Dear.png`,
     links: {
-      pdf: `${BASE}/PDF/Dear.pdf`,
+      pdf: `${BASE}/PDF/Dear you, FROM FAN.pdf`,
     },
   },
   {
