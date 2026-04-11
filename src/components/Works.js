@@ -23,15 +23,15 @@ const LINK_CONFIG = {
   pdf:       { icon: <FaExternalLinkAlt />, cardLabel: 'PDF',       modalLabel: 'PDFを見る' },
 };
 
-const BLUE_KEYS  = ['itch', 'unityroom', 'steam', 'nintendo'];
-const WHITE_KEYS = ['note'];
+const BLUE_KEYS   = ['note'];
+const ORANGE_KEYS = ['itch', 'unityroom', 'steam', 'nintendo'];
 
 const WorkLinks = ({ links, variant = 'card' }) => (
   <>
     {Object.entries(LINK_CONFIG).map(([key, { icon, cardLabel, modalLabel }]) => {
       if (!links[key]) return null;
       const cls = variant === 'modal'
-        ? (BLUE_KEYS.includes(key) ? 'btn-primary' : WHITE_KEYS.includes(key) ? 'btn-white' : 'btn-secondary')
+        ? (BLUE_KEYS.includes(key) ? 'btn-primary' : ORANGE_KEYS.includes(key) ? 'btn-white' : 'btn-secondary')
         : 'work-link';
       const label = variant === 'modal' ? modalLabel : cardLabel;
       return (
