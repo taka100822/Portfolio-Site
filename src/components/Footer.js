@@ -46,9 +46,9 @@ const Footer = () => {
             <div className="link-group">
               <h4>External</h4>
               <ul>
+                <li><a href="https://note.com/Taka10822" target="_blank" rel="noopener noreferrer">note</a></li>
                 <li><a href="https://github.com/Taka100822" target="_blank" rel="noopener noreferrer">GitHub</a></li>
                 <li><a href="https://unityroom.com/users/taka_unityroom" target="_blank" rel="noopener noreferrer">unityroom</a></li>
-                <li><a href="https://note.com/Taka10822" target="_blank" rel="noopener noreferrer">note</a></li>
                 <li><a href="https://plsdb.com/profile/taka10822" target="_blank" rel="noopener noreferrer">PULSE</a></li>
               </ul>
             </div>
@@ -76,7 +76,7 @@ const Footer = () => {
           viewport={{ once: true }}
         >
           <p className="copyright">
-            © 2025 Taka10’s Portfolio. Made with{' '}
+            © Taka10’s Portfolio. Made with{' '}
             <FaHeart className="heart-icon" /> by Taka10
           </p>
         </motion.div>

@@ -32,14 +32,11 @@ const Contact = () => {
             <div className="info-text">
               <h3 className="gradient-text">ご連絡について</h3>
               <p>
-                ゲームプランナー新卒採用に関するご相談や、
-                ポートフォリオについてのご質問など
-                はXのDMでお受けしております。
+                ゲームプランナー新卒採用に関するご相談やポートフォリオについてのご質問などはXのDMでお受けしております。
               </p>
               <p>
-                チーム開発への参加やインターンシップの機会なども
-                積極的に検討させていただきますので、
-                お気軽にお声がけください。
+                ゲームジャムやインターンシップなどの参加も積極的に検討させていただきますので、
+                お気軽にお声がけください！
               </p>
             </div>
 
@@ -59,7 +56,7 @@ const Contact = () => {
               </div>
               <div className="twitter-info">
                 <span className="twitter-label">X (Twitter) </span>
-                <span className="twitter-value">@Taka10822GC</span>
+                <span className="twitter-value">@taka10822GC</span>
               </div>
             </motion.a>
           </div>

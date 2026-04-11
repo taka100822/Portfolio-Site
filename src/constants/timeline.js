@@ -1,4 +1,4 @@
-import { FaGamepad, FaCode, FaGraduationCap, FaProjectDiagram, FaTrophy, FaUsers, FaBriefcase, FaStar, FaFlask, FaPlane } from 'react-icons/fa';
+import { FaGamepad, FaCode, FaGraduationCap, FaProjectDiagram, FaTrophy, FaUsers, FaBriefcase, FaStar, FaFlask, FaPlane, FaGlobe } from 'react-icons/fa';
 
 export const timelineData = [
   {
@@ -29,7 +29,7 @@ export const timelineData = [
     year: '2024', month: '04',
     title: '初めての共同開発',
     description: '研究室のメンバーと冷蔵庫の食品管理問題を解決すべくWebアプリを作成しました。先輩方に引っ張ってもらいながらチーム開発のノウハウを学びました。',
-    icon: FaProjectDiagram,
+    icon: FaGlobe,
     type: 'project',
     details: ['チーム開発', 'Git/GitHub', 'Nuxt3', 'Vue.js'],
   },
@@ -80,7 +80,7 @@ export const timelineData = [
     year: '2025', month: '06',
     title: 'ポートフォリオサイト制作',
     description: 'これまでの経験と制作物を整理し、本ポートフォリオサイトを制作しました。',
-    icon: FaCode,
+    icon: FaGlobe,
     type: 'project',
     details: ['Claude Code', 'JavaScript', 'React'],
   },
@@ -88,7 +88,7 @@ export const timelineData = [
     year: '2025', month: '06',
     title: 'TOMSN第1弾「CRASH REPORT」をリリース',
     description: '私が設立した学生ゲーム制作団体「TOMSN」で開発したゲームを公開しました。リーダーとしてチームの進行管理を行い、長期のチーム開発経験を得ました。',
-    icon: FaUsers,
+    icon: FaGamepad,
     type: 'project',
     details: ['Unity', 'C#', 'Blender'],
     noteLink: 'https://note.com/taka10822/n/n9265ce5cd160?sub_rt=share_pw',
