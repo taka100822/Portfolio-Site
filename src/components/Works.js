@@ -16,11 +16,11 @@ const LINK_CONFIG = {
   itch:      { icon: <FaGamepad />,         cardLabel: 'itch.io',   modalLabel: 'itch.ioで遊ぶ' },
   steam:     { icon: <FaSteam />,           cardLabel: 'Steam',     modalLabel: 'Steamで遊ぶ' },
   nintendo:  { icon: <SiNintendoswitch />,  cardLabel: 'Nintendo',  modalLabel: 'ニンテンドーeショップで見る' },
+  note:      { icon: <FaPenFancy />,        cardLabel: 'note',      modalLabel: 'noteを見る' },
+  Youtube:   { icon: <FaYoutube />,         cardLabel: 'YouTube',   modalLabel: 'YouTubeを見る' },
   website:   { icon: <FaGlobe />,           cardLabel: 'Website',   modalLabel: 'Webサイトを見る' },
   github:    { icon: <FaGithub />,          cardLabel: 'GitHub',    modalLabel: 'GitHubで見る' },
   pdf:       { icon: <FaExternalLinkAlt />, cardLabel: 'PDF',       modalLabel: 'PDFを見る' },
-  note:      { icon: <FaPenFancy />,        cardLabel: 'note',      modalLabel: 'noteを見る' },
-  Youtube:   { icon: <FaYoutube />,         cardLabel: 'YouTube',   modalLabel: 'YouTubeを見る' },
 };
 
 const BLUE_KEYS = ['itch', 'unityroom', 'steam', 'nintendo'];
@@ -218,10 +218,10 @@ const Works = () => {
                     {selectedWork.detailedDescription.overview && (
                       <p className="modal-desc-intro">{nl(selectedWork.detailedDescription.overview)}</p>
                     )}
-                    {selectedWork.detailedDescription.gameContent && (
+                    {selectedWork.detailedDescription.content && (
                       <div className="modal-desc-section">
-                        <span className="modal-desc-label">ゲーム内容</span>
-                        <p>{nl(selectedWork.detailedDescription.gameContent)}</p>
+                        <span className="modal-desc-label">内容</span>
+                        <p>{nl(selectedWork.detailedDescription.content)}</p>
                       </div>
                     )}
                     {selectedWork.detailedDescription.role && (
@@ -238,6 +238,12 @@ const Works = () => {
 
                   <div className="modal-divider" />
                   <div className="modal-features">
+                    <h4>使用技術</h4>
+                    <div className="work-tech" style={{marginBottom: '0.75rem'}}>
+                      {selectedWork.technology.map((t) => (
+                        <span key={t} className="tech-tag">{t}</span>
+                      ))}
+                    </div>
                     <h4>特徴 / キーワード</h4>
                     <ul>
                       {selectedWork.features.map((f) => <li key={f}>{f}</li>)}
