@@ -408,8 +408,8 @@
 
 .gallery-thumb {
   flex-shrink: 0;
-  width: 92px;
-  height: 66px;
+  width: 83px;
+  height: 53px;
   border-radius: 0.4rem;
   overflow: hidden;
   border: 2px solid rgba(255,255,255,0.1);
