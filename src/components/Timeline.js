@@ -36,7 +36,7 @@ const Timeline = () => {
                 <div className="timeline-header">
                   <div className="timeline-date">
                     <span className="year">{item.year}</span>
-                    <span className="month">/{item.month}</span>
+                    <span className="month">/  {item.month}</span>
                   </div>
                   <span className="type-badge">{getTypeLabel(item.type)}</span>
                 </div>
