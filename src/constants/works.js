@@ -7,8 +7,12 @@ export const worksData = [
     category: '2D & HD-2D Action',
     duration: '3ヶ月',
     technology: ['Unity', 'C#'],
-    description: 'BitSummit Gamejam2025にてゲームジャム総合グランプリを受賞した2人協力ゲーム',
-    detailedDescription: 'BitSummitGameJam 2025で制作したプロジェクト\nプランナーとしてチームの進行管理&仕様書作成を担当しつつ、プログラマーとしてシステムの制御を実装。\n球状モニターを使用。\nBitSummitゲームジャム総合グランプリを受賞しました。',
+    description: 'BitSummit Gamejam 2025にてゲームジャム総合グランプリを受賞した協力コミュニケーションゲーム',
+    detailedDescription: {
+      overview: 'BitSummit Gamejam 2025に向けてチームで制作したプロジェクト。',
+      gameContent: '球状モニターを使った2画面マルチプレイの協力コミュニケーションゲーム。BitSummit Gamejam 2025にてゲームジャム総合グランプリを受賞。',
+      role: 'プランナーとして進行管理や仕様書作成を担当しつつ、プログラマーとしてシステムの制御・マルチディスプレイ対応・複数シーンのAdditive読み込みの実装とソース管理を担当。',
+    },
     features: ['チーム開発', 'BSGM2025', '球状モニター', '2画面', 'マルチプレイ'],
     image: `${BASE}/Image/works/DreamMayday/DreamMayday.png`,
     links: {
@@ -26,7 +30,11 @@ export const worksData = [
     duration: '3ヶ月',
     technology: ['Unity', 'C#', 'Blender'],
     description: '自身で立ち上げた学生チーム「TOMSN」で制作した3Dアクションゲーム',
-    detailedDescription: '学生5人のチーム「TOMSN」での開発プロジェクト\nプログラマーとプランナーの両方を担当し、ゲームシステムの設計から実装まで幅広く関わりました。チーム開発でのコミュニケーションと進行管理の経験も積むことができました。',
+    detailedDescription: {
+      overview: '自身でチームを立ち上げ、初めてのチーム開発プロジェクトとして制作。アジャイル開発を取り入れながら進行した。',
+      gameContent: '学生5人のチーム「TOMSN」で制作した3Dアクションゲーム。',
+      role: 'プログラマーとプランナーの両方を担当し、ゲームシステムの設計から実装まで幅広く関わった。チーム開発でのコミュニケーションと進行管理も担当。',
+    },
     features: ['チーム開発', 'アジャイル開発', 'Probuilder', '3DCG'],
     image: `${BASE}/Image/works/CrashReport/CRASH REPORT.png`,
     links: {
@@ -44,7 +52,11 @@ export const worksData = [
     duration: '2ヶ月',
     technology: ['Unity', 'C#', '3D Scan', 'Photon PUN2'],
     description: '研究室のチームで制作したマルチプレイ脱出ゲーム',
-    detailedDescription: '研究室のメンバーとチーム開発で制作した2人協力型脱出ゲーム\nネットワーク機能の実装とゲームバランスの調整を担当。\n私の研究室は数年以内に閉鎖されるため、3Dスキャナーで空間をデジタル保存し、そのデータを使って脱出ゲームを制作しました。\n研究室をそのままデータとして使用しており、個人情報保護の観点によりゲームは公開していません。',
+    detailedDescription: {
+      overview: '研究室が数年以内に閉鎖されるため、3Dスキャナーで空間をデジタル保存し、そのデータをそのままゲームのステージとして使用した。',
+      gameContent: '研究室のメンバーと制作した2人協力型マルチプレイ脱出ゲーム。個人情報保護の観点により非公開。',
+      role: 'ネットワーク機能（Photon PUN2）の実装とゲームバランスの調整を担当。',
+    },
     features: ['チーム開発', '協力型謎解き', 'マルチプレイ機能', '3Dスキャン'],
     image: `${BASE}/Image/works/MultiEscape/MultiEscape.png`,
     links: {
@@ -59,7 +71,11 @@ export const worksData = [
     duration: '10ヶ月',
     technology: ['Unity', 'C#'],
     description: '新感覚のホッピング陣取りバトルゲーム',
-    detailedDescription: 'アルバイトで企画・実装に携わったゲーム\n企画面では、主に演出の仕様作成、ローカライズデータ作成、ステージ制作を担当しました。実装面では、自ら設計した演出の実装や、背景の制作などを行いました。実際に収益が発生するタイトルの開発に関わることで、ゲーム制作におけるプロセスの流れや、マーケティングの重要性を実感しました。また、中規模のチームでの共同制作を通じて、他職種との連携やスケジュール管理といった実践的な開発経験を積むことができました。',
+    detailedDescription: {
+      overview: 'アルバイトとして参加した中規模チームでの開発プロジェクト。実際に収益が発生するタイトルの開発に携わることで、ゲーム制作のプロセスやマーケティングの重要性を実感した。',
+      gameContent: 'ホッピングで陣地を奪い合う新感覚のバトルゲーム。Steam・Nintendo Switchにてリリース済みの収益化タイトル。',
+      role: '企画面では演出の仕様作成・ローカライズデータ作成・ステージ制作を担当。実装面では自ら設計した演出の実装や背景制作を行った。',
+    },
     features: ['学生アルバイト', '収益化タイトル', '中規模チーム開発'],
     image: `${BASE}/Image/works/PogoStadium/PogoStadium.png`,
     links: {
@@ -76,7 +92,11 @@ export const worksData = [
     duration: '1週間',
     technology: ['Unity', 'C#'],
     description: 'ハートを分け合って町を明るくするゲーム',
-    detailedDescription: 'Unity1WeekGameJamの「あい」というテーマで制作した3Dアクションゲーム\nプレイヤーがハートを集めて町の人々に分け与えることで、暗い町を明るくしていくゲームです。限られた時間の中で企画・実装・調整まで一人で担当しました。',
+    detailedDescription: {
+      overview: 'Unity1WeekGameJamの「あい」というテーマで制作。1週間という制約の中で企画・実装・調整まで一人で完結させた。',
+      gameContent: 'プレイヤーがハートを集めて町の人々に分け与えることで、暗い町を明るくしていく3Dアクションゲーム。',
+      role: '個人開発のため企画・実装・デバッグ・調整すべてを一人で担当。',
+    },
     features: ['個人開発', 'Asset使用', 'Unity1WeekGameJam参加作品'],
     image: `${BASE}/Image/works/Wakeai/Wakeai.png`,
     links: {
@@ -92,7 +112,11 @@ export const worksData = [
     duration: '5ヶ月',
     technology: ['Unity', 'C#'],
     description: 'ゲームの視覚情報に関する研究のために作成した2Dアクションゲーム',
-    detailedDescription: '卒業研究の一環として制作した2Dアクションゲーム\n視覚情報の多寡に関する研究データを収集するためのゲームで、プレイヤーの行動データを詳細に記録・分析できる仕組みを実装しました。遊ぶにはコントローラーが必要です。',
+    detailedDescription: {
+      overview: '卒業研究の一環として制作。プレイヤーの行動データを詳細に記録・分析できる仕組みを設計・実装した。',
+      gameContent: '視覚情報の多寡がプレイヤー体験に与える影響を調査するための2Dアクションゲーム。遊ぶにはコントローラーが必要。',
+      role: '個人開発のため企画・設計・実装・実験設計すべてを一人で担当。',
+    },
     features: ['Unity初作品', '研究用途', 'データ収集機能', 'TileMap'],
     image: `${BASE}/Image/works/ReserchGame/ReserchGame.png`,
     links: {
@@ -106,7 +130,11 @@ export const worksData = [
     duration: '1週間',
     technology: ['PowerPoint', 'Unity'],
     description: 'バンダイナムコスタジオ様の主催の「ゲームアイディア創造コンテスト！」にて入賞',
-    detailedDescription: '株式会社バンダイナムコスタジオ様の「ゲームデザイナーから学ぶ、ゲームアイディア創造コンテスト！」にて入賞しました。',
+    detailedDescription: {
+      overview: '株式会社バンダイナムコスタジオ様の「ゲームデザイナーから学ぶ、ゲームアイディア創造コンテスト！」に応募し入賞。',
+      gameContent: 'ファンが推しアーティストに「想いを届ける」をテーマにしたアドベンチャーパズルゲームの企画書（ペラ1）。',
+      role: '企画立案から企画書（ペラ1）の作成まで一人で担当。',
+    },
     features: ['企画書', 'アドベンチャーパズルゲーム'],
     image: `${BASE}/Image/works/Dear/Dear.png`,
     links: {
@@ -120,7 +148,11 @@ export const worksData = [
     duration: '1週間',
     technology: ['HTML', 'JavaScript', 'Nuxt.js', 'Vuetify', 'Tailwind CSS', 'Firebase'],
     description: 'インターンで制作したチャットWebアプリケーション',
-    detailedDescription: 'Nuxt.jsを使用して制作したリアルタイムチャットアプリケーション\nフロントエンド開発の技術習得を目的として制作し、リアルタイム通信やユーザー管理機能を実装しました。',
+    detailedDescription: {
+      overview: 'インターンでのフロントエンド開発の技術習得を目的として制作。',
+      gameContent: 'Nuxt.jsとFirebaseを使用して制作したリアルタイムチャットアプリケーション。',
+      role: 'リアルタイム通信・ユーザー管理・認証機能の実装を担当。',
+    },
     features: ['リアルタイムチャット', 'ログイン機能', 'データベースを活用したデータの保存'],
     image: `${BASE}/Image/works/chatApp/chatApp.png`,
     links: {
@@ -134,7 +166,11 @@ export const worksData = [
     duration: '3ヶ月',
     technology: ['Vue.js', 'Nuxt.js'],
     description: 'フロントエンドの一部分を担当したチーム開発プロジェクト',
-    detailedDescription: 'チーム開発で制作した冷蔵庫の食材管理アプリケーション\n主にフロントエンドの実装を担当し、UI/UXの設計と実装に携わりました。チーム開発でのGit運用や役割分担の経験も積むことができました。',
+    detailedDescription: {
+      overview: '初めてのチーム開発経験として制作。Git運用や役割分担・コードレビューの経験を積んだ。',
+      gameContent: 'チーム開発で制作した冷蔵庫の食材管理Webアプリケーション。',
+      role: '主にフロントエンドの実装を担当し、UI/UXの設計と実装に携わった。',
+    },
     features: ['初チーム開発', 'フロントエンド担当', 'UI/UX設計'],
     image: `${BASE}/Image/works/fridge-manager/fridge-manager.png`,
     links: {

@@ -210,11 +210,20 @@ const Works = () => {
                   </div>
 
                   <div className="modal-divider" />
-                  <p className="modal-detailed-description">
-                    {selectedWork.detailedDescription.split('\n').map((line, i, arr) => (
-                      <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+                  <div className="modal-detailed-description">
+                    {selectedWork.detailedDescription.overview && (
+                      <p className="modal-desc-intro">{selectedWork.detailedDescription.overview}</p>
+                    )}
+                    {[
+                      { label: 'ゲーム内容', key: 'gameContent' },
+                      { label: '担当箇所', key: 'role' },
+                    ].map(({ label, key }) => selectedWork.detailedDescription[key] && (
+                      <div key={key} className="modal-desc-section">
+                        <span className="modal-desc-label">{label}</span>
+                        <p>{selectedWork.detailedDescription[key]}</p>
+                      </div>
                     ))}
-                  </p>
+                  </div>
 
                   <div className="modal-divider" />
                   <div className="modal-features">
