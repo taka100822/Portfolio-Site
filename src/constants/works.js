@@ -143,6 +143,27 @@ export const worksData = [
   },
   {
     id: 8,
+    title: '研究室在室状況可視化システム',
+    category: 'IoT / System Development',
+    duration: '1 month',
+    technology: ['Node.js', 'Express', 'Python', 'Raspberry Pi', 'local-devices'],
+    description: 'LANスキャンとRaspberry Piを用いて研究室の在室状況を可視化し、Discordロールとも連携する在室管理システム',
+    detailedDescription: {
+      overview: '研究室メンバーの在室状況を、LANスキャン・物理LED・Discordロール連携によってリアルタイム可視化するシステムをチーム開発',
+      content: 'Node.jsでLAN内の端末を定期スキャンし、MACアドレスと登録ユーザー情報を照合することで在室判定を行うシステムを開発しました。\n'
+      + '単発スキャンではなく、スライディングウィンドウによる履歴管理と閾値判定を採用することで、ネットワーク揺らぎによる誤判定を抑制しています。\n'
+      + '在室状態はRaspberry Pi GPIOを利用した物理LEDに反映され、さらにDiscord Botを通じて研究室Discordサーバーのロールとも同期されます。\n'
+      + 'また、Node.jsからPythonスクリプトを呼び出す構成にすることで、在室判定ロジックとGPIO制御の責務分離を行い、保守性と拡張性を高めています。',
+      role: '企画立案 \nマネジメント（タスク割り当てやスケジュール調整） \nフロントエンド実装 \nDiscord Botの実装',
+    },
+    features: ['チーム開発', 'LANスキャンによる在室判定', 'Raspberry Pi GPIOによるLED制御', 'Discord連携'],
+    image: `${BASE}/Image/works/AttendanceBoard/AttendanceBoard.jpg`,
+    links: {
+      github: 'https://github.com/Dev-LAB-entry-exit-system/attendance-board-raspberry-controller/tree/fix/readme',
+    },
+  },
+  {
+    id: 9,
     title: 'チャットアプリ',
     category: 'Web App',
     duration: '1 week',
@@ -160,7 +181,7 @@ export const worksData = [
     },
   },
   {
-    id: 9,
+    id: 10,
     title: '冷蔵庫管理アプリ',
     category: 'Web App',
     duration: '3 months',
