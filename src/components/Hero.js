@@ -38,7 +38,7 @@ const Hero = () => {
 
           <motion.p className="hero-subtitle" variants={fadeUpVariants}>
             人々の記憶に残り続けるコンテンツを創る<br />
-            27卒ゲームプランナー志望の<br />
+            27卒ゲームプランナーの<br />
             ポートフォリオへようこそ！！
           </motion.p>
         </motion.div>

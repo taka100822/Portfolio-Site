@@ -1,4 +1,4 @@
-import { FaGamepad, FaCode, FaGraduationCap, FaProjectDiagram, FaTrophy, FaUsers, FaBriefcase, FaStar, FaFlask, FaPlane, FaGlobe } from 'react-icons/fa';
+import { FaGamepad, FaCode, FaGraduationCap, FaMicrochip, FaTrophy, FaUsers, FaBriefcase, FaStar, FaFlask, FaPlane, FaGlobe } from 'react-icons/fa';
 
 export const timelineData = [
   {
@@ -113,11 +113,27 @@ export const timelineData = [
   },
   {
     year: '2026', month: '03',
-    title: '株式会社Colorful Paletteのカスタムインターンゲームプランナーに参加',
-    description: '（サイバーエージェントグループ）株式会社Colorful Paletteにて2週間、『プロジェクトセカイ』の企画チームに参加し、課題型のインターンシップを行いました。',
+    title: '2週間のゲームプランナーインターンシップに参加',
+    description: 'サイバーエージェントグループ子会社にて2週間、企画チームに参加し、課題型のインターンシップを行いました。',
     icon: FaBriefcase,
     type: 'experience',
     details: ['運営プランナー', '課題型インターン', '開発現場'],
+  },
+  {
+    year: '2026', month: '05',
+    title: '研究室在室状況可視化システムを開発',
+    description: 'LANスキャンとRaspberry Piを用いて研究室メンバーの在室状況を物理LEDで可視化し、Discordロールとも自動同期するシステムを個人開発しました。',
+    icon: FaMicrochip,
+    type: 'project',
+    details: ['チーム開発', 'Node.js', 'Raspberry Pi', 'IoT'],
+  },
+  {
+    year: '2026', month: '05',
+    title: 'TOMSN第2弾を制作中',
+    description: '私が設立した学生ゲーム制作団体「TOMSN」にて第2弾のゲームを制作中です。',
+    icon: FaGamepad,
+    type: 'project',
+    details: ['Unity', 'C#', 'Blender'],
   },
 ];
 
