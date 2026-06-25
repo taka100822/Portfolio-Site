@@ -159,7 +159,8 @@ export const worksData = [
     features: ['チーム開発', 'LANスキャンによる在室判定', 'Raspberry Pi GPIOによるLED制御', 'Discord連携'],
     image: `${BASE}/Image/works/AttendanceBoard/AttendanceBoard.jpg`,
     links: {
-      github: 'https://github.com/Dev-LAB-entry-exit-system/attendance-board-raspberry-controller/tree/fix/readme',
+      github: 'https://github.com/Dev-LAB-entry-exit-system/attendance-board-raspberry-controller'
+      ,note: 'https://note.com/taka10822/n/n6e216e414d70?sub_rt=share_pw',
     },
   },
   {

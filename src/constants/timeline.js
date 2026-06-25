@@ -126,6 +126,7 @@ export const timelineData = [
     icon: FaMicrochip,
     type: 'project',
     details: ['チーム開発', 'Node.js', 'Raspberry Pi', 'IoT'],
+    noteLink: 'https://note.com/taka10822/n/n6e216e414d70?sub_rt=share_pw',
   },
   {
     year: '2026', month: '05',
