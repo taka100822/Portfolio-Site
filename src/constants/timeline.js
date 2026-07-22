@@ -114,7 +114,7 @@ export const timelineData = [
   {
     year: '2026', month: '03',
     title: '2週間のゲームプランナーインターンシップに参加',
-    description: 'サイバーエージェントグループ子会社にて2週間、企画チームに参加し、課題型のインターンシップを行いました。',
+    description: '2週間、企画チームに参加し、課題型のインターンシップを行いました。',
     icon: FaBriefcase,
     type: 'experience',
     details: ['運営プランナー', '課題型インターン', '開発現場'],
@@ -129,13 +129,30 @@ export const timelineData = [
     noteLink: 'https://note.com/taka10822/n/n6e216e414d70?sub_rt=share_pw',
   },
   {
-    year: '2026', month: '05',
-    title: 'TOMSN第2弾を制作中',
-    description: '私が設立した学生ゲーム制作団体「TOMSN」にて第2弾のゲームを制作中です。',
+    year: '2026', month: '07',
+    title: '学生チーム対抗ゲームジャムに参加',
+    description: '東京都武蔵野市で行われた学生チーム対抗ゲームジャム2026に参加し、パーティーゲーム「ふらちな海賊団」を制作しました。',
     icon: FaGamepad,
     type: 'project',
-    details: ['Unity', 'C#', 'Blender'],
+    details: ['チーム開発', 'unity', 'C#'],
+    noteLink: 'https://note.com/taka10822/n/nec8736e17f99?sub_rt=share_pw',
   },
+  // {
+  //   year: '2026', month: '07',
+  //   title: 'unity1weekjamに参加',
+  //   description: '',
+  //   icon: FaGamepad,
+  //   type: 'project',
+  //   details: ['チーム開発', 'unity', 'C#'],
+  // },
+    // {
+  //   year: '2026', month: '05',
+  //   title: 'TOMSN第2弾を制作中',
+  //   description: '私が設立した学生ゲーム制作団体「TOMSN」にて第2弾のゲームを制作中です。',
+  //   icon: FaGamepad,
+  //   type: 'project',
+  //   details: ['Unity', 'C#', 'Blender'],
+  // },
 ];
 
 export const TYPE_COLOR = {

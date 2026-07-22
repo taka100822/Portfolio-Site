@@ -81,12 +81,32 @@ export const worksData = [
     links: {
       steam: 'https://store.steampowered.com/app/3672410/POGO_Stadium',
       nintendo: 'https://store-jp.nintendo.com/item/software/D70010000104217',
-      website: 'https://pogostadium.com',
       Youtube: 'https://youtu.be/1p6bkLrbkSs?si=lP8HiRBbq7188G88',
+      website: 'https://pogostadium.com',
     },
   },
   {
     id: 5,
+    title: 'ふらちな海賊団',
+    category: 'Party',
+    duration: '3 days',
+    technology: ['Unity', 'C#', 'Adobe After Effects'],
+    description: '学生チーム対抗ゲームジャム2026に参加し、制作したパーティーゲーム',
+    detailedDescription: {
+      overview: 'お題の「ふらち」を「“ふ”を拉致（らち）する」というコンセプトで制作したパーティーゲーム',
+      content: '1人のプレイヤーがターゲットとなる「ふ」を書き写し、他のプレイヤーは書き写された「ふ」をもとに、ステージ内の「ふ」の中から拉致すべき「ふ」を探し当てます。模写力と観察力が試される、みんなでワイワイ楽しめるゲームです。',
+      role: '企画立案 \n仕様書作成 \nマネジメント（タスク割り当てやスケジュール調整） \n「ふ」のステージ配置',
+    },
+    features: ['チーム開発', 'マルチプレイ', 'ゲームジャム'],
+    image: `${BASE}/Image/works/Furachi/Furachi.png`,
+    links: {
+      unityroom: 'https://unityroom.com/games/stgj2026_team5',
+      note: 'https://note.com/taka10822/n/nec8736e17f99?sub_rt=share_pw',
+      Youtube: 'https://youtu.be/N1MSZDxo5Ps',
+    },
+  },
+  {
+    id: 6,
     title: 'わけあい',
     category: '3D Pazzle',
     duration: '1 week',
@@ -106,7 +126,7 @@ export const worksData = [
     },
   },
   {
-    id: 6,
+    id: 7,
     title: '学部卒業研究用ゲーム',
     category: '2D Action',
     duration: '5 months',
@@ -124,7 +144,7 @@ export const worksData = [
     },
   },
   {
-    id: 7,
+    id: 8,
     title: 'Dear you, FROM FAN （ペラ1）',
     category: 'Proposal',
     duration: '1 week',
@@ -142,7 +162,7 @@ export const worksData = [
     },
   },
   {
-    id: 8,
+    id: 9,
     title: '研究室在室状況可視化システム',
     category: 'IoT / System Development',
     duration: '1 month',
@@ -164,7 +184,7 @@ export const worksData = [
     },
   },
   {
-    id: 9,
+    id: 10,
     title: '未定（開発中）',
     category: 'Adventure',
     duration: 'under development',
@@ -181,7 +201,7 @@ export const worksData = [
     },
   },
   {
-    id: 10,
+    id: 11,
     title: '修士修了研究用ゲーム（開発中）',
     category: '3D RPG',
     duration: 'under development',
@@ -198,7 +218,7 @@ export const worksData = [
     },
   },
   {
-    id: 11,
+    id: 12,
     title: '冷蔵庫管理アプリ',
     category: 'Web App',
     duration: '3 months',
