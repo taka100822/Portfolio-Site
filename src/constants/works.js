@@ -107,6 +107,24 @@ export const worksData = [
   },
   {
     id: 6,
+    title: '米フレンドを残さないで！',
+    category: '2D Action',
+    duration: '1 week',
+    technology: ['Unity', 'C#'],
+    description: 'Unity1WeekGamejamで制作したお茶碗に米粒があるかどうかを高速判断する2Dアクションゲーム',
+    detailedDescription: {
+      overview: 'Unity1WeekGameJamの「しろ」というテーマで制作した作品',
+      content: '返却される茶碗を確認し、お米が残っていないかチェックするゲーム。\n茶碗を半回転させて確認し、お米が残っていなければ「OK」、一粒でも残っていれば「返却」を素早く正確に選択する必要があります。',
+      role: '企画立案 \n仕様書作成',
+    },
+    features: ['Xでの制作メンバー募集に応募', 'Unity1WeekGameJam2回目作品'],
+    image: `${BASE}/Image/works/MyFriend/MyFriend.png`,
+    links: {
+      unityroom: 'https://unityroom.com/games/ricefriend',
+    },
+  },
+  {
+    id: 7,
     title: 'わけあい',
     category: '3D Pazzle',
     duration: '1 week',
@@ -126,7 +144,7 @@ export const worksData = [
     },
   },
   {
-    id: 7,
+    id: 8,
     title: '学部卒業研究用ゲーム',
     category: '2D Action',
     duration: '5 months',
@@ -144,7 +162,7 @@ export const worksData = [
     },
   },
   {
-    id: 8,
+    id: 9,
     title: 'Dear you, FROM FAN （ペラ1）',
     category: 'Proposal',
     duration: '1 week',
@@ -162,7 +180,7 @@ export const worksData = [
     },
   },
   {
-    id: 9,
+    id: 10,
     title: '研究室在室状況可視化システム',
     category: 'IoT / System Development',
     duration: '1 month',
@@ -184,7 +202,7 @@ export const worksData = [
     },
   },
   {
-    id: 10,
+    id: 11,
     title: '未定（開発中）',
     category: 'Adventure',
     duration: 'under development',
@@ -201,7 +219,7 @@ export const worksData = [
     },
   },
   {
-    id: 11,
+    id: 12,
     title: '修士修了研究用ゲーム（開発中）',
     category: '3D RPG',
     duration: 'under development',
@@ -218,7 +236,7 @@ export const worksData = [
     },
   },
   {
-    id: 12,
+    id: 13,
     title: '冷蔵庫管理アプリ',
     category: 'Web App',
     duration: '3 months',
