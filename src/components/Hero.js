@@ -35,7 +35,7 @@ const Hero = ({ onSelectWork }) => {
       <HeroRing items={ringItems} heroRef={heroRef} onSelect={handleSelect} />
 
       <div className="hero-copy" ref={copyRef}>
-        <h1 className="hero-title">人の記憶に残る<br />遊びを設計する。</h1>
+        <h1 className="hero-title">人生の一部となる<br />体験を創造する。</h1>
         <div>
           <p className="hero-meta">
             <strong>Taka10 / 27卒ゲームプランナー</strong>
