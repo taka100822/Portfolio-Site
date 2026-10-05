@@ -36,6 +36,7 @@ const HOBBIES = [
   { src: 'hobby/hobby-bike.jpg',   label: 'バイク' },
   { src: 'hobby/hobby-basket.jpg', label: 'バスケ' },
   { src: 'hobby/hobby-travel.jpg', label: '旅行' },
+  { src: 'hobby/hobby-dog.jpg',    label: '犬' },
 ];
 
 const IMAGE_BASE = `${process.env.PUBLIC_URL}/Image/`;
