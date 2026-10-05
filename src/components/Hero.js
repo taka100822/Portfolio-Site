@@ -1,18 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGamepad, FaFlask, FaUsers, FaGlobe, FaHeart, FaCrown } from 'react-icons/fa';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 import { fadeUpVariants, staggerContainer } from '../constants/animations';
 import './Hero.css';
-
-const FLOATING_CARDS = [
-  { className: 'card-1', Icon: FaGamepad, label: 'Game Creation' },
-  { className: 'card-2', Icon: FaFlask,   label: 'Research' },
-  { className: 'card-3', Icon: FaUsers,   label: 'Teamwork' },
-  { className: 'card-4', Icon: FaGlobe,   label: 'Cross-cultural' },
-  { className: 'card-5', Icon: FaHeart,   label: 'User Experience' },
-  { className: 'card-6', Icon: FaCrown,   label: 'Leadership' },
-];
 
 const Hero = () => {
   const [ref, inView] = useScrollAnimation();
@@ -41,22 +31,6 @@ const Hero = () => {
             27卒ゲームプランナーの<br />
             ポートフォリオへようこそ！！
           </motion.p>
-        </motion.div>
-
-        <motion.div
-          className="hero-visual"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          <div className="visual-element">
-            {FLOATING_CARDS.map(({ className, Icon, label }) => (
-              <div key={label} className={`floating-card ${className}`}>
-                <Icon className="fc-icon" />
-                <span>{label}</span>
-              </div>
-            ))}
-          </div>
         </motion.div>
       </div>
 
