@@ -1,4 +1,4 @@
-// achievement があるものは画面に入ったとき「実績解除」トーストを出す
+// achievement があるものは受賞・発表としてトロフィー付きで強調する
 export const timelineData = [
   {
     year: '2021', month: '05',

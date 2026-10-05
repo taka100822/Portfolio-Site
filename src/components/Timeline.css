@@ -214,61 +214,6 @@
   vertical-align: -0.1em;
 }
 
-/* 実績解除トースト */
-.achievement-region {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  z-index: 1500;
-  pointer-events: none;
-}
-
-.achievement-toast {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-width: 280px;
-  max-width: calc(100vw - 48px);
-  padding: 12px 18px 12px 14px;
-  background: var(--black);
-  border: 1px solid var(--highlight);
-  box-shadow: 0 0 0 1px rgba(147, 197, 253, 0.15), 0 12px 32px rgba(0, 0, 0, 0.5);
-  animation: toast-life 3.2s ease both;
-}
-
-.achievement-icon {
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  padding: 8px;
-  color: var(--black);
-  background: var(--highlight);
-}
-
-.achievement-label {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--highlight);
-}
-
-.achievement-text {
-  display: block;
-  font-size: var(--text-14);
-  font-weight: 500;
-  line-height: 1.5;
-  color: var(--paper);
-}
-
-/* ポンと出て、しばらく留まり、右へはける */
-@keyframes toast-life {
-  0%   { opacity: 0; transform: translateX(24px) scale(0.92); }
-  8%   { opacity: 1; transform: translateX(0) scale(1.03); }
-  12%  { transform: scale(1); }
-  88%  { opacity: 1; transform: translateX(0); }
-  100% { opacity: 0; transform: translateX(24px); }
-}
-
 @media (max-width: 960px) {
   .timeline-chapter {
     grid-template-columns: 1fr;
@@ -308,25 +253,11 @@
   .timeline-panel-inner {
     padding: 0 0.75rem;
   }
-
-  .achievement-region {
-    right: 16px;
-    bottom: 16px;
-    left: 16px;
-  }
-
-  .achievement-toast {
-    min-width: 0;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .timeline-panel,
   .timeline-chevron {
     transition: none;
-  }
-
-  .achievement-toast {
-    animation: none;
   }
 }
