@@ -177,9 +177,8 @@ const ModalGallery = ({ work }) => {
   );
 };
 
-const Works = () => {
+const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
   const [ref, inView] = useScrollAnimation();
-  const [selectedWork, setSelectedWork] = useState(null);
 
   return (
     <section id="works" className="section works-section" ref={ref}>
