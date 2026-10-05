@@ -226,7 +226,7 @@ export const worksData = [
   },
   {
     id: 12,
-    title: '研究用ゲーム（開発中）',
+    title: '研究用ゲーム',
     category: '3D RPG',
     duration: 'under development',
     technology: ['Unity', 'C#'],
