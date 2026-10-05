@@ -8,6 +8,7 @@ const REVEAL_START = 0.86; // cos(θ) がこれを超えると実画像が見え
 const INTRO_MS = 1100;
 const INTRO_STAGGER_MS = 45;
 const CARD_SPACING = 1.12; // カード幅に対する円周上の間隔
+const TILT_DEG = 3;        // リングの傾き。大きいと正面カードが下がり縦の場所を食う
 
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
@@ -77,7 +78,15 @@ const HeroRing = ({ items, heroRef, onSelect }) => {
     };
     layout();
     window.addEventListener('resize', layout);
-    return () => window.removeEventListener('resize', layout);
+    // カード幅はコピーの高さにも連動するので、要素サイズの変化でも組み直す
+    const ro = typeof ResizeObserver !== 'undefined' && slotRefs.current[0]
+      ? new ResizeObserver(layout)
+      : null;
+    if (ro) ro.observe(slotRefs.current[0]);
+    return () => {
+      window.removeEventListener('resize', layout);
+      if (ro) ro.disconnect();
+    };
   }, [count, step]);
 
   // 回転・ドラッグ・スクロール連動
@@ -156,7 +165,7 @@ const HeroRing = ({ items, heroRef, onSelect }) => {
       }
 
       wrapRef.current.style.transform =
-        `translateY(${-sp * 180}px) translateZ(${-radiusRef.current}px) rotateX(-8deg) scale(${1 - sp * 0.25})`;
+        `translateY(${-sp * 180}px) translateZ(${-radiusRef.current}px) rotateX(${-TILT_DEG}deg) scale(${1 - sp * 0.25})`;
       ringRef.current.style.transform = `rotateY(${angle}deg)`;
 
       // 正面ほど実画像に

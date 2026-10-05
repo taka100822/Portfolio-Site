@@ -1,7 +1,14 @@
 .hero {
-  --card-w: clamp(180px, 22vw, 300px);
   --stage-top: calc(72px + 3vh);
-  --stage-h: 58vh;
+  --copy-bottom: 7vh;
+  --copy-h: 0px; /* Hero.js が実測値を入れる */
+  /* リング上端からコピー上端（の 24px 手前）までに使える高さ */
+  --avail: calc(max(100vh, 640px) - var(--copy-bottom) - var(--copy-h) - 24px - var(--stage-top));
+  /* 正面カードの下端がリング中心からカード幅の何倍下に来るか（半分の高さ + 傾きで下がる分） */
+  --front-drop: 0.4;
+  /* 空いた高さいっぱいまでカードを大きくし、正面カードの下端がコピーの手前で止まるよう中心を決める */
+  --card-w: clamp(200px, min(36vw, var(--avail) * 1.4), 600px);
+  --stage-h: calc((var(--avail) - var(--card-w) * var(--front-drop)) * 2);
 
   position: relative;
   /* 内部の z-index を Hero 内に閉じ込め、作品モーダルより前に出ないようにする */
@@ -133,9 +140,13 @@
 .ring-caption {
   position: absolute;
   left: 50%;
-  /* リング中心 + カード半分の高さ + 傾き(rotateX)で正面カードが下がる分 */
-  top: calc(var(--stage-top) + var(--stage-h) / 2 + var(--card-w) * 0.66 + 16px);
-  transform: translateX(-50%);
+  /* 正面カードの下端の内側に重ねる */
+  top: calc(var(--stage-top) + var(--stage-h) / 2 + var(--card-w) * var(--front-drop) - 12px);
+  transform: translate(-50%, -100%);
+  padding: 6px 14px;
+  background: rgba(3, 6, 12, 0.82);
+  border: 1px solid rgba(59, 130, 246, 0.55);
+  pointer-events: none;
   z-index: 2;
   display: flex;
   align-items: center;
@@ -174,7 +185,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 7vh;
+  bottom: var(--copy-bottom);
   z-index: 3;
   max-width: 1200px;
   margin: 0 auto;
@@ -186,7 +197,8 @@
 }
 
 .hero-title {
-  font-size: clamp(2.25rem, 5.6vw, var(--text-72));
+  /* 高さの低い画面ではリングの場所を空けるため少し小さく */
+  font-size: clamp(2.25rem, min(5.6vw, 9vh), var(--text-72));
   letter-spacing: 0.01em;
 }
 
@@ -194,6 +206,21 @@
   max-width: 30em;
   font-size: 0.9375rem;
   color: var(--pencil);
+}
+
+/* 幅の広い画面では説明文を 2 行に収め、コピー全体を低くしてリングの場所を空ける */
+.hero-meta-br {
+  display: none;
+}
+
+@media (min-width: 1100px) {
+  .hero-meta {
+    max-width: none;
+  }
+
+  .hero-meta-br {
+    display: inline;
+  }
 }
 
 .hero-meta strong {
@@ -242,16 +269,15 @@
 /* ---------- Mobile ---------- */
 @media (max-width: 768px) {
   .hero {
-    --card-w: 170px;
     --stage-top: calc(64px + 2vh);
-    --stage-h: 46vh;
+    --copy-bottom: 5vh;
+    --card-w: clamp(180px, min(80vw, var(--avail) * 1.4), 360px);
   }
 
   .hero-copy {
     grid-template-columns: 1fr;
     gap: 16px;
     padding: 0 1rem;
-    bottom: 5vh;
   }
 
   .ring-hint {
