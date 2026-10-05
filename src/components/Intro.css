@@ -1,0 +1,206 @@
+/* 入場アニメーション：ボールが左から弾みながら転がってきて中央で止まる */
+.intro {
+  --drop: min(38vh, 320px); /* 最初に落ちてくる高さ */
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: var(--black);
+  cursor: pointer;
+  transition: transform var(--exit-ms) cubic-bezier(0.7, 0, 0.3, 1),
+              opacity var(--exit-ms) ease;
+}
+
+.intro.is-exit {
+  transform: translateY(-100%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.intro-stage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 62%;
+  height: 0;
+}
+
+/* 床：製図線のような細い青いライン */
+.intro-floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line) 15%, var(--line) 85%, transparent);
+  transform-origin: left;
+  animation: intro-floor 0.5s ease-out both;
+}
+
+/* 横移動：だんだん減速して中央で止まる。回転も同じイージングで同期させる */
+.intro-ball-x,
+.intro-shadow-x {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  margin-left: calc(var(--ball) / -2);
+  width: var(--ball);
+  animation: intro-roll-x var(--roll-ms) cubic-bezier(0.25, 0.6, 0.3, 1) both;
+}
+
+.intro-shadow-x {
+  top: 0;
+  bottom: auto;
+}
+
+/* 縦移動：落下は加速、上昇は減速。弾むたびに低くなる */
+.intro-ball-y {
+  animation: intro-bounce var(--roll-ms) both;
+}
+
+.intro-ball-squash {
+  transform-origin: 50% 100%;
+  animation: intro-squash var(--roll-ms) both;
+}
+
+.intro-ball {
+  display: block;
+  width: var(--ball);
+  height: var(--ball);
+  user-select: none;
+  animation: intro-spin var(--roll-ms) cubic-bezier(0.25, 0.6, 0.3, 1) both;
+}
+
+.intro-shadow {
+  width: var(--ball);
+  height: calc(var(--ball) * 0.16);
+  margin-top: calc(var(--ball) * -0.08);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(59, 130, 246, 0.45), transparent);
+  animation: intro-shadow var(--roll-ms) both;
+}
+
+@keyframes intro-floor {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes intro-roll-x {
+  from { transform: translateX(calc(var(--dist) * -1)); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes intro-spin {
+  from { transform: rotate(calc(var(--rot) * -1)); }
+  to   { transform: rotate(0deg); }
+}
+
+/* 落下 = ease-in / 上昇 = ease-out */
+@keyframes intro-bounce {
+  0%    { transform: translateY(calc(var(--drop) * -1));    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  20%   { transform: translateY(0);                         animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1); }
+  33%   { transform: translateY(calc(var(--drop) * -0.5));  animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  46%   { transform: translateY(0);                         animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1); }
+  55%   { transform: translateY(calc(var(--drop) * -0.25)); animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  64%   { transform: translateY(0);                         animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1); }
+  70.5% { transform: translateY(calc(var(--drop) * -0.11)); animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  77%   { transform: translateY(0);                         animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1); }
+  81.5% { transform: translateY(calc(var(--drop) * -0.04)); animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  86%   { transform: translateY(0); }
+  100%  { transform: translateY(0); }
+}
+
+/* 着地の瞬間だけ少し潰れる */
+@keyframes intro-squash {
+  0%, 18%, 23%, 44%, 49%, 62.5%, 66%, 100% { transform: scale(1, 1); }
+  20%   { transform: scale(1.2, 0.78); }
+  46%   { transform: scale(1.12, 0.88); }
+  64%   { transform: scale(1.06, 0.94); }
+}
+
+/* ボールが高いほど影は小さく薄く */
+@keyframes intro-shadow {
+  0%    { transform: scale(0.3); opacity: 0.2; animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  20%   { transform: scale(1);   opacity: 1;   animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1); }
+  33%   { transform: scale(0.6); opacity: 0.5; animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  46%   { transform: scale(1);   opacity: 1;   animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1); }
+  55%   { transform: scale(0.8); opacity: 0.75; animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  64%, 100% { transform: scale(1); opacity: 1; }
+}
+
+/* 床の下に名前：ボールが転がっている間に誰のサイトか分かるように */
+.intro-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 2.5rem;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.intro-name {
+  font-family: var(--font-display);
+  font-size: var(--text-44);
+  color: var(--paper);
+  letter-spacing: 0.04em;
+}
+
+/* 名前：1文字ずつ上から落ちて弾む → ボールが止まったら左から順にぴょんと跳ねる */
+.intro-name-char {
+  display: inline-block;
+  animation:
+    intro-char-drop 0.7s calc(0.25s + var(--i) * 0.08s) both,
+    intro-char-hop 0.45s calc(var(--roll-ms) - 0.1s + var(--i) * 0.06s) ease-out;
+}
+
+.intro-sub {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.75rem;
+  font-size: var(--text-14);
+  letter-spacing: 0.3em;
+}
+
+.intro-sub-en {
+  color: var(--pencil);
+  text-transform: uppercase;
+}
+
+.intro-sub-ja {
+  margin-left: 1em;
+  padding-left: 1em;
+  border-left: 1px solid var(--line);
+  letter-spacing: 0.1em;
+  color: var(--signal);
+}
+
+/* サブ：名前のあとにタイプライターのように1文字ずつ灯る */
+.intro-sub-char {
+  display: inline-block;
+  animation: intro-char-flicker 0.4s calc(0.9s + var(--i) * 0.045s) both;
+}
+
+@keyframes intro-char-drop {
+  0%   { opacity: 0; transform: translateY(-0.9em) scale(1, 1);       animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  45%  { opacity: 1; transform: translateY(0) scale(1.12, 0.85);      animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1); }
+  70%  {             transform: translateY(-0.18em) scale(0.97, 1.04); animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45); }
+  88%  {             transform: translateY(0) scale(1.03, 0.97); }
+  100% { opacity: 1; transform: translateY(0) scale(1, 1); }
+}
+
+@keyframes intro-char-hop {
+  0%, 100% { transform: translateY(0); color: var(--paper); }
+  40%      { transform: translateY(-0.22em); color: var(--highlight); }
+}
+
+@keyframes intro-char-flicker {
+  0%   { opacity: 0; transform: translateY(4px); }
+  50%  { opacity: 1; color: var(--highlight); }
+  70%  { opacity: 0.4; }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .intro-name { font-size: var(--text-28); }
+  .intro-sub  { font-size: 0.75rem; letter-spacing: 0.2em; }
+}
