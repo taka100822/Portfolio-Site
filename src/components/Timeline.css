@@ -1,81 +1,174 @@
-.timeline-year {
+/* 章ごとに見出し＋要約を置き、その下に出来事をタイトルだけで並べる */
+.timeline-chapter {
   display: grid;
-  grid-template-columns: 9rem minmax(0, 1fr);
-  gap: 2rem;
+  grid-template-columns: 16rem minmax(0, 1fr);
+  gap: 3rem;
 }
 
-.timeline-year + .timeline-year {
-  margin-top: 4rem;
+.timeline-chapter + .timeline-chapter {
+  margin-top: 4.5rem;
 }
 
-.timeline-year-label {
+.timeline-chapter-head {
   position: sticky;
-  top: 120px;
+  top: 110px;
   align-self: start;
-  font-family: var(--font-display);
-  font-size: var(--text-44);
-  font-weight: 400;
-  line-height: 1;
-  color: var(--paper);
 }
 
-/* 1本の線と点 */
-.timeline-items {
-  position: relative;
-  list-style: none;
-  border-left: 1px solid var(--line);
-}
-
-.timeline-item {
-  position: relative;
-  max-width: 44em;
-  padding: 0 0 2.5rem 2rem;
-}
-
-.timeline-item:last-child {
-  padding-bottom: 0;
-}
-
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  top: 0.55rem;
-  left: -5px;
-  width: 9px;
-  height: 9px;
-  background: var(--black);
-  border: 1px solid var(--signal);
-  border-radius: 50%;
-}
-
-.timeline-head {
+.timeline-chapter-meta {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.75rem;
-  margin-bottom: 0.25rem;
-}
-
-.timeline-month {
-  font-size: var(--text-14);
-  font-weight: 700;
-  color: var(--signal);
-}
-
-.timeline-type {
   font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   color: var(--pencil);
 }
 
-.timeline-title {
-  margin-bottom: 0.4rem;
-  font-size: var(--text-20);
+.timeline-chapter-number {
+  color: var(--signal);
+  text-transform: uppercase;
+}
+
+.timeline-chapter-number::after {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 1px;
+  margin-left: 0.75rem;
+  vertical-align: middle;
+  background: var(--line);
+}
+
+.timeline-chapter-title {
+  margin: 0.5rem 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: var(--text-28);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--paper);
+}
+
+.timeline-chapter-summary {
+  font-size: var(--text-14);
+  line-height: 1.8;
+  color: rgba(230, 236, 245, 0.7);
+}
+
+.timeline-items {
+  list-style: none;
+  border-top: 1px solid var(--signal);
+}
+
+.timeline-item {
+  border-bottom: 1px solid var(--line);
+}
+
+/* 1行 = 年月・分類・タイトル・開閉矢印 */
+.timeline-row {
+  display: grid;
+  grid-template-columns: 5rem 5rem minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 0.75rem;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.timeline-row:hover {
+  background: rgba(59, 130, 246, 0.06);
+}
+
+.timeline-date {
+  font-size: var(--text-14);
   font-weight: 700;
-  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--pencil);
+}
+
+.timeline-type {
+  /* 分類ごとに文字数が違っても枠の大きさをそろえる */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
+  justify-self: start;
+  width: 5rem;
+  padding: 1px 0;
+  font-size: 0.8125rem;
+  line-height: 1.8;
+  white-space: nowrap;
+  border: 1px solid currentColor;
+}
+
+.timeline-type-icon {
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+}
+
+.timeline-type.type-game,
+.timeline-type.type-project    { color: var(--signal); }
+.timeline-type.type-education  { color: var(--highlight); }
+.timeline-type.type-experience { color: var(--pencil); }
+
+.timeline-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.timeline-chevron {
+  align-self: center;
+  width: 0.75rem;
+  color: var(--pencil);
+  transition: transform 0.25s ease, color 0.2s ease;
+}
+
+.timeline-row:hover .timeline-chevron {
+  color: var(--signal);
+}
+
+.timeline-item.is-open .timeline-chevron {
+  transform: rotate(180deg);
+}
+
+/* 開閉：高さを 0fr ⇔ 1fr でなめらかに */
+.timeline-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.timeline-item.is-open .timeline-panel {
+  grid-template-rows: 1fr;
+}
+
+.timeline-panel-inner {
+  min-height: 0;
+  overflow: hidden;
+  padding-left: 11.75rem;
+  visibility: hidden;
+  transition: visibility 0.3s;
+}
+
+.timeline-item.is-open .timeline-panel-inner {
+  padding-bottom: 1.25rem;
+  visibility: visible;
 }
 
 .timeline-description {
-  font-size: 0.9375rem;
-  color: rgba(230, 236, 245, 0.8);
+  max-width: 40em;
+  font-size: var(--text-14);
+  line-height: 1.8;
+  color: rgba(230, 236, 245, 0.75);
 }
 
 .timeline-tags {
@@ -90,7 +183,7 @@
   font-size: 0.75rem;
   line-height: 1.8;
   color: var(--pencil);
-  border: 1px solid rgba(29, 58, 110, 0.9);
+  border: 1px solid var(--line);
 }
 
 .timeline-note {
@@ -105,20 +198,20 @@
   color: var(--highlight);
 }
 
-/* 受賞・発表 */
-.timeline-item.is-achievement::before {
-  top: 0.4rem;
-  left: -8px;
-  width: 15px;
-  height: 15px;
-  background: var(--highlight);
-  border-color: var(--highlight);
-  box-shadow: 0 0 0 4px rgba(147, 197, 253, 0.18);
+/* 受賞・発表：行をうっすら光らせ、トロフィーを添える */
+.timeline-item.is-achievement {
+  background: linear-gradient(90deg, rgba(147, 197, 253, 0.08), transparent 70%);
+  box-shadow: inset 2px 0 0 var(--highlight);
 }
 
-.timeline-item.is-achievement .timeline-title,
-.timeline-item.is-achievement .timeline-month {
+.timeline-item.is-achievement .timeline-date,
+.timeline-item.is-achievement .timeline-title {
   color: var(--highlight);
+}
+
+.timeline-trophy {
+  margin-right: 0.5em;
+  vertical-align: -0.1em;
 }
 
 /* 実績解除トースト */
@@ -176,19 +269,44 @@
   100% { opacity: 0; transform: translateX(24px); }
 }
 
-@media (max-width: 768px) {
-  .timeline-year {
+@media (max-width: 960px) {
+  .timeline-chapter {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 
-  .timeline-year-label {
+  .timeline-chapter-head {
     position: static;
-    font-size: var(--text-28);
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-chapter + .timeline-chapter {
+    margin-top: 3.5rem;
   }
 
-  .timeline-item {
-    padding-left: 1.5rem;
+  .timeline-chapter-title {
+    font-size: 1.5rem;
+  }
+
+  /* 年月・分類を1行目、タイトルを2行目に */
+  .timeline-row {
+    grid-template-columns: auto 1fr auto;
+    gap: 0.4rem 0.75rem;
+  }
+
+  .timeline-title {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .timeline-chevron {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .timeline-panel-inner {
+    padding: 0 0.75rem;
   }
 
   .achievement-region {
@@ -203,6 +321,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .timeline-panel,
+  .timeline-chevron {
+    transition: none;
+  }
+
   .achievement-toast {
     animation: none;
   }

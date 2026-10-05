@@ -46,7 +46,7 @@ export const timelineData = [
     year: '2025', month: '04',
     title: 'unity1weekjamに参加',
     description: '初めてゲームジャムに参加し、企画から開発までを1人で経験しました。開発の難しさを実感しました。',
-    type: 'project',
+    type: 'game',
     details: ['個人開発', 'unity', 'C#'],
     noteLink: 'https://note.com/taka10822/n/n25c7fc449fc2?sub_rt=share_pw',
   },
@@ -54,7 +54,7 @@ export const timelineData = [
     year: '2025', month: '05',
     title: '研究室の3Dデータを用いたマルチプレイ脱出ゲームを開発',
     description: '私の研究室が数年で閉鎖になることを知り、思い出を残すために、3Dスキャンデータを活用したマルチプレイ脱出ゲームを開発しました。本ゲームには教授や私がNPCとして登場します。',
-    type: 'project',
+    type: 'game',
     details: ['チーム開発', 'unity', 'C#'],
     noteLink: 'https://note.com/taka10822/n/n9031b5fbc073?sub_rt=share_pw',
   },
@@ -78,7 +78,7 @@ export const timelineData = [
     year: '2025', month: '06',
     title: 'TOMSN第1弾「CRASH REPORT」をリリース',
     description: '私が設立した学生ゲーム制作団体「TOMSN」で開発したゲームを公開しました。リーダーとしてチームの進行管理を行い、長期のチーム開発経験を得ました。',
-    type: 'project',
+    type: 'game',
     details: ['Unity', 'C#', 'Blender'],
     noteLink: 'https://note.com/taka10822/n/n9265ce5cd160?sub_rt=share_pw',
   },
@@ -87,7 +87,7 @@ export const timelineData = [
     title: 'BitSummit Gamejam 2025 総合グランプリを受賞',
     achievement: 'BitSummit Gamejam 2025 総合グランプリ',
     description: 'BitSummit Gamejam 2025にプランナー兼プログラマーとして参加し、制作した『DreamMayday』がBitSummitゲームジャム総合グランプリを受賞しました。',
-    type: 'project',
+    type: 'game',
     details: ['Unity', 'C#', 'ゲームジャム', '最優秀賞'],
     noteLink: 'https://note.com/taka10822/n/nd1916fb6d500?sub_rt=share_pw',
   },
@@ -118,7 +118,7 @@ export const timelineData = [
     year: '2026', month: '07',
     title: '学生チーム対抗ゲームジャムに参加',
     description: '東京都武蔵野市で行われた学生チーム対抗ゲームジャム2026に参加し、パーティーゲーム『ふらちな海賊団』を制作しました。',
-    type: 'project',
+    type: 'game',
     details: ['チーム開発', 'unity', 'C#'],
     noteLink: 'https://note.com/taka10822/n/nec8736e17f99?sub_rt=share_pw',
   },
@@ -126,7 +126,7 @@ export const timelineData = [
     year: '2026', month: '07',
     title: 'unity1week Gamejamに参加',
     description: 'unity1week Gamejamに参加し、『米フレンドを残さないで！』を制作しました。',
-    type: 'project',
+    type: 'game',
     details: ['チーム開発', 'unity', 'C#', 'Gamejam'],
   },
   {
@@ -141,25 +141,49 @@ export const timelineData = [
     year: '2026', month: '10',
     title: 'TOMSN第2弾として言語解読ADV「フリージア」を制作中',
     description: '私が設立した学生ゲーム制作団体「TOMSN」にて第2弾のゲームを制作中です。',
-    type: 'project',
+    type: 'game',
     details: ['Unity', 'C#', 'Blender', 'GC甲子園2026'],
   },
 ];
 
 export const TYPE_LABEL = {
   education:   '学び',
+  game:        'ゲーム',
   project:     '制作',
   experience:  '経験',
 };
 
 export const getTypeLabel = (type) => TYPE_LABEL[type] ?? type;
 
-// 年ごとにまとめ、新しい順に並べる
-export const timelineByYear = Object.entries(
-  timelineData.reduce((acc, item) => {
-    (acc[item.year] = acc[item.year] || []).push(item);
-    return acc;
-  }, {})
-)
-  .map(([year, items]) => ({ year, items: [...items].reverse() }))
-  .sort((a, b) => b.year.localeCompare(a.year));
+// 成長の流れが読めるよう、年ではなく章でまとめて古い順に並べる
+export const CHAPTERS = [
+  {
+    title: '土台をつくる',
+    years: ['2021', '2022', '2023'],
+    summary: 'プログラミングを学び、エンタメに触れ、100人のサークルの代表に就任。',
+  },
+  {
+    title: 'ゲームを作り始める',
+    years: ['2024'],
+    summary: 'チーム開発を知り、卒業研究とアルバイトでゲーム制作デビュー。',
+  },
+  {
+    title: 'チームを率いる',
+    years: ['2025'],
+    summary: '制作団体 TOMSN を立ち上げ、ゲームジャムでグランプリを獲得。',
+  },
+  {
+    title: 'さらなる経験を積む',
+    years: ['2026'],
+    summary: 'プランナーとして現場を経験し、様々な活動に積極的に参加。',
+  },
+];
+
+export const timelineByChapter = CHAPTERS.map((chapter, i) => ({
+  ...chapter,
+  number: i + 1,
+  period: chapter.years.length > 1
+    ? `${chapter.years[0]}–${chapter.years[chapter.years.length - 1]}`
+    : chapter.years[0],
+  items: timelineData.filter((item) => chapter.years.includes(item.year)),
+}));
