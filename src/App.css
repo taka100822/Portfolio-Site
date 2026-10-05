@@ -1,7 +1,7 @@
 .App {
   text-align: left;
-  background: #0a0a0a;
-  color: #ffffff;
+  background: var(--black);
+  color: var(--paper);
   min-height: 100vh;
   position: relative;
 }

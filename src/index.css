@@ -1,24 +1,22 @@
 :root {
-  /* Brand colors */
-  --color-blue:         #3b82f6;
-  --color-blue-light:   #60a5fa;
-  --color-blue-lighter: #93c5fd;
-  --color-purple:       #8b5cf6;
-  --color-cyan:         #06b6d4;
+  /* Color — 黒い製図台と青い線 */
+  --black:     #03060C; /* Drafting Black：背景 */
+  --line:      #1D3A6E; /* Line Blue：方眼・罫線・枠線 */
+  --signal:    #3B82F6; /* Signal Blue：リンク・選択・注釈線 */
+  --highlight: #93C5FD; /* Highlight Blue：受賞などの強調（少量） */
+  --paper:     #E6ECF5; /* Paper：本文 */
+  --pencil:    #7C889C; /* Pencil：補足・日付 */
 
-  /* Text */
-  --text-primary:   rgba(255, 255, 255, 0.9);
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --text-muted:     rgba(255, 255, 255, 0.5);
-  --text-subtle:    rgba(255, 255, 255, 0.35);
+  /* Type */
+  --font-display: 'Dela Gothic One', sans-serif;
+  --font-body:    'IBM Plex Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
 
-  /* Gradients */
-  --gradient-blue: linear-gradient(135deg, #93c5fd 0%, #60a5fa 60%, #3b82f6 100%);
-  --gradient-blue-dark: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
-
-  /* Glass */
-  --glass-bg:     rgba(255, 255, 255, 0.04);
-  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-14: 0.875rem;
+  --text-16: 1rem;
+  --text-20: 1.25rem;
+  --text-28: 1.75rem;
+  --text-44: 2.75rem;
+  --text-72: 4.5rem;
 }
 
 * {
@@ -29,13 +27,13 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-body);
+  font-size: var(--text-16);
+  line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #0a0a0a;
-  color: #ffffff;
+  background-color: var(--black);
+  color: var(--paper);
   overflow-x: hidden;
 }
 
@@ -48,19 +46,30 @@ html {
   scroll-behavior: smooth;
 }
 
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+:focus-visible {
+  outline: 2px solid var(--highlight);
+  outline-offset: 3px;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: var(--black);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: var(--line);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--signal);
 }
