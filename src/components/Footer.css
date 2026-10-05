@@ -3,27 +3,114 @@
 }
 
 .footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 2rem;
+}
+
+.footer-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+  gap: 1.5rem;
+}
+
+/* ---------- ナビ ---------- */
+.footer-nav ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  list-style: none;
+}
+
+.footer-nav a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
   font-size: var(--text-14);
+  color: var(--paper);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.footer-nav-num {
+  font-family: var(--font-pixel);
+  font-size: 0.6875rem;
+  color: var(--line);
+  transition: color 0.15s;
+}
+
+.footer-nav a:hover {
+  color: var(--highlight);
+}
+
+.footer-nav a:hover .footer-nav-num {
+  color: var(--signal);
+}
+
+/* ---------- SNS ---------- */
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+
+.footer-social a {
+  display: block;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--pencil);
+  transition: color 0.15s;
+}
+
+.footer-social a:hover,
+.footer-social a:focus-visible {
+  color: var(--paper);
+}
+
+/* ---------- 下段 ---------- */
+.footer-bottom {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(29, 58, 110, 0.5);
+  font-size: 0.75rem;
   color: var(--pencil);
 }
 
 .footer-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   color: var(--pencil);
-  text-underline-offset: 3px;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.footer-top svg {
+  transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .footer-top:hover {
   color: var(--paper);
 }
 
+.footer-top:hover svg {
+  transform: translateY(-2px);
+}
+
 @media (max-width: 768px) {
   .footer-inner {
-    padding: 1.5rem 1rem;
+    padding: 2rem 1rem 1.5rem;
+  }
+
+  .footer-row:first-child {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-top svg {
+    transition: none;
   }
 }
