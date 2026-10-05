@@ -1,68 +1,252 @@
 .header {
+  --progress: 0;
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 1000;
-  background: linear-gradient(var(--black) 40%, rgba(3, 6, 12, 0));
-  transition: background 0.2s, border-color 0.2s;
-  border-bottom: 1px solid transparent;
+  padding: 0;
+  transition: padding 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.header.is-scrolled {
-  background: rgba(3, 6, 12, 0.92);
-  border-bottom-color: var(--line);
-}
-
+/* ---------- 枠：スクロールすると浮いた製図枠になる ---------- */
 .header-inner {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
-  height: 64px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  height: 72px;
+  padding: 0 2.5rem;
+  border: 1px solid transparent;
+  transition:
+    height 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background-color 0.25s,
+    border-color 0.25s;
 }
 
+/* 四隅のトンボ */
+.header-inner::before,
+.header-inner::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 0 solid var(--signal);
+  opacity: 0;
+  transition: opacity 0.25s;
+  pointer-events: none;
+}
+
+.header-inner::before {
+  top: -1px;
+  left: -1px;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+
+.header-inner::after {
+  right: -1px;
+  bottom: -1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+}
+
+.header.is-scrolled {
+  padding: 12px 1rem 0;
+}
+
+.header.is-scrolled .header-inner {
+  height: 56px;
+  padding: 0 1.5rem;
+  background-color: rgba(3, 6, 12, 0.72);
+  border-color: var(--line);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+}
+
+.header.is-scrolled .header-inner::before,
+.header.is-scrolled .header-inner::after {
+  opacity: 1;
+}
+
+/* ---------- 読み進めた割合 ---------- */
+.header-progress {
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  width: calc(100% - 2rem);
+  height: 1px;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.25s;
+  pointer-events: none;
+}
+
+.header-progress::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--signal), var(--highlight));
+  transform: scaleX(var(--progress));
+  transform-origin: left;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+}
+
+.header.is-scrolled .header-progress {
+  opacity: 1;
+}
+
+/* ---------- ロゴ ---------- */
 .header-logo {
-  font-family: var(--font-display);
-  font-size: var(--text-20);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   color: var(--paper);
   text-decoration: none;
 }
 
-.header-nav {
+.header-mark {
+  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.header-logo:hover .header-mark {
+  transform: rotate(180deg);
+}
+
+.header-logo-text {
   display: flex;
-  gap: 2rem;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.header-logo-name {
+  font-family: var(--font-display);
+  font-size: var(--text-20);
+  letter-spacing: 0.02em;
+}
+
+.header-logo-sub {
+  margin-top: 4px;
+  font-family: var(--font-pixel);
+  font-size: 0.625rem;
+  letter-spacing: 0.3em;
+  color: var(--pencil);
+}
+
+/* ---------- ナビ ---------- */
+.header-nav ol {
+  display: flex;
+  gap: 0.25rem;
+  list-style: none;
 }
 
 .header-nav a {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.5rem 0.75rem 0.5rem 1.1rem;
   font-size: var(--text-14);
   color: var(--pencil);
   text-decoration: none;
   transition: color 0.15s;
 }
 
-.header-nav a:hover {
+.header-nav-num {
+  font-family: var(--font-pixel);
+  font-size: 0.6875rem;
+  color: var(--line);
+  transition: color 0.15s;
+}
+
+/* RPG のカーソル */
+.header-nav a::before {
+  content: '';
+  position: absolute;
+  left: 0.3rem;
+  top: 50%;
+  border-style: solid;
+  border-width: 4px 0 4px 6px;
+  border-color: transparent transparent transparent var(--highlight);
+  transform: translate(-4px, -50%);
+  opacity: 0;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+/* 現在地の下線 */
+.header-nav a::after {
+  content: '';
+  position: absolute;
+  left: 1.1rem;
+  right: 0.75rem;
+  bottom: 0.2rem;
+  height: 1px;
+  background: var(--signal);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.header-nav a:hover,
+.header-nav a.is-active {
   color: var(--paper);
+}
+
+.header-nav a:hover .header-nav-num,
+.header-nav a.is-active .header-nav-num {
+  color: var(--signal);
+}
+
+.header-nav a:hover::before {
+  opacity: 1;
+  transform: translate(0, -50%);
+  animation: header-cursor 0.9s steps(1) infinite;
+}
+
+.header-nav a.is-active::after {
+  transform: scaleX(1);
+}
+
+@keyframes header-cursor {
+  50% { opacity: 0; }
 }
 
 .header-toggle {
   display: none;
 }
 
+/* ---------- スマホ ---------- */
 @media (max-width: 768px) {
   .header-inner {
-    height: 56px;
+    height: 60px;
     padding: 0 1rem;
+  }
+
+  .header.is-scrolled {
+    padding: 8px 0.5rem 0;
+  }
+
+  .header.is-scrolled .header-inner {
+    height: 52px;
+    padding: 0 0.5rem 0 0.75rem;
+  }
+
+  .header-progress {
+    width: calc(100% - 1rem);
   }
 
   .header-toggle {
     position: relative;
+    z-index: 2;
     display: block;
     width: 40px;
     height: 40px;
     background: none;
     border: 1px solid var(--line);
     cursor: pointer;
+    transition: border-color 0.2s;
   }
 
   .header-toggle span {
@@ -71,40 +255,118 @@
     right: 10px;
     height: 1px;
     background: var(--paper);
-    transition: transform 0.2s;
+    transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
   .header-toggle span:first-child { top: 15px; }
-  .header-toggle span:last-child { top: 23px; }
+  .header-toggle span:last-child { top: 23px; right: 16px; }
 
+  .header.is-open .header-toggle { border-color: var(--signal); }
   .header.is-open .header-toggle span:first-child { transform: translateY(4px) rotate(45deg); }
-  .header.is-open .header-toggle span:last-child { transform: translateY(-4px) rotate(-45deg); }
+  .header.is-open .header-toggle span:last-child { right: 10px; transform: translateY(-4px) rotate(-45deg); }
 
+  .header-logo {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* 全画面メニュー */
   .header-nav {
-    position: absolute;
-    top: 56px;
-    left: 0;
-    right: 0;
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: flex;
     flex-direction: column;
-    gap: 0;
-    padding: 0.5rem 1rem 1rem;
-    background: var(--black);
-    border-bottom: 1px solid var(--line);
-    display: none;
+    justify-content: center;
+    padding: 80px 1.5rem 2rem;
+    background-color: var(--black);
+    background-image:
+      linear-gradient(to right, rgba(29, 58, 110, 0.25) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(29, 58, 110, 0.25) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0s 0.3s;
   }
 
   .header.is-open .header-nav {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s;
   }
 
-  .header.is-open {
-    background: var(--black);
+  .header.is-open .header-inner {
+    background-color: transparent;
+    border-color: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .header.is-open .header-inner::before,
+  .header.is-open .header-inner::after,
+  .header.is-open .header-progress {
+    opacity: 0;
+  }
+
+  .header-nav ol {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .header-nav li {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s, transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .header.is-open .header-nav li {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(0.06s * var(--i) + 0.08s);
   }
 
   .header-nav a {
-    padding: 0.75rem 0;
-    font-size: var(--text-16);
+    gap: 1rem;
+    padding: 1rem 0 1rem 1.5rem;
+    border-bottom: 1px solid rgba(29, 58, 110, 0.6);
+  }
+
+  .header-nav-name {
+    font-family: var(--font-display);
+    font-size: var(--text-28);
     color: var(--paper);
-    border-bottom: 1px solid rgba(29, 58, 110, 0.5);
+  }
+
+  .header-nav-num {
+    font-size: var(--text-14);
+    color: var(--signal);
+  }
+
+  .header-nav a::before {
+    left: 0;
+    border-width: 6px 0 6px 9px;
+  }
+
+  .header-nav a.is-active::before {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+
+  .header-nav a::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .header-inner,
+  .header-mark,
+  .header-nav li,
+  .header-nav a::after {
+    transition: none;
+  }
+
+  .header-nav a:hover::before {
+    animation: none;
   }
 }
