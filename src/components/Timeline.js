@@ -1,74 +1,96 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import useScrollAnimation from '../hooks/useScrollAnimation';
-import { slideInLeftVariants, staggerContainer, titleMotionProps } from '../constants/animations';
-import { timelineData, getTypeColor, getTypeLabel } from '../constants/timeline';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { FaTrophy } from 'react-icons/fa';
+import { timelineByYear, getTypeLabel } from '../constants/timeline';
 import './Timeline.css';
 
-const Timeline = () => {
-  const [ref, inView] = useScrollAnimation();
+const TOAST_MS = 3200;
+
+const TimelineItem = ({ item, onAchieve }) => {
+  const [ref, inView] = useInView({ threshold: 0.6, triggerOnce: true });
+
+  useEffect(() => {
+    if (inView && item.achievement) onAchieve(item.achievement);
+  }, [inView, item.achievement, onAchieve]);
 
   return (
-    <section id="timeline" className="section timeline-section" ref={ref}>
-      <div className="container">
-        <motion.h2 className="section-title" {...titleMotionProps(inView)}>
-          Timeline
-        </motion.h2>
-
-        <motion.div
-          className="timeline"
-          variants={staggerContainer(0.3)}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-        >
-          <div className="timeline-line" />
-
-          {timelineData.map((item, index) => (
-            <motion.div
-              key={index}
-              className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}
-              variants={slideInLeftVariants}
-            >
-              <div
-                className="timeline-content"
-                style={{ '--type-color': getTypeColor(item.type) }}
-              >
-                <div className="timeline-header">
-                  <div className="timeline-date">
-                    <span className="year">{item.year}</span>
-                    <span className="month">/  {item.month}</span>
-                  </div>
-                  <span className="type-badge">{getTypeLabel(item.type)}</span>
-                </div>
-
-                <h3 className="timeline-title">{item.title}</h3>
-                <p className="timeline-description">{item.description}</p>
-
-                <div className="timeline-details">
-                  {item.details.map((detail) => (
-                    <span key={detail} className="detail-tag">{detail}</span>
-                  ))}
-                </div>
-
-                {item.noteLink && (
-                  <div className="timeline-link">
-                    <a href={item.noteLink} target="_blank" rel="noopener noreferrer" className="note-link">
-                      📝 noteで詳しく見る
-                    </a>
-                  </div>
-                )}
-              </div>
-
-              <div
-                className="timeline-dot"
-                style={{ backgroundColor: getTypeColor(item.type) }}
-              >
-                <item.icon />
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+    <li ref={ref} className={`timeline-item ${item.achievement ? 'is-achievement' : ''}`}>
+      <div className="timeline-head">
+        <span className="timeline-month">{Number(item.month)}月</span>
+        <span className="timeline-type">{getTypeLabel(item.type)}</span>
       </div>
+      <h4 className="timeline-title">{item.title}</h4>
+      <p className="timeline-description">{item.description}</p>
+      <div className="timeline-tags">
+        {item.details.map((detail) => <span key={detail}>{detail}</span>)}
+      </div>
+      {item.noteLink && (
+        <a href={item.noteLink} target="_blank" rel="noopener noreferrer" className="timeline-note">
+          noteで詳しく読む
+        </a>
+      )}
+    </li>
+  );
+};
+
+// 受賞・発表の行が画面に入ったら、ゲームの実績解除風に1件ずつ知らせる
+const AchievementToast = ({ queue, onDone }) => {
+  const current = queue[0];
+
+  useEffect(() => {
+    if (!current) return undefined;
+    const timer = setTimeout(onDone, TOAST_MS);
+    return () => clearTimeout(timer);
+  }, [current, onDone]);
+
+  return (
+    <div className="achievement-region" role="status" aria-live="polite">
+      {current && (
+        <div className="achievement-toast" key={current}>
+          <FaTrophy className="achievement-icon" aria-hidden="true" />
+          <div>
+            <span className="achievement-label">実績解除</span>
+            <span className="achievement-text">{current}</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const Timeline = () => {
+  const [queue, setQueue] = useState([]);
+
+  const handleAchieve = useCallback((text) => {
+    setQueue((q) => (q.includes(text) ? q : [...q, text]));
+  }, []);
+
+  const handleDone = useCallback(() => setQueue((q) => q.slice(1)), []);
+
+  return (
+    <section id="timeline" className="section timeline-section">
+      <div className="container">
+        <h2 className="section-title">Timeline</h2>
+
+        <div className="timeline">
+          {timelineByYear.map(({ year, items }) => (
+            <section key={year} className="timeline-year">
+              <h3 className="timeline-year-label">{year}</h3>
+              <ol className="timeline-items">
+                {items.map((item) => (
+                  <TimelineItem
+                    key={`${item.year}-${item.month}-${item.title}`}
+                    item={item}
+                    onAchieve={handleAchieve}
+                  />
+                ))}
+              </ol>
+            </section>
+          ))}
+        </div>
+      </div>
+
+      <AchievementToast queue={queue} onDone={handleDone} />
     </section>
   );
 };

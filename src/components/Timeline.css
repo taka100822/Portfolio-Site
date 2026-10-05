@@ -1,262 +1,209 @@
-.timeline-section {
-  background: rgba(255, 255, 255, 0.02);
+.timeline-year {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: 2rem;
 }
 
-.timeline {
+.timeline-year + .timeline-year {
+  margin-top: 4rem;
+}
+
+.timeline-year-label {
+  position: sticky;
+  top: 120px;
+  align-self: start;
+  font-family: var(--font-display);
+  font-size: var(--text-44);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--paper);
+}
+
+/* 1本の線と点 */
+.timeline-items {
   position: relative;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2rem 0;
-}
-
-.timeline-line {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(180deg,
-    transparent 0%,
-    #60a5fa 10%,
-    #3b82f6 50%,
-    #1d4ed8 90%,
-    transparent 100%);
-  transform: translateX(-50%);
-  z-index: 1;
+  list-style: none;
+  border-left: 1px solid var(--line);
 }
 
 .timeline-item {
   position: relative;
-  width: 50%;
-  margin-bottom: 2rem;
+  max-width: 44em;
+  padding: 0 0 2.5rem 2rem;
 }
 
-.timeline-item.left {
-  left: 0;
-  padding-right: 3rem;
+.timeline-item:last-child {
+  padding-bottom: 0;
 }
 
-.timeline-item.right {
-  left: 50%;
-  padding-left: 3rem;
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 0.55rem;
+  left: -5px;
+  width: 9px;
+  height: 9px;
+  background: var(--black);
+  border: 1px solid var(--signal);
+  border-radius: 50%;
 }
 
-.timeline-content {
-  position: relative;
-  padding: 1.25rem 1.5rem;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  transition: all 0.3s ease;
-  border-left: 3px solid var(--type-color, #3b82f6);
-}
-
-.timeline-content:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
-  border-left-color: var(--type-color, #3b82f6);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(96, 165, 250, 0.05);
-}
-
-.timeline-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.6rem;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.timeline-date {
+.timeline-head {
   display: flex;
   align-items: baseline;
-  gap: 0.3rem;
-  color: #60a5fa;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-month {
+  font-size: var(--text-14);
   font-weight: 700;
+  color: var(--signal);
 }
 
-.year {
-  font-size: 1rem;
-}
-
-.month {
-  font-size: 1rem;
-}
-
-.type-badge {
-  font-size: 0.65rem;
-  font-weight: 600;
-  padding: 0.15rem 0.6rem;
-  border-radius: 999px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.6);
+.timeline-type {
+  font-size: 0.75rem;
+  color: var(--pencil);
 }
 
 .timeline-title {
-  font-size: 0.95rem;
-  font-weight: 700;
   margin-bottom: 0.4rem;
-  color: #ffffff;
-  line-height: 1.3;
+  font-size: var(--text-20);
+  font-weight: 700;
+  line-height: 1.5;
 }
 
 .timeline-description {
-  color: rgba(255, 255, 255, 0.65);
-  line-height: 1.6;
-  margin-bottom: 0.75rem;
-  font-size: 0.8rem;
+  font-size: 0.9375rem;
+  color: rgba(230, 236, 245, 0.8);
 }
 
-.timeline-details {
+.timeline-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
-}
-
-.detail-tag {
-  background: rgba(96, 165, 250, 0.12);
-  color: #93c5fd;
-  padding: 0.15rem 0.55rem;
-  border-radius: 999px;
-  font-size: 0.68rem;
-  font-weight: 500;
-  border: 1px solid rgba(96, 165, 250, 0.25);
-  transition: all 0.2s ease;
-}
-
-.detail-tag:hover {
-  background: rgba(96, 165, 250, 0.2);
-  border-color: rgba(96, 165, 250, 0.4);
-}
-
-.timeline-link {
+  gap: 0.4rem;
   margin-top: 0.75rem;
 }
 
-.note-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  color: rgba(255, 255, 255, 0.5);
-  text-decoration: none;
-  font-size: 0.72rem;
-  font-weight: 500;
-  padding: 0.25rem 0.6rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 0.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  transition: all 0.3s ease;
+.timeline-tags span {
+  padding: 0 8px;
+  font-size: 0.75rem;
+  line-height: 1.8;
+  color: var(--pencil);
+  border: 1px solid rgba(29, 58, 110, 0.9);
 }
 
-.note-link:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.25);
-  color: rgba(255, 255, 255, 0.85);
-  transform: translateY(-1px);
+.timeline-note {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: var(--text-14);
+  color: var(--signal);
+  text-underline-offset: 3px;
 }
 
-/* Dot with icon */
-.timeline-dot {
-  position: absolute;
-  top: 1.25rem;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  z-index: 2;
+.timeline-note:hover {
+  color: var(--highlight);
+}
+
+/* 受賞・発表 */
+.timeline-item.is-achievement::before {
+  top: 0.4rem;
+  left: -8px;
+  width: 15px;
+  height: 15px;
+  background: var(--highlight);
+  border-color: var(--highlight);
+  box-shadow: 0 0 0 4px rgba(147, 197, 253, 0.18);
+}
+
+.timeline-item.is-achievement .timeline-title,
+.timeline-item.is-achievement .timeline-month {
+  color: var(--highlight);
+}
+
+/* 実績解除トースト */
+.achievement-region {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1500;
+  pointer-events: none;
+}
+
+.achievement-toast {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-  color: #ffffff;
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 12px rgba(96, 165, 250, 0.4);
-  transition: all 0.3s ease;
+  gap: 14px;
+  min-width: 280px;
+  max-width: calc(100vw - 48px);
+  padding: 12px 18px 12px 14px;
+  background: var(--black);
+  border: 1px solid var(--highlight);
+  box-shadow: 0 0 0 1px rgba(147, 197, 253, 0.15), 0 12px 32px rgba(0, 0, 0, 0.5);
+  animation: toast-life 3.2s ease both;
 }
 
-.timeline-dot:hover {
-  transform: scale(1.15);
-  box-shadow: 0 0 20px rgba(96, 165, 250, 0.6);
+.achievement-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  color: var(--black);
+  background: var(--highlight);
 }
 
-.timeline-item.left .timeline-dot {
-  right: calc(3rem - 18px);
+.achievement-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--highlight);
 }
 
-.timeline-item.right .timeline-dot {
-  left: calc(3rem - 18px);
+.achievement-text {
+  display: block;
+  font-size: var(--text-14);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--paper);
 }
 
-/* Arrow */
-.timeline-content::before {
-  content: '';
-  position: absolute;
-  top: 1.4rem;
-  width: 0;
-  height: 0;
-  border: 6px solid transparent;
-}
-
-.timeline-item.left .timeline-content::before {
-  right: -12px;
-  border-left-color: rgba(255, 255, 255, 0.08);
-}
-
-.timeline-item.right .timeline-content::before {
-  left: -12px;
-  border-right-color: rgba(255, 255, 255, 0.08);
+/* ポンと出て、しばらく留まり、右へはける */
+@keyframes toast-life {
+  0%   { opacity: 0; transform: translateX(24px) scale(0.92); }
+  8%   { opacity: 1; transform: translateX(0) scale(1.03); }
+  12%  { transform: scale(1); }
+  88%  { opacity: 1; transform: translateX(0); }
+  100% { opacity: 0; transform: translateX(24px); }
 }
 
 @media (max-width: 768px) {
-  .timeline-line {
-    left: 1.5rem;
+  .timeline-year {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .timeline-year-label {
+    position: static;
+    font-size: var(--text-28);
   }
 
   .timeline-item {
-    width: 100%;
-    left: 0 !important;
-    padding-left: 4rem;
-    padding-right: 0;
-    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
   }
 
-  .timeline-content {
-    padding: 1rem 1.25rem;
+  .achievement-region {
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
   }
 
-  .timeline-title {
-    font-size: 0.9rem;
+  .achievement-toast {
+    min-width: 0;
   }
+}
 
-  .timeline-description {
-    font-size: 0.75rem;
-  }
-
-  .detail-tag {
-    font-size: 0.63rem;
-    padding: 0.12rem 0.45rem;
-  }
-
-  .note-link {
-    font-size: 0.68rem;
-  }
-
-  .timeline-content::before {
-    left: -12px !important;
-    right: auto !important;
-    border-left-color: transparent !important;
-    border-right-color: rgba(255, 255, 255, 0.08) !important;
-  }
-
-  .timeline-dot {
-    left: calc(1.5rem - 18px) !important;
-    right: auto !important;
-    width: 32px;
-    height: 32px;
-    font-size: 0.75rem;
+@media (prefers-reduced-motion: reduce) {
+  .achievement-toast {
+    animation: none;
   }
 }
