@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './Header.css';
 
 const NAV_ITEMS = [
-  { name: 'Works', href: '#works' },
   { name: 'About', href: '#about' },
+  { name: 'Works', href: '#works' },
   { name: 'Timeline', href: '#timeline' },
   { name: 'Contact', href: '#contact' },
 ];

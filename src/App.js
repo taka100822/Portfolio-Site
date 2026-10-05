@@ -21,8 +21,8 @@ function App() {
       <Header />
       <main>
         <Hero onSelectWork={setSelectedWork} />
-        <Works selectedWork={selectedWork} onSelectWork={setSelectedWork} />
         <About />
+        <Works selectedWork={selectedWork} onSelectWork={setSelectedWork} />
         <Timeline />
         <Contact />
       </main>
