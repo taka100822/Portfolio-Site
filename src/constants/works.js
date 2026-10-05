@@ -132,7 +132,7 @@ export const worksData = [
   {
     id: 7,
     title: 'わけあい',
-    category: '3D Pazzle',
+    category: '3D Puzzle',
     duration: '1 week',
     technology: ['Unity', 'C#'],
     description: 'Unity1WeekGamejamで制作したハートを分け合い、町を明るくする3Dゲーム',
@@ -261,16 +261,6 @@ export const worksData = [
   },
 ];
 
-// 「そのほかの制作」の分類（代表作以外）。並び順もこの通り
 // 一覧の並び順（作品 id）。ここにない作品は末尾に並ぶ
 export const workOrder = [1, 11, 4, 2, 3, 5, 6, 7, 12, 8, 9, 10, 13];
 
-export const workGroups = [
-  { label: '制作中', ids: [11, 12] },
-  { label: '商業', ids: [4] },
-  { label: 'チーム開発', ids: [2, 3] },
-  { label: 'ゲームジャム', ids: [1, 5, 6, 7] },
-  { label: '研究', ids: [8] },
-  { label: '企画書', ids: [9] },
-  { label: 'システム開発', ids: [10, 13] },
-];

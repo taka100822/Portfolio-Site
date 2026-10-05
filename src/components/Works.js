@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { FaExternalLinkAlt, FaGithub, FaGamepad, FaPenFancy, FaSteam, FaGlobe, FaYoutube, FaDesktop, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { SiNintendoswitch } from 'react-icons/si';
-import { worksData, workGroups, workOrder } from '../constants/works';
+import { worksData, workOrder } from '../constants/works';
 import './Works.css';
 
 const nl = (text) => text.split('\n').map((line, i, arr) => (
@@ -79,7 +79,7 @@ const getYouTubeId = (url) => {
   return m ? m[1] : null;
 };
 
-const ModalGallery = ({ work }) => {
+const ModalGallery = ({ work, expand, fade }) => {
   const allImages = useGalleryImages(work.image);
   const youtubeId = getYouTubeId(work.links.Youtube);
 
@@ -89,16 +89,20 @@ const ModalGallery = ({ work }) => {
     ...allImages.map(src => ({ type: 'image', src })),
   ];
 
-  const [index, setIndex] = useState(0);
-  useEffect(() => { setIndex(0); }, [work]);
+  // カードのサムネから広がって見えるよう、最初は動画より先にサムネと同じ画像を出す
+  const [index, setIndex] = useState(youtubeId ? 1 : 0);
+  useEffect(() => { setIndex(youtubeId ? 1 : 0); }, [work, youtubeId]);
 
   const hasMultiple = items.length > 1;
-  const current = items[index];
+  const current = items[index] || items[0];
 
   return (
     <div className="modal-gallery">
-      <div className="modal-gallery-main">
-        <AnimatePresence mode="wait">
+      <motion.div
+        className="modal-gallery-main"
+        layoutId={expand ? `work-thumb-${work.id}` : undefined}
+      >
+        <AnimatePresence mode="wait" initial={false}>
           {current.type === 'youtube' ? (
             <motion.div
               key="youtube"
@@ -148,9 +152,9 @@ const ModalGallery = ({ work }) => {
             <div className="gallery-counter">{index + 1} / {items.length}</div>
           </>
         )}
-      </div>
+      </motion.div>
       {hasMultiple && (
-        <div className="modal-gallery-thumbs">
+        <motion.div className="modal-gallery-thumbs" {...fade}>
           {items.map((item, i) => (
             <button
               key={i}
@@ -171,7 +175,7 @@ const ModalGallery = ({ work }) => {
               )}
             </button>
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   );
@@ -179,81 +183,71 @@ const ModalGallery = ({ work }) => {
 
 const splitLines = (text) => text.split('\n').map((s) => s.trim()).filter(Boolean);
 
-const groupedWorks = workGroups.map((g) => ({
-  ...g,
-  works: g.ids.map((id) => worksData.find((w) => w.id === id)).filter(Boolean),
-}));
-
 const orderOf = (id) => (workOrder.includes(id) ? workOrder.indexOf(id) : workOrder.length);
-const allWorks = groupedWorks
-  .flatMap((g) => g.works.map((work) => ({ work, group: g.label })))
-  .sort((a, b) => orderOf(a.work.id) - orderOf(b.work.id));
-const ALL = 'すべて';
+const allWorks = [...worksData].sort((a, b) => orderOf(a.id) - orderOf(b.id));
 
-// 全作品をサムネ付きのカードで並べる。分類で絞り込みもできる
-const WorkGrid = ({ onOpen }) => {
-  const [filter, setFilter] = useState(ALL);
+// 全作品をサムネ付きのカードで並べる
+const WorkGrid = ({ onOpen, openId }) => {
   const reduceMotion = useReducedMotion();
-  const visible = filter === ALL ? allWorks : allWorks.filter((w) => w.group === filter);
 
   return (
-    <div className="work-grid">
-      <div className="other-filters" role="group" aria-label="分類で絞り込む">
-        {[{ label: ALL, works: allWorks }, ...groupedWorks].map((g) => (
-          <button
-            key={g.label}
-            className={`other-filter ${filter === g.label ? 'is-active' : ''}`}
-            aria-pressed={filter === g.label}
-            onClick={() => setFilter(g.label)}
+    <ul className="works-list">
+      {allWorks.map((work, i) => (
+        <motion.li
+          key={work.id}
+          className={`work-card ${openId === work.id ? 'is-open' : ''}`}
+          layoutId={reduceMotion ? undefined : `work-card-${work.id}`}
+          onClick={() => onOpen(work)}
+        >
+          <motion.div
+            className="work-thumb"
+            layoutId={reduceMotion ? undefined : `work-thumb-${work.id}`}
           >
-            {g.label}
-            <span className="other-filter-count">{g.works.length}</span>
-          </button>
-        ))}
-      </div>
-
-      <motion.ul className="other-grid" layout={!reduceMotion}>
-        <AnimatePresence initial={false}>
-          {visible.map(({ work, group }) => (
-            <motion.li
-              key={work.id}
-              className="other-card"
-              layout={!reduceMotion}
-              initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.2 }}
-              onClick={() => onOpen(work)}
+            <img src={work.image} alt="" loading="lazy" />
+            <span className="work-thumb-cta" aria-hidden="true">詳しく見る →</span>
+          </motion.div>
+          <div className="work-body">
+            <p className="work-index">
+              <span className="work-no">{String(i + 1).padStart(2, '0')}</span>
+              <span className="work-genre">{work.category}</span>
+            </p>
+            <button
+              className="work-title"
+              onClick={(e) => { e.stopPropagation(); onOpen(work); }}
             >
-              <div className="other-thumb">
-                <img src={work.image} alt="" loading="lazy" />
-                <span className="other-group-tag">{group}</span>
+              {work.title}
+            </button>
+            <p className="work-desc">{work.description}</p>
+            <div className="work-foot">
+              <p className="work-meta">制作期間 {work.duration}</p>
+              <div className="work-links" onClick={(e) => e.stopPropagation()}>
+                <WorkLinks links={work.links} variant="card" />
               </div>
-              <div className="other-body">
-                <button
-                  className="other-title"
-                  onClick={(e) => { e.stopPropagation(); onOpen(work); }}
-                >
-                  {work.title}
-                </button>
-                {work.achievement && <p className="other-achievement">{work.achievement}</p>}
-                <p className="other-meta">{work.category} ・ {work.duration}</p>
-                <p className="other-desc">{work.description}</p>
-                <div className="work-links" onClick={(e) => e.stopPropagation()}>
-                  <WorkLinks links={work.links} variant="card" />
-                </div>
-              </div>
-            </motion.li>
-          ))}
-        </AnimatePresence>
-      </motion.ul>
-    </div>
+            </div>
+          </div>
+        </motion.li>
+      ))}
+    </ul>
   );
 };
 
 const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
   const closeRef = useRef(null);
   const reduceMotion = useReducedMotion();
+  // 一覧のカードから開いたときだけ、そのカードが大きくなるように見せる
+  // （Hero から開いたときはカードが画面外にあるので、中央で拡大する）
+  const [expandFrom, setExpandFrom] = useState(null);
+  const expand = !reduceMotion && selectedWork && expandFrom === selectedWork.id;
+  // 拡大のあいだ文字が伸び縮みして見えないよう、本文は広がりきってから出す
+  const fade = expand ? {
+    initial: { opacity: 0 },
+    animate: { opacity: 1, transition: { duration: 0.2, delay: 0.3 } },
+    exit: { opacity: 0, transition: { duration: 0.1 } },
+  } : {};
+  const openFromGrid = (work) => {
+    setExpandFrom(work.id);
+    setSelectedWork(work);
+  };
 
   // 開いたら閉じるボタンにフォーカスし、Esc で閉じる。閉じたら元の場所へフォーカスを戻す
   useEffect(() => {
@@ -277,31 +271,36 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
       <div className="container">
         <h2 className="section-title">Works</h2>
 
-        <WorkGrid onOpen={setSelectedWork} />
+        <WorkGrid onOpen={openFromGrid} openId={expand ? selectedWork.id : null} />
 
-        <AnimatePresence>
+        <AnimatePresence onExitComplete={() => setExpandFrom(null)}>
           {selectedWork && (
             <motion.div
-              className="modal-overlay"
+              key="backdrop"
+              className="modal-backdrop"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.2 }}
-              onClick={() => setSelectedWork(null)}
-            >
+              transition={{ duration: reduceMotion ? 0 : 0.3 }}
+            />
+          )}
+          {selectedWork && (
+            <div key="modal" className="modal-overlay" onClick={() => setSelectedWork(null)}>
               <motion.div
                 className="modal-content"
                 role="dialog"
                 aria-modal="true"
                 aria-label={selectedWork.title}
-                initial={reduceMotion ? false : { x: '100%' }}
-                animate={{ x: 0 }}
-                exit={reduceMotion ? { opacity: 0 } : { x: '100%' }}
-                transition={{ duration: reduceMotion ? 0 : 0.3, ease: [0.2, 0.8, 0.2, 1] }}
+                layoutId={expand ? `work-card-${selectedWork.id}` : undefined}
+                initial={expand || reduceMotion ? false : { opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={expand ? undefined : { opacity: 0, scale: reduceMotion ? 1 : 0.96 }}
+                transition={{ duration: reduceMotion ? 0 : 0.45, ease: [0.2, 0.8, 0.2, 1] }}
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="modal-bar">
-                  <span className="modal-bar-category">{selectedWork.category}</span>
+                <motion.div className="modal-scroll" layoutScroll>
+                <motion.div className="modal-bar" {...fade}>
+                  <span className="modal-bar-title">{selectedWork.title}</span>
                   <button
                     ref={closeRef}
                     className="modal-close"
@@ -310,61 +309,70 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
                   >
                     ×
                   </button>
-                </div>
+                </motion.div>
 
-                <ModalGallery work={selectedWork} />
+                <ModalGallery work={selectedWork} expand={expand} fade={fade} />
 
-                <div className="modal-info">
-                  {selectedWork.achievement && (
-                    <p className="modal-achievement">{selectedWork.achievement}</p>
-                  )}
+                <motion.div className="modal-info" {...fade}>
                   <h3 className="modal-title">{selectedWork.title}</h3>
-                  <p className="modal-duration">制作期間：{selectedWork.duration}</p>
 
                   {selectedWork.detailedDescription.overview && (
                     <p className="modal-lead">{nl(selectedWork.detailedDescription.overview)}</p>
                   )}
 
+                  {/* 基本情報をひと目で読めるように横に並べる */}
+                  <dl className="modal-facts">
+                    <div>
+                      <dt>ジャンル</dt>
+                      <dd>{selectedWork.category}</dd>
+                    </div>
+                    <div>
+                      <dt>制作期間</dt>
+                      <dd>{selectedWork.duration}</dd>
+                    </div>
+                    <div>
+                      <dt>使用技術</dt>
+                      <dd>{selectedWork.technology.join(' / ')}</dd>
+                    </div>
+                  </dl>
+
                   <div className="modal-links">
                     <WorkLinks links={selectedWork.links} variant="modal" />
                   </div>
 
+                  {/* 企画書のスペック表のように、左に見出し・右に内容 */}
                   {selectedWork.detailedDescription.content && (
                     <section className="modal-section">
                       <h4>内容</h4>
-                      <p>{nl(selectedWork.detailedDescription.content)}</p>
+                      <div className="modal-section-body">
+                        {splitLines(selectedWork.detailedDescription.content).map((line) => (
+                          <p key={line}>{line}</p>
+                        ))}
+                      </div>
                     </section>
                   )}
 
                   {selectedWork.detailedDescription.role && (
                     <section className="modal-section">
                       <h4>担当</h4>
-                      <ul className="modal-role">
+                      <ol className="modal-role modal-section-body">
                         {splitLines(selectedWork.detailedDescription.role).map((item) => (
                           <li key={item}>{item}</li>
                         ))}
-                      </ul>
+                      </ol>
                     </section>
                   )}
 
                   <section className="modal-section">
-                    <h4>使用技術</h4>
-                    <div className="work-tech">
-                      {selectedWork.technology.map((t) => (
-                        <span key={t} className="tech-tag">{t}</span>
-                      ))}
-                    </div>
-                  </section>
-
-                  <section className="modal-section">
                     <h4>キーワード</h4>
-                    <ul className="modal-keywords">
+                    <ul className="modal-keywords modal-section-body">
                       {selectedWork.features.map((f) => <li key={f}>{f}</li>)}
                     </ul>
                   </section>
-                </div>
+                </motion.div>
+                </motion.div>
               </motion.div>
-            </motion.div>
+            </div>
           )}
         </AnimatePresence>
       </div>
