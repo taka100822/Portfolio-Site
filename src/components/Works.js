@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaExternalLinkAlt, FaGithub, FaGamepad, FaPenFancy, FaSteam, FaGlobe, FaYoutube, FaDesktop, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { SiNintendoswitch } from 'react-icons/si';
 import useScrollAnimation from '../hooks/useScrollAnimation';
-import { fadeUpVariants, staggerContainer, titleMotionProps } from '../constants/animations';
+import { fadeUpVariants, staggerContainer } from '../constants/animations';
 import { worksData } from '../constants/works';
 import './Works.css';
 
@@ -177,15 +177,58 @@ const ModalGallery = ({ work }) => {
   );
 };
 
+const splitLines = (text) => text.split('\n').map((s) => s.trim()).filter(Boolean);
+
+const FeaturedWork = ({ work, onOpen }) => (
+  <article className="featured-work">
+    <button className="featured-image" onClick={onOpen} aria-label={`${work.title}の詳細を見る`}>
+      <img src={work.image} alt="" />
+    </button>
+
+    <div className="featured-body">
+      {work.achievement && <p className="featured-achievement">{work.achievement}</p>}
+      <h3 className="featured-title">{work.title}</h3>
+      <p className="featured-overview">{work.detailedDescription.overview}</p>
+
+      <div className="featured-role">
+        <h4>担当</h4>
+        <ul>
+          {splitLines(work.detailedDescription.role).map((r) => <li key={r}>{r}</li>)}
+        </ul>
+      </div>
+
+      <div className="work-tech">
+        {work.technology.map((tech) => <span key={tech} className="tech-tag">{tech}</span>)}
+      </div>
+
+      <div className="featured-actions">
+        <button className="featured-open" onClick={onOpen}>詳細を見る</button>
+        <div className="work-links">
+          <WorkLinks links={work.links} variant="card" />
+        </div>
+      </div>
+    </div>
+  </article>
+);
+
+const featuredWorks = worksData.filter((w) => w.featured);
+const otherWorks = worksData.filter((w) => !w.featured);
+
 const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
   const [ref, inView] = useScrollAnimation();
 
   return (
     <section id="works" className="section works-section" ref={ref}>
       <div className="container">
-        <motion.h2 className="section-title" {...titleMotionProps(inView)}>
-          Works
-        </motion.h2>
+        <h2 className="section-title">Works</h2>
+
+        <div className="featured-list">
+          {featuredWorks.map((work) => (
+            <FeaturedWork key={work.id} work={work} onOpen={() => setSelectedWork(work)} />
+          ))}
+        </div>
+
+        <h3 className="works-subheading">そのほかの制作</h3>
 
         <motion.div
           className="works-grid"
@@ -193,14 +236,13 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
         >
-          {worksData.map((work, index) => (
+          {otherWorks.map((work) => (
             <motion.div
               key={work.id}
               className="work-card"
               variants={fadeUpVariants}
               onClick={() => setSelectedWork(work)}
             >
-              <span className="work-number">{String(index + 1).padStart(2, '0')}</span>
               <div className="work-image">
                 <img src={work.image} alt={work.title} />
                 <div className="work-overlay">

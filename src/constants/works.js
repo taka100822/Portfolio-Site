@@ -4,6 +4,8 @@ export const worksData = [
   {
     id: 1,
     title: 'DreamMayday',
+    featured: true,
+    achievement: 'BitSummit Gamejam 2025 総合グランプリ',
     category: 'Communication',
     duration: '3 months',
     technology: ['Unity', 'C#'],
@@ -26,6 +28,8 @@ export const worksData = [
   {
     id: 2,
     title: 'CRASH REPORT',
+    featured: true,
+    achievement: '学生ゲーム制作団体「TOMSN」第1弾',
     category: '3D Action',
     duration: '3 months',
     technology: ['Unity', 'C#', 'Blender'],
@@ -67,6 +71,8 @@ export const worksData = [
   {
     id: 4,
     title: 'POGO・Stadium',
+    featured: true,
+    achievement: 'Steam / Nintendo Switch で発売',
     category: 'Action & Strategy',
     duration: '10 months',
     technology: ['Unity', 'C#', 'Tiled'],
