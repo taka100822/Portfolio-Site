@@ -3,8 +3,6 @@
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 3rem;
   align-items: center;
-  padding-bottom: 4rem;
-  border-bottom: 1px solid var(--line);
 }
 
 .contact-lead {
@@ -50,59 +48,6 @@
   opacity: 0.85;
 }
 
-.contact-links {
-  margin-top: 3rem;
-}
-
-.contact-links h3 {
-  margin-bottom: 1rem;
-  font-size: var(--text-14);
-  font-weight: 500;
-  color: var(--pencil);
-}
-
-.contact-links ul {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
-  list-style: none;
-}
-
-.contact-links a {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.25rem 0.6rem;
-  align-items: center;
-  height: 100%;
-  padding: 1rem;
-  color: var(--paper);
-  text-decoration: none;
-  border: 1px solid var(--line);
-  transition: border-color 0.15s, background 0.15s;
-}
-
-.contact-links a:hover {
-  border-color: var(--signal);
-  background: rgba(59, 130, 246, 0.06);
-}
-
-.contact-link-icon {
-  width: 18px;
-  height: 18px;
-  color: var(--highlight);
-}
-
-.contact-link-title {
-  font-weight: 700;
-}
-
-.contact-link-desc {
-  grid-column: 1 / -1;
-  font-size: 0.8125rem;
-  line-height: 1.6;
-  color: var(--pencil);
-}
-
 @media (max-width: 900px) {
   .contact-main {
     grid-template-columns: 1fr;
@@ -111,15 +56,5 @@
 
   .contact-x {
     justify-self: start;
-  }
-
-  .contact-links ul {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 480px) {
-  .contact-links ul {
-    grid-template-columns: 1fr;
   }
 }

@@ -42,4 +42,4 @@ OS の「視差効果を減らす」設定では回転や塗り替えを止め�
 
 ## ページ構成
 
-`Hero` → `Works` → `About` → `Timeline` → `Contact`
+`Hero` → `About` → `Works` → `Timeline` → `Links` → `Contact`

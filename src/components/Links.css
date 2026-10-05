@@ -1,0 +1,155 @@
+/* ── RPG のウィンドウ：二重線の枠 ── */
+.warp {
+  display: grid;
+  grid-template-columns: minmax(0, 34rem) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: end;
+  font-family: var(--font-pixel);
+}
+
+.warp-window {
+  position: relative;
+  padding: 1.75rem 2rem;
+  background: rgba(3, 6, 12, 0.92);
+  border: 2px solid var(--paper);
+  border-radius: 6px;
+  box-shadow:
+    0 0 0 4px var(--black),
+    0 0 0 6px var(--line);
+}
+
+/* ── コマンドメニュー ── */
+.warp-ask {
+  margin-bottom: 1rem;
+  font-size: var(--text-20);
+  color: var(--paper);
+}
+
+.warp-list {
+  list-style: none;
+}
+
+.warp-item {
+  display: grid;
+  grid-template-columns: 1.5rem 1.5rem minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.6rem 0.75rem;
+  font-size: var(--text-20);
+  color: var(--pencil);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: color 0.1s, background 0.1s;
+}
+
+.warp-item:focus-visible {
+  outline: 2px dashed var(--signal);
+  outline-offset: 2px;
+}
+
+.warp-cursor {
+  font-size: var(--text-14);
+  color: var(--highlight);
+  visibility: hidden;
+}
+
+.warp-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.warp-host {
+  font-size: var(--text-14);
+  color: var(--pencil);
+}
+
+.warp-item.is-selected {
+  color: #fff;
+  background: rgba(59, 130, 246, 0.16);
+}
+
+.warp-item.is-selected .warp-cursor {
+  visibility: visible;
+  animation: warp-cursor-bob 0.6s steps(2) infinite;
+}
+
+.warp-item.is-selected .warp-icon {
+  color: var(--highlight);
+}
+
+/* ── メッセージ窓 ── */
+.warp-message {
+  min-height: 9rem;
+}
+
+.warp-speaker {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0 0.75rem;
+  font-size: var(--text-14);
+  color: var(--black);
+  background: var(--highlight);
+  border-radius: 3px;
+}
+
+.warp-text {
+  font-size: var(--text-20);
+  line-height: 1.9;
+  color: var(--paper);
+}
+
+.warp-text::before {
+  content: '＊ ';
+  color: var(--highlight);
+}
+
+.warp-next {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-size: var(--text-14);
+  color: var(--highlight);
+  animation: warp-next-blink 0.8s steps(2) infinite;
+}
+
+@keyframes warp-cursor-bob {
+  to { transform: translateX(4px); }
+}
+
+@keyframes warp-next-blink {
+  to { opacity: 0; }
+}
+
+@media (max-width: 900px) {
+  .warp {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .warp-window {
+    padding: 1.25rem 1rem;
+  }
+
+  .warp-ask,
+  .warp-item,
+  .warp-text {
+    font-size: var(--text-16);
+  }
+
+  .warp-item {
+    grid-template-columns: 1rem 1.25rem minmax(0, 1fr);
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .warp-host {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .warp-item.is-selected .warp-cursor,
+  .warp-next {
+    animation: none;
+  }
+}

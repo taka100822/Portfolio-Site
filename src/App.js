@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Works from './components/Works';
 import Timeline from './components/Timeline';
+import Links from './components/Links';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Intro from './components/Intro';
@@ -24,6 +25,7 @@ function App() {
         <About />
         <Works selectedWork={selectedWork} onSelectWork={setSelectedWork} />
         <Timeline />
+        <Links />
         <Contact />
       </main>
       <Footer />

@@ -11,6 +11,7 @@
   --font-display: 'Dela Gothic One', sans-serif;
   --font-body:    'IBM Plex Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
   --font-hand:    'Yomogi', var(--font-body); /* 企画書への手書き注釈 */
+  --font-pixel:   'DotGothic16', var(--font-body); /* ゲーム画面風の UI */
 
   --text-14: 0.875rem;
   --text-16: 1rem;
@@ -75,4 +76,16 @@ h1, h2 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--signal);
+}
+/* 画面には出さず、読み上げにだけ渡すテキスト */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

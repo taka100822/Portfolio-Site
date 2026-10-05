@@ -1,6 +1,5 @@
 import React from 'react';
 import { FaXTwitter } from 'react-icons/fa6';
-import { linksData } from '../constants/links';
 import './Contact.css';
 
 const Contact = () => (
@@ -26,21 +25,6 @@ const Contact = () => (
             <span className="contact-x-handle">@taka10822GC</span>
           </span>
         </a>
-      </div>
-
-      <div className="contact-links">
-        <h3>ほかの場所での活動</h3>
-        <ul>
-          {linksData.map((link) => (
-            <li key={link.title}>
-              <a href={link.url} target="_blank" rel="noopener noreferrer">
-                <link.icon className="contact-link-icon" aria-hidden="true" />
-                <span className="contact-link-title">{link.title}</span>
-                <span className="contact-link-desc">{link.description}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   </section>
