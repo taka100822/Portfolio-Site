@@ -36,7 +36,7 @@ const HOBBIES = [
   { src: 'hobby/hobby-bike.jpg',   label: 'バイク' },
   { src: 'hobby/hobby-basket.jpg', label: 'バスケ' },
   { src: 'hobby/hobby-travel.jpg', label: '旅行' },
-  { src: 'hobby/hobby-dog.jpg',    label: '犬' },
+  { src: 'hobby/hobby-dog.jpg',    label: 'わんちゃん' },
 ];
 
 const IMAGE_BASE = `${process.env.PUBLIC_URL}/Image/`;
@@ -120,7 +120,7 @@ const About = () => (
             <p className="gdd-text">{renderText(ABOUT_TEXT.vision)}</p>
           </Row>
 
-          <Row label="おまけ要素" note="幅広く取り組んでいます">
+          <Row label="趣味" note="幅広く取り組んでいます">
             <ul className="hobby-list">
               {HOBBIES.map(({ src, label }) => (
                 <li key={label}>
