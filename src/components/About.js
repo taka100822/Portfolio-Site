@@ -1,4 +1,5 @@
 import React from 'react';
+import { useInView } from 'react-intersection-observer';
 import { skillsData } from '../constants/skills';
 import './About.css';
 
@@ -11,26 +12,24 @@ const renderText = (text) => text.split('\n').map((line, i, arr) => (
   </span>
 ));
 
-const ABOUT_TEXT = [
-  {
-    heading: '自己紹介',
-    body:
-      `京都にある**大学院**で**ゲームのインタラクションに関する研究**を行いながら、ゲーム制作に取り組んでいます。
-    また、**ゲーム制作団体「TOMSN」の代表**としてチームを率い、第2弾タイトルの開発を進めています。`,
-  },
-  {
-    heading: 'これまでの経験',
-    body:
-      `個人でのゲーム開発からスタートし、**ゲームジャムの参加**や**「TOMSN」設立によるチーム開発・マネジメント**を経験してきました。さらに、**企業でのアルバイト・インターンシップ**で企画を実際の形にする経験を積んできました。
-    また、**学会発表**に登壇するなど研究活動にも注力しています。加えて、**タイへ短期留学**を通じて、視野を広げました。`,
-  },
-  {
-    heading: '目指すこと',
-    body:
-      `私は、ゲーム体験を通じて**人々の心に残り続ける価値**を届けたいと考えています。プレイした瞬間の楽しさにとどまらず、「出会えてよかった」と思えるような、**人生の中で意味を持つ体験**を生み出したいです。
-    これまで、ゲーム制作や研究活動を通じてプレイヤー体験の設計に向き合い、実際に人の感情を動かす経験を積んできました。今後は、体験の根幹を設計し、**人々の記憶に残り続けるコンテンツ**を創り続けていきます。`,
-  },
-];
+const ABOUT_TEXT = {
+  intro:
+    `**京都工芸繊維大学大学院**で**ゲーム × AI**に関する研究を行いながら、
+    ゲーム制作に取り組んでいます。
+    また、**ゲーム制作団体「TOMSN」の代表**としてチームを率い、
+    第2弾タイトルの開発を進めています。`,
+  history:
+    `個人開発からスタートし、**ゲームジャムでの受賞**や**「TOMSN」団体設立**による
+    **チーム開発・マネジメント**を経験してきました。
+    さらに、**企業でのアルバイト・インターンシップ**で経験を積んできました。
+    また、**学会発表**に登壇するなど研究活動にも注力しています。
+    加えて、**タイへ短期留学**を通じて、視野を広げました。`,
+  vision:
+    `私は、ゲーム体験を通じて**人々の心に残り続ける価値**を届けたいと考えています。
+    プレイした瞬間の楽しさにとどまらず、「出会えてよかった」と思えるような、
+    **人生の中で意味を持つ体験**を生み出したいです。
+    今後は体験の根幹を設計し、**人々の記憶に残り続けるコンテンツ**を創り続けていきます。`,
+};
 
 const HOBBIES = [
   { src: 'hobby/hobby-piano.jpg',  label: 'ピアノ' },
@@ -41,54 +40,97 @@ const HOBBIES = [
 
 const IMAGE_BASE = `${process.env.PUBLIC_URL}/Image/`;
 
+// 企画書の1項目。右の余白に青ペンの注釈が書き込まれる
+const Row = ({ label, note, className = '', children }) => {
+  const [ref, inView] = useInView({ threshold: 0.4, triggerOnce: true });
+
+  return (
+    <div ref={ref} className={`gdd-row ${className} ${inView ? 'is-marked' : ''}`}>
+      <dt className="gdd-label">{label}</dt>
+      <dd className="gdd-content">{children}</dd>
+      {note && (
+        <dd className="gdd-note">
+          <svg className="gdd-note-arrow" viewBox="0 0 48 24" aria-hidden="true">
+            <path d="M46 14 C 34 4, 20 18, 4 12 M4 12 L 12 6 M4 12 L 11 19" />
+          </svg>
+          <span>{note}</span>
+        </dd>
+      )}
+    </div>
+  );
+};
+
 const About = () => (
   <section id="about" className="section about-section">
     <div className="container">
       <h2 className="section-title">About</h2>
 
-      <div className="about-intro">
-        <figure className="about-photo">
-          <img src={`${IMAGE_BASE}me.jpeg`} alt="Taka10" />
-          <figcaption>Taka10 / 27卒ゲームプランナー志望</figcaption>
-        </figure>
+      <article className="gdd">
+        <header className="gdd-header">
+          <span className="gdd-doc-type">GAME DESIGN DOCUMENT</span>
+          <span className="gdd-doc-meta">企画書 / 作成：Taka10</span>
+        </header>
 
-        <div className="about-text">
-          {ABOUT_TEXT.map(({ heading, body }) => (
-            <div key={heading} className="about-block">
-              <h3>{heading}</h3>
-              <p>{renderText(body)}</p>
+        <dl className="gdd-rows">
+          <Row label="タイトル" note="大学院生です" className="gdd-row-title">
+            <figure className="gdd-photo">
+              <img src={`${IMAGE_BASE}me.jpeg`} alt="Taka10" />
+            </figure>
+            <div>
+              <p className="gdd-title">Taka10</p>
+              <p className="gdd-subtitle">27卒 / ゲームプランナー志望</p>
             </div>
-          ))}
-        </div>
-      </div>
+          </Row>
 
-      <div className="about-skills">
-        <h3 className="about-subheading">できること</h3>
-        <dl className="skill-rows">
-          {skillsData.map(({ title, items }) => (
-            <div key={title} className="skill-row">
-              <dt>{title}</dt>
-              <dd>
-                <ul>
-                  {items.map((item) => <li key={item}>{item}</li>)}
-                </ul>
-              </dd>
-            </div>
-          ))}
+          <Row label="コンセプト" note="ブレない軸">
+            <p className="gdd-concept">人生の一部となる体験を創造する。</p>
+          </Row>
+
+          <Row label="概要" note="第2弾開発中">
+            <p className="gdd-text">{renderText(ABOUT_TEXT.intro)}</p>
+          </Row>
+
+          <Row label="経緯" note="様々な経験！">
+            <p className="gdd-text">{renderText(ABOUT_TEXT.history)}</p>
+          </Row>
+
+          <Row label="搭載スキル" note="企画もしつつ、開発も可能です">
+            <ul className="gdd-skills">
+              {skillsData.map(({ title, icon: CategoryIcon, items }) => (
+                <li key={title} className="gdd-skill">
+                  <h4 className="gdd-skill-title">
+                    <span className="gdd-skill-icon"><CategoryIcon aria-hidden="true" /></span>
+                    {title}
+                  </h4>
+                  <ul className="gdd-skill-items">
+                    {items.map(({ name, icon: ItemIcon }) => (
+                      <li key={name}>
+                        <ItemIcon aria-hidden="true" />
+                        {name}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </Row>
+
+          <Row label="今後の展望" note="2027年春に、　ゲーム企画職で入社予定！">
+            <p className="gdd-text">{renderText(ABOUT_TEXT.vision)}</p>
+          </Row>
+
+          <Row label="おまけ要素" note="幅広く取り組んでいます">
+            <ul className="hobby-list">
+              {HOBBIES.map(({ src, label }) => (
+                <li key={label}>
+                  <img src={`${IMAGE_BASE}${src}`} alt="" loading="lazy" />
+                  <span>{label}</span>
+                </li>
+              ))}
+            </ul>
+          </Row>
         </dl>
-      </div>
-
-      <div className="about-hobbies">
-        <h3 className="about-subheading">趣味</h3>
-        <ul className="hobby-list">
-          {HOBBIES.map(({ src, label }) => (
-            <li key={label}>
-              <img src={`${IMAGE_BASE}${src}`} alt="" loading="lazy" />
-              <span>{label}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      </article>
     </div>
   </section>
 );
