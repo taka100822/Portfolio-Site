@@ -10,7 +10,6 @@ export const heroImages = [
   { workId: 5,  path: 'Furachi/Furachi2.png' },
   { workId: 6,  path: 'MyFriend/MyFriend2.png' },
   { workId: 7,  path: 'Wakeai/Wakeai2.png' },
-  { workId: 10, path: 'AttendanceBoard/AttendanceBoard2.png' },
   { workId: 11, path: 'p-victory/p-victory2.png' },
   { workId: 12, path: 'MasterResearch/MasterResearch2.png' },
 ];
