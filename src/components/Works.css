@@ -2,143 +2,6 @@
   position: relative;
 }
 
-/* ── 代表作 ── */
-.featured-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6rem;
-}
-
-.featured-work {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-  gap: 3rem;
-  align-items: start;
-}
-
-.featured-image {
-  position: relative;
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  padding: 0;
-  border: 1px solid var(--line);
-  background: var(--black);
-  cursor: pointer;
-}
-
-.featured-image:hover .featured-photo {
-  opacity: 0.85;
-}
-
-/* 製図の角トンボ */
-.featured-image::before,
-.featured-image::after {
-  content: '';
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border-color: var(--highlight);
-  border-style: solid;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.featured-image::before { top: -7px; left: -7px; border-width: 1px 0 0 1px; }
-.featured-image::after { bottom: -7px; right: -7px; border-width: 0 1px 1px 0; }
-
-.featured-achievement {
-  margin-bottom: 0.5rem;
-  font-size: var(--text-14);
-  font-weight: 700;
-  color: var(--highlight);
-}
-
-.featured-title {
-  margin-bottom: 1rem;
-  font-family: var(--font-display);
-  font-size: var(--text-28);
-  font-weight: 400;
-  line-height: 1.3;
-}
-
-.featured-overview {
-  margin-bottom: 1.5rem;
-  color: var(--paper);
-}
-
-.featured-role {
-  margin-bottom: 1.25rem;
-  padding-left: 1rem;
-  border-left: 1px solid var(--line);
-}
-
-.featured-role h4 {
-  margin-bottom: 0.25rem;
-  font-size: var(--text-14);
-  font-weight: 500;
-  color: var(--pencil);
-}
-
-.featured-role ul {
-  list-style: none;
-  font-size: 0.9375rem;
-  line-height: 1.7;
-}
-
-.featured-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.featured-actions .work-links {
-  margin: 0;
-}
-
-.featured-open {
-  padding: 10px 20px;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: #fff;
-  background: var(--signal);
-  border: 1px solid var(--signal);
-  cursor: pointer;
-  transition: background 0.15s, transform 0.1s;
-}
-
-.featured-open:hover {
-  background: #2f6fdc;
-}
-
-.featured-open:active {
-  transform: translateY(2px);
-}
-
-.works-subheading {
-  margin: 7rem 0 0;
-  font-family: var(--font-display);
-  font-size: var(--text-28);
-  font-weight: 400;
-}
-
-@media (max-width: 768px) {
-  .featured-list {
-    gap: 4rem;
-  }
-
-  .featured-work {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .works-subheading {
-    margin-top: 5rem;
-  }
-}
-
 /* ── 技術タグとリンク ── */
 .work-tech {
   display: flex;
@@ -517,164 +380,108 @@
   }
 }
 
-/* ── 代表作画像：線画 → 実画像 と注釈線 ── */
-.featured-image {
-  overflow: visible;
+/* ── 作品一覧：サムネ付きカード ── */
+
+.other-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
 }
 
-.featured-lineart,
-.featured-photo {
-  position: absolute;
-  inset: 0;
+.other-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 6px 14px;
+  font-size: var(--text-14);
+  font-weight: 500;
+  color: var(--pencil);
+  background: none;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.other-filter:hover {
+  color: var(--paper);
+  border-color: var(--signal);
+}
+
+.other-filter.is-active {
+  color: #fff;
+  background: rgba(59, 130, 246, 0.25);
+  border-color: var(--signal);
+}
+
+.other-filter-count {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.other-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.other-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--black);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.other-card:hover,
+.other-card:focus-within {
+  border-color: var(--signal);
+  transform: translateY(-3px);
+}
+
+.other-thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+
+.other-thumb img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease-out;
 }
 
-.featured-lineart-fallback {
-  filter: grayscale(1) contrast(2.2) brightness(0.55) sepia(1) hue-rotate(180deg) saturate(3);
-  opacity: 0.7;
+.other-card:hover .other-thumb img {
+  transform: scale(1.04);
 }
 
-/* 左から塗るように実画像へ */
-.featured-photo {
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.4s, opacity 0.2s;
-}
-
-.featured-image.is-drawn .featured-photo {
-  clip-path: inset(0 0 0 0);
-}
-
-.annotation-lines {
+.other-group-tag {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
-}
-
-.annotation-lines line {
-  stroke: var(--highlight);
-  stroke-width: 1.5;
-  /* non-scaling-stroke なので画面上の px。線の長さより十分長く取る */
-  stroke-dasharray: 2000;
-  stroke-dashoffset: 2000;
-  transition: stroke-dashoffset 0.5s ease-out;
-  transition-delay: calc(1.4s + var(--i) * 0.25s);
-}
-
-.featured-image.is-drawn .annotation-lines line {
-  stroke-dashoffset: 0;
-}
-
-.annotation-dot {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  margin: -5px 0 0 -5px;
-  border: 2px solid var(--highlight);
-  border-radius: 50%;
-  background: var(--black);
-  transform: scale(0);
-  transition: transform 0.25s ease-out;
-  transition-delay: calc(1.3s + var(--i) * 0.25s);
-  pointer-events: none;
-}
-
-.featured-image.is-drawn .annotation-dot {
-  transform: scale(1);
-}
-
-.annotation-label {
-  position: absolute;
-  padding: 2px 8px;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  line-height: 1.6;
+  top: 0.6rem;
+  left: 0.6rem;
+  padding: 0 8px;
+  font-size: 0.75rem;
+  line-height: 1.8;
   color: var(--paper);
-  white-space: nowrap;
   background: rgba(3, 6, 12, 0.85);
-  border: 1px solid var(--highlight);
-  opacity: 0;
-  transition: opacity 0.3s;
-  transition-delay: calc(1.8s + var(--i) * 0.25s);
-  pointer-events: none;
+  border: 1px solid var(--line);
 }
 
-.annotation-label.is-right { transform: translate(0, -50%); }
-.annotation-label.is-left { transform: translate(-100%, -50%); }
-
-.featured-image.is-drawn .annotation-label {
-  opacity: 1;
-}
-
-@media (max-width: 768px) {
-  .annotation-label {
-    padding: 1px 6px;
-    font-size: 0.6875rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .featured-photo,
-  .annotation-lines line,
-  .annotation-dot,
-  .annotation-label {
-    transition: none;
-  }
-}
-
-/* ── そのほかの制作：分類ごとの一覧 ── */
-.other-works {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
-  gap: 3rem;
-  align-items: start;
-  margin-top: 2.5rem;
-}
-
-.other-group + .other-group {
-  margin-top: 2.5rem;
-}
-
-.other-group-label {
-  padding-bottom: 0.5rem;
-  font-size: var(--text-14);
-  font-weight: 500;
-  color: var(--pencil);
-  border-bottom: 1px solid var(--line);
-}
-
-.other-group ul {
-  list-style: none;
-}
-
-.other-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 9rem auto;
-  gap: 1.5rem;
-  align-items: center;
-  padding: 1rem 0.75rem;
-  border-bottom: 1px solid rgba(29, 58, 110, 0.5);
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.other-row:hover,
-.other-row.is-active {
-  background: rgba(59, 130, 246, 0.06);
-}
-
-.other-thumb {
-  display: none;
+.other-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1rem 1.1rem 1.1rem;
 }
 
 .other-title {
   padding: 0;
-  font-size: var(--text-20);
+  font-size: var(--text-16);
   font-weight: 700;
   line-height: 1.4;
   text-align: left;
@@ -684,107 +491,108 @@
   cursor: pointer;
 }
 
-.other-row:hover .other-title,
-.other-row.is-active .other-title {
+.other-card:hover .other-title {
   color: var(--highlight);
 }
 
-.other-desc {
-  margin-top: 0.25rem;
-  font-size: var(--text-14);
-  line-height: 1.7;
-  color: var(--pencil);
+.other-achievement {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--highlight);
 }
 
 .other-meta {
-  font-size: 0.8125rem;
-  line-height: 1.6;
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
   color: var(--pencil);
 }
 
-.other-row .work-links {
-  margin: 0;
-  justify-content: flex-end;
-}
-
-/* 右側のプレビュー（PC のみ） */
-.other-preview {
-  position: sticky;
-  top: 120px;
-}
-
-.other-preview-frame {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  border: 1px solid var(--line);
-  background: var(--black);
+.other-desc {
+  margin-top: 0.6rem;
+  font-size: var(--text-14);
+  line-height: 1.7;
+  color: rgba(230, 236, 245, 0.8);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.other-preview-frame img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  animation: preview-in 0.25s ease-out;
+.other-card .work-links {
+  margin-top: auto;
+  padding-top: 1rem;
 }
 
-@keyframes preview-in {
-  from { opacity: 0; transform: translateX(12px); }
-  to { opacity: 1; transform: none; }
+.other-card .work-links:empty {
+  display: none;
 }
 
-.other-preview-title {
-  margin-top: 0.5rem;
-  font-size: var(--text-14);
-  color: var(--highlight);
-}
+/* スマホは横並びのコンパクトな行に */
+@media (max-width: 560px) {
+  .other-filters {
+    flex-wrap: nowrap;
+    margin-right: -16px;
+    padding-right: 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
 
-@media (max-width: 1024px) {
-  .other-works {
+  .other-filters::-webkit-scrollbar { display: none; }
+
+  .other-filter {
+    flex-shrink: 0;
+  }
+
+  .other-grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
-  .other-preview {
-    display: none;
+  .other-card {
+    flex-direction: row;
   }
 
-  .other-row {
-    grid-template-columns: 96px minmax(0, 1fr);
-    gap: 0.5rem 1rem;
-    padding: 1rem 0;
+  .other-card:hover,
+  .other-card:focus-within {
+    transform: none;
   }
 
   .other-thumb {
-    display: block;
-    grid-row: span 2;
-    align-self: start;
-    width: 96px;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    border: 1px solid var(--line);
+    flex-shrink: 0;
+    width: 120px;
+    align-self: stretch;
+    aspect-ratio: auto;
+    border-bottom: none;
+    border-right: 1px solid var(--line);
   }
 
-  .other-meta {
+  .other-group-tag {
     display: none;
   }
 
-  .other-row .work-links {
-    grid-column: 2;
-    justify-content: flex-start;
+  .other-body {
+    min-width: 0;
+    padding: 0.75rem;
   }
 
   .other-title {
-    font-size: var(--text-16);
+    font-size: var(--text-14);
+  }
+
+  .other-desc {
+    -webkit-line-clamp: 2;
+    font-size: 0.8125rem;
+  }
+
+  .other-card .work-links {
+    padding-top: 0.6rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .other-preview-frame img {
-    animation: none;
+  .other-card,
+  .other-thumb img {
+    transition: none;
   }
-}
-
-.other-row .work-links:empty {
-  display: none;
 }

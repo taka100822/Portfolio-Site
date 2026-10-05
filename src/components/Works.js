@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { FaExternalLinkAlt, FaGithub, FaGamepad, FaPenFancy, FaSteam, FaGlobe, FaYoutube, FaDesktop, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { SiNintendoswitch } from 'react-icons/si';
-import { worksData, workGroups } from '../constants/works';
-import FeaturedImage from './FeaturedImage';
+import { worksData, workGroups, workOrder } from '../constants/works';
 import './Works.css';
 
 const nl = (text) => text.split('\n').map((line, i, arr) => (
@@ -180,92 +179,74 @@ const ModalGallery = ({ work }) => {
 
 const splitLines = (text) => text.split('\n').map((s) => s.trim()).filter(Boolean);
 
-const FeaturedWork = ({ work, onOpen }) => (
-  <article className="featured-work">
-    <FeaturedImage work={work} onOpen={onOpen} />
-
-    <div className="featured-body">
-      {work.achievement && <p className="featured-achievement">{work.achievement}</p>}
-      <h3 className="featured-title">{work.title}</h3>
-      <p className="featured-overview">{work.detailedDescription.overview}</p>
-
-      <div className="featured-role">
-        <h4>担当</h4>
-        <ul>
-          {splitLines(work.detailedDescription.role).map((r) => <li key={r}>{r}</li>)}
-        </ul>
-      </div>
-
-      <div className="work-tech">
-        {work.technology.map((tech) => <span key={tech} className="tech-tag">{tech}</span>)}
-      </div>
-
-      <div className="featured-actions">
-        <button className="featured-open" onClick={onOpen}>詳細を見る</button>
-        <div className="work-links">
-          <WorkLinks links={work.links} variant="card" />
-        </div>
-      </div>
-    </div>
-  </article>
-);
-
-const featuredWorks = worksData.filter((w) => w.featured);
 const groupedWorks = workGroups.map((g) => ({
   ...g,
   works: g.ids.map((id) => worksData.find((w) => w.id === id)).filter(Boolean),
 }));
 
-// 代表作以外を分類ごとの一覧で。PC では右側に、ホバー中の作品の画像を出す
-const OtherWorks = ({ onOpen }) => {
-  const [preview, setPreview] = useState(groupedWorks[0].works[0]);
+const orderOf = (id) => (workOrder.includes(id) ? workOrder.indexOf(id) : workOrder.length);
+const allWorks = groupedWorks
+  .flatMap((g) => g.works.map((work) => ({ work, group: g.label })))
+  .sort((a, b) => orderOf(a.work.id) - orderOf(b.work.id));
+const ALL = 'すべて';
+
+// 全作品をサムネ付きのカードで並べる。分類で絞り込みもできる
+const WorkGrid = ({ onOpen }) => {
+  const [filter, setFilter] = useState(ALL);
+  const reduceMotion = useReducedMotion();
+  const visible = filter === ALL ? allWorks : allWorks.filter((w) => w.group === filter);
 
   return (
-    <div className="other-works">
-      <div className="other-list">
-        {groupedWorks.map((group) => (
-          <section key={group.label} className="other-group">
-            <h4 className="other-group-label">{group.label}</h4>
-            <ul>
-              {group.works.map((work) => (
-                <li
-                  key={work.id}
-                  className={`other-row ${preview.id === work.id ? 'is-active' : ''}`}
-                  onMouseEnter={() => setPreview(work)}
-                  onClick={() => onOpen(work)}
-                >
-                  <img className="other-thumb" src={work.image} alt="" loading="lazy" />
-                  <div className="other-main">
-                    <button
-                      className="other-title"
-                      onFocus={() => setPreview(work)}
-                      onClick={(e) => { e.stopPropagation(); onOpen(work); }}
-                    >
-                      {work.title}
-                    </button>
-                    <p className="other-desc">{work.description}</p>
-                  </div>
-                  <span className="other-meta">
-                    {work.category}
-                    <br />
-                    {work.duration}
-                  </span>
-                  <div className="work-links" onClick={(e) => e.stopPropagation()}>
-                    <WorkLinks links={work.links} variant="card" />
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </section>
+    <div className="work-grid">
+      <div className="other-filters" role="group" aria-label="分類で絞り込む">
+        {[{ label: ALL, works: allWorks }, ...groupedWorks].map((g) => (
+          <button
+            key={g.label}
+            className={`other-filter ${filter === g.label ? 'is-active' : ''}`}
+            aria-pressed={filter === g.label}
+            onClick={() => setFilter(g.label)}
+          >
+            {g.label}
+            <span className="other-filter-count">{g.works.length}</span>
+          </button>
         ))}
       </div>
 
-      <div className="other-preview" aria-hidden="true">
-        <div className="other-preview-frame">
-          <img key={preview.id} src={preview.image} alt="" />
-        </div>
-        <p className="other-preview-title">{preview.title}</p>
-      </div>
+      <motion.ul className="other-grid" layout={!reduceMotion}>
+        <AnimatePresence initial={false}>
+          {visible.map(({ work, group }) => (
+            <motion.li
+              key={work.id}
+              className="other-card"
+              layout={!reduceMotion}
+              initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.2 }}
+              onClick={() => onOpen(work)}
+            >
+              <div className="other-thumb">
+                <img src={work.image} alt="" loading="lazy" />
+                <span className="other-group-tag">{group}</span>
+              </div>
+              <div className="other-body">
+                <button
+                  className="other-title"
+                  onClick={(e) => { e.stopPropagation(); onOpen(work); }}
+                >
+                  {work.title}
+                </button>
+                {work.achievement && <p className="other-achievement">{work.achievement}</p>}
+                <p className="other-meta">{work.category} ・ {work.duration}</p>
+                <p className="other-desc">{work.description}</p>
+                <div className="work-links" onClick={(e) => e.stopPropagation()}>
+                  <WorkLinks links={work.links} variant="card" />
+                </div>
+              </div>
+            </motion.li>
+          ))}
+        </AnimatePresence>
+      </motion.ul>
     </div>
   );
 };
@@ -296,15 +277,7 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
       <div className="container">
         <h2 className="section-title">Works</h2>
 
-        <div className="featured-list">
-          {featuredWorks.map((work) => (
-            <FeaturedWork key={work.id} work={work} onOpen={() => setSelectedWork(work)} />
-          ))}
-        </div>
-
-        <h3 className="works-subheading">そのほかの制作</h3>
-
-        <OtherWorks onOpen={setSelectedWork} />
+        <WorkGrid onOpen={setSelectedWork} />
 
         <AnimatePresence>
           {selectedWork && (
