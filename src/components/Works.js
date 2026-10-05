@@ -5,6 +5,7 @@ import { SiNintendoswitch } from 'react-icons/si';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 import { fadeUpVariants, staggerContainer } from '../constants/animations';
 import { worksData } from '../constants/works';
+import FeaturedImage from './FeaturedImage';
 import './Works.css';
 
 const nl = (text) => text.split('\n').map((line, i, arr) => (
@@ -181,9 +182,7 @@ const splitLines = (text) => text.split('\n').map((s) => s.trim()).filter(Boolea
 
 const FeaturedWork = ({ work, onOpen }) => (
   <article className="featured-work">
-    <button className="featured-image" onClick={onOpen} aria-label={`${work.title}の詳細を見る`}>
-      <img src={work.image} alt="" />
-    </button>
+    <FeaturedImage work={work} onOpen={onOpen} />
 
     <div className="featured-body">
       {work.achievement && <p className="featured-achievement">{work.achievement}</p>}

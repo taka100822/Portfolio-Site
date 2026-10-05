@@ -6,6 +6,12 @@ export const worksData = [
     title: 'DreamMayday',
     featured: true,
     achievement: 'BitSummit Gamejam 2025 総合グランプリ',
+    // 代表画像上の注釈。x, y は指す点、lx, ly は線の終点（画像に対する %）。
+    // ラベルは終点から点と反対向きに伸びる
+    annotations: [
+      { x: 82, y: 31, lx: 70, ly: 10, label: 'マルチディスプレイ制御を実装' },
+      { x: 30, y: 58, lx: 38, ly: 88, label: '10人チームの企画・進行管理' },
+    ],
     category: 'Communication',
     duration: '3 months',
     technology: ['Unity', 'C#'],
@@ -30,6 +36,10 @@ export const worksData = [
     title: 'CRASH REPORT',
     featured: true,
     achievement: '学生ゲーム制作団体「TOMSN」第1弾',
+    annotations: [
+      { x: 55, y: 34, lx: 72, ly: 12, label: '敵の実装' },
+      { x: 80, y: 58, lx: 62, ly: 80, label: 'ステージ制作' },
+    ],
     category: '3D Action',
     duration: '3 months',
     technology: ['Unity', 'C#', 'Blender'],
@@ -73,6 +83,10 @@ export const worksData = [
     title: 'POGO・Stadium',
     featured: true,
     achievement: 'Steam / Nintendo Switch で発売',
+    annotations: [
+      { x: 50, y: 55, lx: 74, ly: 46, label: 'ステージ制作' },
+      { x: 50, y: 88, lx: 58, ly: 94, label: 'ブロック落下演出を実装' },
+    ],
     category: 'Action & Strategy',
     duration: '10 months',
     technology: ['Unity', 'C#', 'Tiled'],

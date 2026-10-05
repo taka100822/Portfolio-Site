@@ -1,10 +1,9 @@
 // 画像の輪郭を Sobel フィルタで抽出し、青い線画として canvas に描く。
 // クロスオリジン画像などで getImageData が使えない場合は例外を投げる。
-const WIDTH = 360;
-const HEIGHT = Math.round((WIDTH * 9) / 16);
 const THRESHOLD = 0.12;
 
-export const drawLineArt = (img, canvas) => {
+export const drawLineArt = (img, canvas, WIDTH = 360) => {
+  const HEIGHT = Math.round((WIDTH * 9) / 16);
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
   const ctx = canvas.getContext('2d');

@@ -28,15 +28,7 @@
   cursor: pointer;
 }
 
-.featured-image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.2s;
-}
-
-.featured-image:hover img {
+.featured-image:hover .featured-photo {
   opacity: 0.85;
 }
 
@@ -50,6 +42,7 @@
   border-color: var(--highlight);
   border-style: solid;
   pointer-events: none;
+  z-index: 1;
 }
 
 .featured-image::before { top: -7px; left: -7px; border-width: 1px 0 0 1px; }
@@ -818,5 +811,115 @@
 @media (min-width: 1600px) {
   .works-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ── 代表作画像：線画 → 実画像 と注釈線 ── */
+.featured-image {
+  overflow: visible;
+}
+
+.featured-lineart,
+.featured-photo {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.featured-lineart-fallback {
+  filter: grayscale(1) contrast(2.2) brightness(0.55) sepia(1) hue-rotate(180deg) saturate(3);
+  opacity: 0.7;
+}
+
+/* 左から塗るように実画像へ */
+.featured-photo {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.4s, opacity 0.2s;
+}
+
+.featured-image.is-drawn .featured-photo {
+  clip-path: inset(0 0 0 0);
+}
+
+.annotation-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.annotation-lines line {
+  stroke: var(--highlight);
+  stroke-width: 1.5;
+  /* non-scaling-stroke なので画面上の px。線の長さより十分長く取る */
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  transition: stroke-dashoffset 0.5s ease-out;
+  transition-delay: calc(1.4s + var(--i) * 0.25s);
+}
+
+.featured-image.is-drawn .annotation-lines line {
+  stroke-dashoffset: 0;
+}
+
+.annotation-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border: 2px solid var(--highlight);
+  border-radius: 50%;
+  background: var(--black);
+  transform: scale(0);
+  transition: transform 0.25s ease-out;
+  transition-delay: calc(1.3s + var(--i) * 0.25s);
+  pointer-events: none;
+}
+
+.featured-image.is-drawn .annotation-dot {
+  transform: scale(1);
+}
+
+.annotation-label {
+  position: absolute;
+  padding: 2px 8px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--paper);
+  white-space: nowrap;
+  background: rgba(3, 6, 12, 0.85);
+  border: 1px solid var(--highlight);
+  opacity: 0;
+  transition: opacity 0.3s;
+  transition-delay: calc(1.8s + var(--i) * 0.25s);
+  pointer-events: none;
+}
+
+.annotation-label.is-right { transform: translate(0, -50%); }
+.annotation-label.is-left { transform: translate(-100%, -50%); }
+
+.featured-image.is-drawn .annotation-label {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .annotation-label {
+    padding: 1px 6px;
+    font-size: 0.6875rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-photo,
+  .annotation-lines line,
+  .annotation-dot,
+  .annotation-label {
+    transition: none;
   }
 }
