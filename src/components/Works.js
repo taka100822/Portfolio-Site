@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaExternalLinkAlt, FaGithub, FaGamepad, FaPenFancy, FaSteam, FaGlobe, FaYoutube, FaDesktop, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { SiNintendoswitch } from 'react-icons/si';
@@ -269,6 +269,21 @@ const OtherWorks = ({ onOpen }) => {
 };
 
 const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
+  const closeRef = useRef(null);
+
+  // 開いたら閉じるボタンにフォーカスし、Esc で閉じる。閉じたら元の場所へフォーカスを戻す
+  useEffect(() => {
+    if (!selectedWork) return undefined;
+    const opener = document.activeElement;
+    closeRef.current?.focus();
+    const onKey = (e) => { if (e.key === 'Escape') setSelectedWork(null); };
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      if (opener && opener.focus) opener.focus({ preventScroll: true });
+    };
+  }, [selectedWork, setSelectedWork]);
+
   return (
     <section id="works" className="section works-section">
       <div className="container">
@@ -295,12 +310,22 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
             >
               <motion.div
                 className="modal-content"
+                role="dialog"
+                aria-modal="true"
+                aria-label={selectedWork.title}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                <button className="modal-close" onClick={() => setSelectedWork(null)}>×</button>
+                <button
+                  ref={closeRef}
+                  className="modal-close"
+                  aria-label="閉じる"
+                  onClick={() => setSelectedWork(null)}
+                >
+                  ×
+                </button>
 
                 <ModalGallery work={selectedWork} />
 
