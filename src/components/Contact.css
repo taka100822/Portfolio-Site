@@ -1,60 +1,118 @@
-.contact-main {
+/* 左に案内文、右に連絡先カード */
+.contact-body {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 3rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 2.5rem 4rem;
   align-items: center;
 }
 
 .contact-lead {
-  max-width: 34em;
   color: rgba(230, 236, 245, 0.85);
 }
 
-.contact-x {
-  display: flex;
+/* ── 連絡先カード ── */
+.contact-link {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 1.5rem;
   align-items: center;
-  gap: 1rem;
-  padding: 1.25rem 2rem 1.25rem 1.5rem;
-  color: #fff;
+  padding: 1.5rem 1.75rem 1.5rem 1.5rem;
+  color: var(--paper);
   text-decoration: none;
-  background: var(--signal);
-  border: 1px solid var(--signal);
-  transition: background 0.15s, transform 0.1s;
+  border: 1px solid var(--line);
+  transition: border-color 0.3s, background 0.3s;
 }
 
-.contact-x:hover {
-  background: #2f6fdc;
+.contact-link:hover,
+.contact-link:focus-visible {
+  border-color: var(--signal);
+  background: rgba(59, 130, 246, 0.06);
 }
 
-.contact-x:active {
-  transform: translateY(2px);
+.contact-link-logo {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  font-size: 2rem;
+  color: var(--paper);
+  border: 1px solid var(--line);
+  transition: color 0.3s, background 0.3s, border-color 0.3s;
 }
 
-.contact-x-icon {
-  width: 28px;
-  height: 28px;
+/* ホバーでロゴの枠が白く反転する */
+.contact-link:hover .contact-link-logo,
+.contact-link:focus-visible .contact-link-logo {
+  color: var(--black);
+  background: var(--paper);
+  border-color: var(--paper);
 }
 
-.contact-x-label {
-  display: block;
-  font-size: var(--text-20);
-  font-weight: 700;
-  line-height: 1.4;
+.contact-link-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 0;
 }
 
-.contact-x-handle {
-  display: block;
+.contact-link-label {
   font-size: var(--text-14);
-  opacity: 0.85;
+  letter-spacing: 0.04em;
+  color: var(--pencil);
 }
 
-@media (max-width: 900px) {
-  .contact-main {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+.contact-link-handle {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.6vw, 2rem);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.contact-link-arrow {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--pencil);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s;
+}
+
+.contact-link:hover .contact-link-arrow,
+.contact-link:focus-visible .contact-link-arrow {
+  color: var(--signal);
+  transform: translate(3px, -3px);
+}
+
+@media (max-width: 1100px) {
+  .contact-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-link {
+    gap: 1rem;
+    padding: 1rem;
   }
 
-  .contact-x {
-    justify-self: start;
+  .contact-link-logo {
+    width: 3.25rem;
+    height: 3.25rem;
+    font-size: 1.5rem;
+  }
+
+  .contact-link-label {
+    font-size: 0.75rem;
+  }
+
+  .contact-link-arrow {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-link,
+  .contact-link-logo,
+  .contact-link-arrow {
+    transition: none;
   }
 }
