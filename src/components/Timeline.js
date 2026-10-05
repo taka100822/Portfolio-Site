@@ -1,16 +1,20 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { FaTrophy } from 'react-icons/fa';
 import { timelineByYear, getTypeLabel } from '../constants/timeline';
 import './Timeline.css';
 
 const TOAST_MS = 3200;
+const ACHIEVE_DWELL_MS = 500;
 
 const TimelineItem = ({ item, onAchieve }) => {
-  const [ref, inView] = useInView({ threshold: 0.6, triggerOnce: true });
+  const [ref, inView] = useInView({ threshold: 0.6, skip: !item.achievement });
 
+  // ナビでの移動などで通り過ぎただけでは出さず、しばらく画面に留まったら出す
   useEffect(() => {
-    if (inView && item.achievement) onAchieve(item.achievement);
+    if (!inView || !item.achievement) return undefined;
+    const timer = setTimeout(() => onAchieve(item.achievement), ACHIEVE_DWELL_MS);
+    return () => clearTimeout(timer);
   }, [inView, item.achievement, onAchieve]);
 
   return (
@@ -60,9 +64,13 @@ const AchievementToast = ({ queue, onDone }) => {
 
 const Timeline = () => {
   const [queue, setQueue] = useState([]);
+  const unlockedRef = useRef(new Set());
 
+  // 実績は1つにつき1回だけ
   const handleAchieve = useCallback((text) => {
-    setQueue((q) => (q.includes(text) ? q : [...q, text]));
+    if (unlockedRef.current.has(text)) return;
+    unlockedRef.current.add(text);
+    setQueue((q) => [...q, text]);
   }, []);
 
   const handleDone = useCallback(() => setQueue((q) => q.slice(1)), []);

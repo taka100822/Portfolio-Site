@@ -4,7 +4,6 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Works from './components/Works';
 import Timeline from './components/Timeline';
-import Links from './components/Links';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import './App.css';
@@ -21,7 +20,6 @@ function App() {
         <Works selectedWork={selectedWork} onSelectWork={setSelectedWork} />
         <About />
         <Timeline />
-        <Links />
         <Contact />
       </main>
       <Footer />

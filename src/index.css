@@ -44,6 +44,8 @@ code {
 
 html {
   scroll-behavior: smooth;
+  /* 固定ヘッダーの下に見出しが隠れないように */
+  scroll-padding-top: 72px;
 }
 
 h1, h2 {
