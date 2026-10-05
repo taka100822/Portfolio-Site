@@ -48,4 +48,4 @@ Works セクションでは `LINK_CONFIG` オブジェクトで各リンクの�
 
 ## ページ構成
 
-`Hero` → `About` → `Works` → `Skills` → `Timeline` → `Links` → `Contact`
+`Hero` → `Works` → `About` → `Skills` → `Timeline` → `Links` → `Contact`

@@ -37,9 +37,9 @@ const Footer = () => {
             <div className="link-group">
               <h4>Navigation</h4>
               <ul>
+                <li><a href="#works">Works</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
-                <li><a href="#works">Works</a></li>
                 <li><a href="#timeline">Timeline</a></li>
               </ul>
             </div>
