@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { FaExternalLinkAlt, FaGithub, FaGamepad, FaPenFancy, FaSteam, FaGlobe, FaYoutube, FaDesktop, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { SiNintendoswitch } from 'react-icons/si';
 import { worksData, workGroups } from '../constants/works';
@@ -22,16 +22,15 @@ const LINK_CONFIG = {
   pdf:       { icon: <FaExternalLinkAlt />, cardLabel: 'PDF',       modalLabel: 'PDFを見る' },
 };
 
-const BLUE_KEYS   = ['note'];
-const ORANGE_KEYS = ['itch', 'unityroom', 'steam', 'nintendo'];
+// 遊べる・買えるリンクは目立たせる
+const PLAY_KEYS = ['itch', 'unityroom', 'steam', 'nintendo'];
 
 const WorkLinks = ({ links, variant = 'card' }) => (
   <>
     {Object.entries(LINK_CONFIG).map(([key, { icon, cardLabel, modalLabel }]) => {
       if (!links[key]) return null;
-      const cls = variant === 'modal'
-        ? (BLUE_KEYS.includes(key) ? 'btn-primary' : ORANGE_KEYS.includes(key) ? 'btn-white' : 'btn-secondary')
-        : 'work-link';
+      const base = variant === 'modal' ? 'modal-link' : 'work-link';
+      const cls = PLAY_KEYS.includes(key) ? `${base} is-play` : base;
       const label = variant === 'modal' ? modalLabel : cardLabel;
       return (
         <a key={key} href={links[key]} target="_blank" rel="noopener noreferrer" className={cls} data-key={key}>
@@ -133,6 +132,7 @@ const ModalGallery = ({ work }) => {
           <>
             <button
               className="gallery-arrow gallery-prev"
+              aria-label="前へ"
               onClick={() => setIndex(i => Math.max(0, i - 1))}
               disabled={index === 0}
             >
@@ -140,6 +140,7 @@ const ModalGallery = ({ work }) => {
             </button>
             <button
               className="gallery-arrow gallery-next"
+              aria-label="次へ"
               onClick={() => setIndex(i => Math.min(items.length - 1, i + 1))}
               disabled={index === items.length - 1}
             >
@@ -155,6 +156,7 @@ const ModalGallery = ({ work }) => {
             <button
               key={i}
               className={`gallery-thumb ${i === index ? 'active' : ''}`}
+              aria-label={item.type === 'youtube' ? '動画' : `画像 ${i + 1}`}
               onClick={() => setIndex(i)}
             >
               {item.type === 'youtube' ? (
@@ -270,6 +272,7 @@ const OtherWorks = ({ onOpen }) => {
 
 const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
   const closeRef = useRef(null);
+  const reduceMotion = useReducedMotion();
 
   // 開いたら閉じるボタンにフォーカスし、Esc で閉じる。閉じたら元の場所へフォーカスを戻す
   useEffect(() => {
@@ -278,8 +281,12 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
     closeRef.current?.focus();
     const onKey = (e) => { if (e.key === 'Escape') setSelectedWork(null); };
     document.addEventListener('keydown', onKey);
+    // 開いている間は背面のページをスクロールさせない
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     return () => {
       document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
       if (opener && opener.focus) opener.focus({ preventScroll: true });
     };
   }, [selectedWork, setSelectedWork]);
@@ -306,6 +313,7 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.2 }}
               onClick={() => setSelectedWork(null)}
             >
               <motion.div
@@ -313,70 +321,74 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
                 role="dialog"
                 aria-modal="true"
                 aria-label={selectedWork.title}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
+                initial={reduceMotion ? false : { x: '100%' }}
+                animate={{ x: 0 }}
+                exit={reduceMotion ? { opacity: 0 } : { x: '100%' }}
+                transition={{ duration: reduceMotion ? 0 : 0.3, ease: [0.2, 0.8, 0.2, 1] }}
                 onClick={(e) => e.stopPropagation()}
               >
-                <button
-                  ref={closeRef}
-                  className="modal-close"
-                  aria-label="閉じる"
-                  onClick={() => setSelectedWork(null)}
-                >
-                  ×
-                </button>
+                <div className="modal-bar">
+                  <span className="modal-bar-category">{selectedWork.category}</span>
+                  <button
+                    ref={closeRef}
+                    className="modal-close"
+                    aria-label="閉じる"
+                    onClick={() => setSelectedWork(null)}
+                  >
+                    ×
+                  </button>
+                </div>
 
                 <ModalGallery work={selectedWork} />
 
                 <div className="modal-info">
+                  {selectedWork.achievement && (
+                    <p className="modal-achievement">{selectedWork.achievement}</p>
+                  )}
                   <h3 className="modal-title">{selectedWork.title}</h3>
-                  <div className="modal-meta">
-                    <span className="modal-category">{selectedWork.category}</span>
-                    <span className="modal-duration">{selectedWork.duration}</span>
+                  <p className="modal-duration">制作期間：{selectedWork.duration}</p>
+
+                  {selectedWork.detailedDescription.overview && (
+                    <p className="modal-lead">{nl(selectedWork.detailedDescription.overview)}</p>
+                  )}
+
+                  <div className="modal-links">
+                    <WorkLinks links={selectedWork.links} variant="modal" />
                   </div>
 
-                  <div className="modal-divider" />
-                  <div className="modal-detailed-description">
-                    {selectedWork.detailedDescription.overview && (
-                      <p className="modal-desc-intro">{nl(selectedWork.detailedDescription.overview)}</p>
-                    )}
-                    {selectedWork.detailedDescription.content && (
-                      <div className="modal-desc-section">
-                        <span className="modal-desc-label">内容</span>
-                        <p>{nl(selectedWork.detailedDescription.content)}</p>
-                      </div>
-                    )}
-                    {selectedWork.detailedDescription.role && (
-                      <div className="modal-desc-section">
-                        <span className="modal-desc-label">担当箇所</span>
-                        <ul className="modal-desc-role">
-                          {selectedWork.detailedDescription.role.split('\n').map((item, i) => (
-                            <li key={i}>{item}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
+                  {selectedWork.detailedDescription.content && (
+                    <section className="modal-section">
+                      <h4>内容</h4>
+                      <p>{nl(selectedWork.detailedDescription.content)}</p>
+                    </section>
+                  )}
 
-                  <div className="modal-divider" />
-                  <div className="modal-features">
+                  {selectedWork.detailedDescription.role && (
+                    <section className="modal-section">
+                      <h4>担当</h4>
+                      <ul className="modal-role">
+                        {splitLines(selectedWork.detailedDescription.role).map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </section>
+                  )}
+
+                  <section className="modal-section">
                     <h4>使用技術</h4>
-                    <div className="work-tech" style={{marginBottom: '0.75rem'}}>
+                    <div className="work-tech">
                       {selectedWork.technology.map((t) => (
                         <span key={t} className="tech-tag">{t}</span>
                       ))}
                     </div>
-                    <h4>特徴 / キーワード</h4>
-                    <ul>
+                  </section>
+
+                  <section className="modal-section">
+                    <h4>キーワード</h4>
+                    <ul className="modal-keywords">
                       {selectedWork.features.map((f) => <li key={f}>{f}</li>)}
                     </ul>
-                  </div>
-
-                  <div className="modal-divider" />
-                  <div className="modal-links">
-                    <WorkLinks links={selectedWork.links} variant="modal" />
-                  </div>
+                  </section>
                 </div>
               </motion.div>
             </motion.div>
