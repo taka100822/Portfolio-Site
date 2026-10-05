@@ -203,14 +203,14 @@ export const worksData = [
   },
   {
     id: 11,
-    title: '未定（開発中）',
+    title: 'フリージア',
     category: 'Adventure',
     duration: 'under development',
     technology: ['Unity', 'C#', 'Blender', 'CLIP STUDIO PAINT'],
     description: '自身で設立した学生ゲーム制作団体「TOMSN」で制作中の第2弾のゲーム',
     detailedDescription: {
       overview: '未知の言語が書かれたノートを解読することで、物語を進めるアドベンチャーゲーム',
-      content: '鋭意制作中のアドベンチャーゲーム（2026年7月現在）',
+      content: '鋭意制作中のアドベンチャーゲーム（2026年10月現在）',
       role: '企画立案 \n仕様書作成 \nマネジメント（タスク割り当てやスケジュール調整）\nシナリオ',
     },
     features: ['チーム開発', 'アジャイル開発', '第2弾'],
@@ -220,7 +220,7 @@ export const worksData = [
   },
   {
     id: 12,
-    title: '修士修了研究用ゲーム（開発中）',
+    title: '研究用ゲーム（開発中）',
     category: '3D RPG',
     duration: 'under development',
     technology: ['Unity', 'C#'],

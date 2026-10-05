@@ -76,14 +76,14 @@ export const timelineData = [
     details: ['Latex', 'スライド発表', '論文執筆'],
     noteLink: 'https://note.com/Taka10822/n/nfbef8b80eae1',
   },
-  {
-    year: '2025', month: '06',
-    title: 'ポートフォリオサイト制作',
-    description: 'これまでの経験と制作物を整理し、本ポートフォリオサイトを制作しました。',
-    icon: FaGlobe,
-    type: 'project',
-    details: ['Claude Code', 'JavaScript', 'React'],
-  },
+  // {
+  //   year: '2025', month: '06',
+  //   title: 'ポートフォリオサイト制作',
+  //   description: 'これまでの経験と制作物を整理し、本ポートフォリオサイトを制作しました。',
+  //   icon: FaGlobe,
+  //   type: 'project',
+  //   details: ['Claude Code', 'JavaScript', 'React'],
+  // },
   {
     year: '2025', month: '06',
     title: 'TOMSN第1弾「CRASH REPORT」をリリース',
@@ -145,14 +145,22 @@ export const timelineData = [
     type: 'project',
     details: ['チーム開発', 'unity', 'C#', 'Gamejam'],
   },
-    // {
-  //   year: '2026', month: '05',
-  //   title: 'TOMSN第2弾を制作中',
-  //   description: '私が設立した学生ゲーム制作団体「TOMSN」にて第2弾のゲームを制作中です。',
-  //   icon: FaGamepad,
-  //   type: 'project',
-  //   details: ['Unity', 'C#', 'Blender'],
-  // },
+  {
+    year: '2026', month: '08',
+    title: '「関西PLATEAU学生アイデアソン」にてオーディエンス賞を受賞',
+    description: '「関西PLATEAU学生アイデアソン2026 in 京都」に参加し、聖地巡礼用SNS『mikata』を企画し、オーディエンス賞を受賞しました。',
+    icon: FaGamepad,
+    type: 'project',
+    details: ['Ideathon', '3DCG', '社会課題解決'],
+  },
+    {
+    year: '2026', month: '10',
+    title: 'TOMSN第2弾として言語解読ADV「フリージア」を制作中',
+    description: '私が設立した学生ゲーム制作団体「TOMSN」にて第2弾のゲームを制作中です。',
+    icon: FaGamepad,
+    type: 'project',
+    details: ['Unity', 'C#', 'Blender', 'GC甲子園2026'],
+  },
 ];
 
 export const TYPE_COLOR = {
