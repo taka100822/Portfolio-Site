@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaExternalLinkAlt, FaGithub, FaGamepad, FaPenFancy, FaSteam, FaGlobe, FaYoutube, FaDesktop, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { SiNintendoswitch } from 'react-icons/si';
-import useScrollAnimation from '../hooks/useScrollAnimation';
-import { fadeUpVariants, staggerContainer } from '../constants/animations';
-import { worksData } from '../constants/works';
+import { worksData, workGroups } from '../constants/works';
 import FeaturedImage from './FeaturedImage';
 import './Works.css';
 
@@ -211,13 +209,68 @@ const FeaturedWork = ({ work, onOpen }) => (
 );
 
 const featuredWorks = worksData.filter((w) => w.featured);
-const otherWorks = worksData.filter((w) => !w.featured);
+const groupedWorks = workGroups.map((g) => ({
+  ...g,
+  works: g.ids.map((id) => worksData.find((w) => w.id === id)).filter(Boolean),
+}));
 
-const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
-  const [ref, inView] = useScrollAnimation();
+// 代表作以外を分類ごとの一覧で。PC では右側に、ホバー中の作品の画像を出す
+const OtherWorks = ({ onOpen }) => {
+  const [preview, setPreview] = useState(groupedWorks[0].works[0]);
 
   return (
-    <section id="works" className="section works-section" ref={ref}>
+    <div className="other-works">
+      <div className="other-list">
+        {groupedWorks.map((group) => (
+          <section key={group.label} className="other-group">
+            <h4 className="other-group-label">{group.label}</h4>
+            <ul>
+              {group.works.map((work) => (
+                <li
+                  key={work.id}
+                  className={`other-row ${preview.id === work.id ? 'is-active' : ''}`}
+                  onMouseEnter={() => setPreview(work)}
+                  onClick={() => onOpen(work)}
+                >
+                  <img className="other-thumb" src={work.image} alt="" loading="lazy" />
+                  <div className="other-main">
+                    <button
+                      className="other-title"
+                      onFocus={() => setPreview(work)}
+                      onClick={(e) => { e.stopPropagation(); onOpen(work); }}
+                    >
+                      {work.title}
+                    </button>
+                    <p className="other-desc">{work.description}</p>
+                  </div>
+                  <span className="other-meta">
+                    {work.category}
+                    <br />
+                    {work.duration}
+                  </span>
+                  <div className="work-links" onClick={(e) => e.stopPropagation()}>
+                    <WorkLinks links={work.links} variant="card" />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+
+      <div className="other-preview" aria-hidden="true">
+        <div className="other-preview-frame">
+          <img key={preview.id} src={preview.image} alt="" />
+        </div>
+        <p className="other-preview-title">{preview.title}</p>
+      </div>
+    </div>
+  );
+};
+
+const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
+  return (
+    <section id="works" className="section works-section">
       <div className="container">
         <h2 className="section-title">Works</h2>
 
@@ -229,45 +282,7 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
 
         <h3 className="works-subheading">そのほかの制作</h3>
 
-        <motion.div
-          className="works-grid"
-          variants={staggerContainer(0.2)}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-        >
-          {otherWorks.map((work) => (
-            <motion.div
-              key={work.id}
-              className="work-card"
-              variants={fadeUpVariants}
-              onClick={() => setSelectedWork(work)}
-            >
-              <div className="work-image">
-                <img src={work.image} alt={work.title} />
-                <div className="work-overlay">
-                  <button className="view-details">詳細を見る</button>
-                </div>
-              </div>
-
-              <div className="work-content">
-                <div className="work-meta">
-                  <span className="work-category">{work.category}</span>
-                  <span className="work-duration">{work.duration}</span>
-                </div>
-                <h3 className="work-title">{work.title}</h3>
-                <p className="work-description">{work.description}</p>
-                <div className="work-tech">
-                  {work.technology.map((tech) => (
-                    <span key={tech} className="tech-tag">{tech}</span>
-                  ))}
-                </div>
-                <div className="work-links">
-                  <WorkLinks links={work.links} variant="card" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+        <OtherWorks onOpen={setSelectedWork} />
 
         <AnimatePresence>
           {selectedWork && (

@@ -274,3 +274,13 @@ export const worksData = [
     },
   },
 ];
+
+// 「そのほかの制作」の分類（代表作以外）。並び順もこの通り
+export const workGroups = [
+  { label: '制作中', ids: [11, 12] },
+  { label: 'チーム開発', ids: [3] },
+  { label: 'ゲームジャム', ids: [5, 6, 7] },
+  { label: '研究', ids: [8] },
+  { label: '企画書', ids: [9] },
+  { label: 'システム開発', ids: [10, 13] },
+];
