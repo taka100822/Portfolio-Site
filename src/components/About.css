@@ -1,386 +1,144 @@
-.about-section {
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.about-content {
+.about-intro {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: stretch;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 4rem;
+  align-items: start;
 }
 
-/* ── Left: text ── */
+.about-photo {
+  position: sticky;
+  top: 120px;
+}
+
+.about-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid var(--line);
+}
+
+.about-photo figcaption {
+  margin-top: 0.5rem;
+  font-size: var(--text-14);
+  color: var(--pencil);
+}
+
 .about-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
+  max-width: 40em;
 }
 
-.text-block {
-  position: relative;
-  padding-left: 1.5rem;
-  border-left: 2px solid rgba(96, 165, 250, 0.25);
-  transition: border-color 0.3s ease;
+.about-block + .about-block {
+  margin-top: 2.5rem;
 }
 
-.text-block:hover {
-  border-left-color: rgba(96, 165, 250, 0.7);
-}
-
-.text-block-number {
-  font-size: 0.65rem;
-  font-weight: 800;
-  color: rgba(96, 165, 250, 0.5);
-  letter-spacing: 0.12em;
-  margin-bottom: 0.4rem;
-  text-transform: uppercase;
-}
-
-.text-block h3 {
-  font-size: 1.15rem;
-  font-weight: 700;
+.about-block h3 {
   margin-bottom: 0.75rem;
-  background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 60%, #3b82f6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1.3;
-}
-
-.text-block p {
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.85;
-  font-size: 0.9rem;
-}
-
-.text-block p strong {
-  color: rgba(255, 255, 255, 0.95);
+  font-size: var(--text-20);
   font-weight: 700;
 }
 
-/* ── Right: visual card ── */
-.about-visual {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
+.about-block p {
+  color: rgba(230, 236, 245, 0.85);
 }
 
-.passion-showcase {
-  width: 100%;
-  max-width: 380px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-  background: rgba(8, 10, 22, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1.75rem;
-  padding: 2rem 1.75rem;
-  position: relative;
-  overflow: hidden;
-  justify-content: space-between;
-  backdrop-filter: blur(12px);
-  box-sizing: border-box;
-}
-
-.passion-showcase::before {
-  content: '';
-  position: absolute;
-  top: -70px;
-  right: -70px;
-  width: 220px;
-  height: 220px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.16) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.passion-showcase::after {
-  content: '';
-  position: absolute;
-  bottom: -60px;
-  left: -60px;
-  width: 180px;
-  height: 180px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-/* Profile image */
-.profile-image-container {
-  display: flex;
-  justify-content: center;
-  padding: 3px;
-  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
-  border-radius: 50%;
-  width: fit-content;
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.25), 0 12px 32px rgba(0,0,0,0.4);
-  transition: all 0.3s ease;
-}
-
-.profile-image-container:hover {
-  box-shadow: 0 0 32px rgba(59, 130, 246, 0.4), 0 16px 40px rgba(0,0,0,0.5);
-  transform: scale(1.03);
-}
-
-.profile-image {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #080a16;
-  display: block;
-}
-
-/* Main card */
-.passion-card {
-  position: relative;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 1.25rem;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.main-card {
-  width: 100%;
-  height: 90px;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(255,255,255,0.04) 100%);
-  border-left: 3px solid rgba(96, 165, 250, 0.55);
-}
-
-.main-card:hover {
-  transform: rotateY(4deg) rotateX(3deg);
-  box-shadow: 0 16px 36px rgba(96, 165, 250, 0.18);
-  border-color: rgba(96, 165, 250, 0.4);
-  border-left-color: #60a5fa;
-}
-
-.card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1rem 1.5rem;
-  z-index: 2;
-}
-
-.card-icon {
-  font-size: 2rem;
-  filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.4));
-  flex-shrink: 0;
-}
-
-.card-inner h4 {
-  font-size: 1rem;
+.about-block strong {
   font-weight: 700;
-  color: #ffffff;
+  color: var(--highlight);
 }
 
-.card-inner p {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.8rem;
-  margin-top: 0.15rem;
+.about-subheading {
+  margin-bottom: 1.5rem;
+  font-family: var(--font-display);
+  font-size: var(--text-28);
+  font-weight: 400;
 }
 
-.card-glow {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 30% 50%, rgba(96, 165, 250, 0.08) 0%, transparent 70%);
-  z-index: 1;
+/* できること */
+.about-skills {
+  margin-top: 6rem;
 }
 
-/* Mini cards */
-.mini-cards {
-  display: flex;
-  gap: 0.75rem;
-  justify-content: center;
-  width: 100%;
+.skill-rows {
+  border-top: 1px solid var(--line);
 }
 
-.mini-card {
-  flex: 1;
-  height: 72px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0.6rem;
-  border-radius: 1rem;
-  transition: all 0.3s ease;
-}
-
-.mini-cards .mini-card:nth-child(1) {
-  background: rgba(251, 191, 36, 0.06);
-  border-color: rgba(251, 191, 36, 0.15);
-}
-.mini-cards .mini-card:nth-child(2) {
-  background: rgba(6, 182, 212, 0.06);
-  border-color: rgba(6, 182, 212, 0.15);
-}
-.mini-cards .mini-card:nth-child(3) {
-  background: rgba(244, 114, 182, 0.06);
-  border-color: rgba(244, 114, 182, 0.15);
-}
-
-.mini-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-}
-.mini-cards .mini-card:nth-child(1):hover { background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.3); }
-.mini-cards .mini-card:nth-child(2):hover { background: rgba(6, 182, 212, 0.12);  border-color: rgba(6, 182, 212, 0.3);  }
-.mini-cards .mini-card:nth-child(3):hover { background: rgba(244, 114, 182, 0.12); border-color: rgba(244, 114, 182, 0.3); }
-
-.mini-icon {
-  font-size: 1.4rem;
-  margin-bottom: 0.35rem;
-}
-
-.mini-card span {
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 600;
-}
-
-/* Stats */
-.stats-grid {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  width: 100%;
-}
-
-.stat-item {
-  flex: 1;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-top: 1px solid rgba(96, 165, 250, 0.2);
-  border-radius: 1rem;
-  padding: 0.75rem 0.5rem;
-  transition: all 0.3s ease;
-}
-
-.stat-item:hover {
-  background: rgba(59, 130, 246, 0.06);
-  border-color: rgba(96, 165, 250, 0.2);
-  border-top-color: rgba(96, 165, 250, 0.45);
-}
-
-.stat-number {
-  display: block;
-  font-size: 1.8rem;
-  font-weight: 900;
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.stat-label {
-  display: block;
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin-top: 0.2rem;
-}
-
-/* Hobby photos */
-.hobby-photos {
-  width: 100%;
-}
-
-.hobby-photos-label {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.4);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
-  text-align: center;
-}
-
-.hobby-photos-grid {
+.skill-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.6rem;
+  grid-template-columns: 10rem minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
 }
 
-.hobby-photo-item {
+.skill-row dt {
+  font-size: var(--text-20);
+  font-weight: 700;
+}
+
+.skill-row ul {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
 }
 
-.hobby-photo-frame {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 0.75rem;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.04);
-  transition: all 0.3s ease;
+.skill-row li {
+  padding: 2px 12px;
+  font-size: var(--text-14);
+  color: var(--paper);
+  border: 1px solid rgba(59, 130, 246, 0.45);
 }
 
-.hobby-photo-frame:hover {
-  border-color: rgba(96, 165, 250, 0.35);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-  transform: translateY(-3px);
+/* 趣味 */
+.about-hobbies {
+  margin-top: 6rem;
 }
 
-.hobby-photo-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.hobby-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  list-style: none;
+}
+
+.hobby-list img {
   display: block;
-}
-
-.hobby-photo-placeholder {
   width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, rgba(96, 165, 250, 0.08) 0%, rgba(59, 130, 246, 0.04) 100%);
-  font-size: 1.6rem;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid var(--line);
 }
 
-.hobby-photo-label {
-  font-size: 0.65rem;
-  color: rgba(255, 255, 255, 0.55);
-  font-weight: 600;
-  text-align: center;
+.hobby-list span {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: var(--text-14);
+  color: var(--pencil);
 }
 
-/* ── Responsive ── */
 @media (max-width: 768px) {
-  .about-content {
+  .about-intro {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
   }
 
-  .passion-showcase {
-    max-width: 100%;
-    padding: 1.5rem 1.25rem;
-    gap: 1rem;
+  .about-photo {
+    position: static;
+    max-width: 220px;
   }
 
-  .profile-image {
-    width: 110px;
-    height: 110px;
+  .about-skills,
+  .about-hobbies {
+    margin-top: 4rem;
   }
 
-  .main-card {
-    height: 80px;
+  .skill-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
-  .stat-number {
-    font-size: 1.5rem;
+  .hobby-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

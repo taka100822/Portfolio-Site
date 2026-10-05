@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
-import Skills from './components/Skills';
 import Works from './components/Works';
 import Timeline from './components/Timeline';
 import Links from './components/Links';
@@ -21,7 +20,6 @@ function App() {
         <Hero onSelectWork={setSelectedWork} />
         <Works selectedWork={selectedWork} onSelectWork={setSelectedWork} />
         <About />
-        <Skills />
         <Timeline />
         <Links />
         <Contact />
