@@ -89,3 +89,12 @@ h1, h2 {
   white-space: nowrap;
   border: 0;
 }
+
+/* 見出し以外の長い文章は、日本語なら文言中の改行（\n）の位置で改行する。
+   英語は改行せずに流し込む（About の renderText と同じ方針） */
+:lang(ja) .work-desc,
+:lang(ja) .timeline-description,
+:lang(ja) .timeline-chapter-summary,
+:lang(ja) .warp-text {
+  white-space: pre-line;
+}
