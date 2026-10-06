@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { FaExternalLinkAlt, FaGithub, FaGamepad, FaPenFancy, FaSteam, FaGlobe, FaYoutube, FaDesktop, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaGithub, FaGamepad, FaPenFancy, FaSteam, FaGlobe, FaYoutube, FaDesktop, FaChevronLeft, FaChevronRight, FaPlay } from 'react-icons/fa';
 import { SiNintendoswitch } from 'react-icons/si';
 import { worksData, workOrder } from '../constants/works';
 import { useLang } from '../i18n';
@@ -89,18 +89,39 @@ const ModalGallery = ({ work, expand, fade }) => {
   const youtubeId = getYouTubeId(work.links.Youtube);
   const { t } = useLang();
 
-  // items: youtube first (if exists), then images
+  // 動画があれば先頭に置き、そのあとに画像を並べる
+  const offset = youtubeId ? 1 : 0;
   const items = [
     ...(youtubeId ? [{ type: 'youtube', id: youtubeId }] : []),
     ...allImages.map(src => ({ type: 'image', src })),
   ];
 
-  // カードのサムネから広がって見えるよう、最初は動画より先にサムネと同じ画像を出す
-  const [index, setIndex] = useState(youtubeId ? 1 : 0);
-  useEffect(() => { setIndex(youtubeId ? 1 : 0); }, [work, youtubeId]);
+  // カードから開いたときはサムネと同じ画像のまま広がり、広がりきったら動画に切り替える。
+  // それまでに自分で画像を選んだら、切り替えない
+  const [index, setIndex] = useState(expand ? offset : 0);
+  const [playing, setPlaying] = useState(false); // 押すまで YouTube は読み込まない
+  const touched = useRef(false);
+  useEffect(() => {
+    touched.current = false;
+    setPlaying(false);
+    if (!expand || !youtubeId) {
+      setIndex(0);
+      return undefined;
+    }
+    setIndex(1);
+    const timer = setTimeout(() => { if (!touched.current) setIndex(0); }, 700);
+    return () => clearTimeout(timer);
+  }, [work, youtubeId, expand]);
+
+  const go = (next) => {
+    touched.current = true;
+    setPlaying(false);
+    setIndex(next);
+  };
 
   const hasMultiple = items.length > 1;
   const current = items[index] || items[0];
+  const imageLabel = (i) => `${t('画像')} ${i - offset + 1}`;
 
   return (
     <div className="modal-gallery">
@@ -118,12 +139,20 @@ const ModalGallery = ({ work, expand, fade }) => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <iframe
-                src={`https://www.youtube.com/embed/${current.id}`}
-                title="YouTube"
-                allowFullScreen
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              />
+              {playing ? (
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${current.id}?autoplay=1&rel=0`}
+                  title={`${t(work.title)} ${t('プレイ動画')}`}
+                  allowFullScreen
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                />
+              ) : (
+                <button className="gallery-poster" onClick={() => setPlaying(true)}>
+                  <img src={`https://img.youtube.com/vi/${current.id}/hqdefault.jpg`} alt="" />
+                  <span className="gallery-poster-play" aria-hidden="true"><FaPlay /></span>
+                  <span className="gallery-poster-label">{t('プレイ動画を再生')}</span>
+                </button>
+              )}
             </motion.div>
           ) : (
             <motion.img
@@ -142,7 +171,7 @@ const ModalGallery = ({ work, expand, fade }) => {
             <button
               className="gallery-arrow gallery-prev"
               aria-label={t('前へ')}
-              onClick={() => setIndex(i => Math.max(0, i - 1))}
+              onClick={() => go(Math.max(0, index - 1))}
               disabled={index === 0}
             >
               <FaChevronLeft />
@@ -150,12 +179,14 @@ const ModalGallery = ({ work, expand, fade }) => {
             <button
               className="gallery-arrow gallery-next"
               aria-label={t('次へ')}
-              onClick={() => setIndex(i => Math.min(items.length - 1, i + 1))}
+              onClick={() => go(Math.min(items.length - 1, index + 1))}
               disabled={index === items.length - 1}
             >
               <FaChevronRight />
             </button>
-            <div className="gallery-counter">{index + 1} / {items.length}</div>
+            <div className="gallery-counter">
+              {current.type === 'youtube' ? t('プレイ動画') : `${index - offset + 1} / ${allImages.length}`}
+            </div>
           </>
         )}
       </motion.div>
@@ -165,8 +196,8 @@ const ModalGallery = ({ work, expand, fade }) => {
             <button
               key={i}
               className={`gallery-thumb ${i === index ? 'active' : ''}`}
-              aria-label={item.type === 'youtube' ? t('動画') : `${t('画像')} ${i + 1}`}
-              onClick={() => setIndex(i)}
+              aria-label={item.type === 'youtube' ? t('プレイ動画') : imageLabel(i)}
+              onClick={() => go(i)}
             >
               {item.type === 'youtube' ? (
                 <div className="gallery-thumb-youtube">
@@ -177,7 +208,7 @@ const ModalGallery = ({ work, expand, fade }) => {
                   <div className="gallery-thumb-play">▶</div>
                 </div>
               ) : (
-                <img src={item.src} alt={`${t(work.title)} ${i + 1}`} />
+                <img src={item.src} alt={`${t(work.title)} ${imageLabel(i)}`} />
               )}
             </button>
           ))}
@@ -211,6 +242,12 @@ const WorkGrid = ({ onOpen, openId }) => {
             layoutId={reduceMotion ? undefined : `work-thumb-${work.id}`}
           >
             <img src={work.image} alt="" loading="lazy" />
+            {getYouTubeId(work.links.Youtube) && (
+              <span className="work-thumb-video">
+                <FaPlay aria-hidden="true" />
+                <span>{t('動画あり')}</span>
+              </span>
+            )}
             <span className="work-thumb-cta" aria-hidden="true">{t('詳しく見る')} →</span>
           </motion.div>
           <div className="work-body">
