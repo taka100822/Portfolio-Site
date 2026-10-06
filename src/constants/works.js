@@ -7,7 +7,7 @@ export const worksData = [
     featured: true,
     achievement: 'BitSummit Gamejam 2025 総合グランプリ',
     category: '2D Co-op',
-    duration: '3 months',
+    duration: '3か月',
     technology: ['Unity', 'C#'],
     description: 'BitSummit Gamejam 2025にて総合グランプリ\n（最優秀賞）を受賞した協力コミュニケーションゲーム',
     detailedDescription: {
@@ -31,7 +31,7 @@ export const worksData = [
     featured: true,
     achievement: '学生ゲーム制作団体「TOMSN」第1弾',
     category: '3D Action',
-    duration: '3 months',
+    duration: '3か月',
     technology: ['Unity', 'C#', 'Blender'],
     description: '自身で設立した学生ゲーム制作団体「TOMSN」で制作した第1弾のゲーム',
     detailedDescription: {
@@ -53,7 +53,7 @@ export const worksData = [
     id: 3,
     title: '研究室からの脱出',
     category: '3D Escape',
-    duration: '2 months',
+    duration: '2か月',
     technology: ['Unity', 'C#', 'Photon PUN2', 'Blender', 'Mixamo', '3Dスキャン'],
     description: '研究室のメンバーで制作した現実空間をゲーム舞台に落とし込んだマルチプレイ脱出ゲーム',
     detailedDescription: {
@@ -74,7 +74,7 @@ export const worksData = [
     featured: true,
     achievement: 'Steam / Nintendo Switch で発売',
     category: '3D Strategy Action',
-    duration: '10 months',
+    duration: '10か月',
     technology: ['Unity', 'C#', 'Tiled'],
     description: 'アルバイトとして参加した新感覚のホッピング陣取りバトルゲーム',
     detailedDescription: {
@@ -95,7 +95,7 @@ export const worksData = [
     id: 5,
     title: 'ふらちな海賊団',
     category: '2D Party',
-    duration: '3 days',
+    duration: '3日間',
     technology: ['Unity', 'C#', 'Adobe After Effects'],
     description: '学生チーム対抗ゲームジャム2026に参加し、制作したパーティーゲーム',
     detailedDescription: {
@@ -115,7 +115,7 @@ export const worksData = [
     id: 6,
     title: '米フレンドを残さないで！',
     category: '2D Action',
-    duration: '1 week',
+    duration: '1週間',
     technology: ['Unity', 'C#'],
     description: 'Unity1WeekGamejamで制作したお茶碗に米粒があるかどうかを高速判断する2Dアクションゲーム',
     detailedDescription: {
@@ -133,7 +133,7 @@ export const worksData = [
     id: 7,
     title: 'わけあい',
     category: '3D Puzzle',
-    duration: '1 week',
+    duration: '1週間',
     technology: ['Unity', 'C#'],
     description: 'Unity1WeekGamejamで制作したハートを分け合い、町を明るくする3Dゲーム',
     detailedDescription: {
@@ -153,7 +153,7 @@ export const worksData = [
     id: 8,
     title: '学部卒業研究用ゲーム',
     category: '2D Action',
-    duration: '5 months',
+    duration: '5か月',
     technology: ['Unity', 'C#', 'Python', 'R'],
     description: 'ゲームの視覚情報に関する研究のために作成した2Dアクションゲーム',
     detailedDescription: {
@@ -171,7 +171,7 @@ export const worksData = [
     id: 9,
     title: 'Dear you, FROM FAN （ペラ1）',
     category: 'Game Proposal',
-    duration: '1 week',
+    duration: '1週間',
     technology: ['Unity', 'PowerPoint'],
     description: '株式会社バンダイナムコスタジオ様の主催の「ゲームアイディア創造コンテスト」にて入賞',
     detailedDescription: {
@@ -189,7 +189,7 @@ export const worksData = [
     id: 10,
     title: '研究室在室状況可視化システム',
     category: 'IoT System',
-    duration: '1 month',
+    duration: '1か月',
     technology: ['Node.js', 'Express', 'Python', 'local-devices', 'Raspberry Pi'],
     description: 'LANスキャンとRaspberry Piを用いて研究室の在室状況を可視化し、Discordロールとも連携する在室管理システム',
     detailedDescription: {
@@ -211,7 +211,7 @@ export const worksData = [
     id: 11,
     title: 'フリージア',
     category: '2D Adventure',
-    duration: 'under development',
+    duration: '制作中',
     technology: ['Unity', 'C#', 'Blender', 'CLIP STUDIO PAINT'],
     description: '自身で設立した学生ゲーム制作団体「TOMSN」で制作中の第2弾のゲーム',
     detailedDescription: {
@@ -228,7 +228,7 @@ export const worksData = [
     id: 12,
     title: '研究用ゲーム',
     category: '3D RPG',
-    duration: 'under development',
+    duration: '制作中',
     technology: ['Unity', 'C#'],
     description: 'AIとゲームに関する研究のために作成した3Dアクションゲーム',
     detailedDescription: {
@@ -245,7 +245,7 @@ export const worksData = [
     id: 13,
     title: '冷蔵庫管理アプリ',
     category: 'Web App',
-    duration: '3 months',
+    duration: '3か月',
     technology: ['Nuxt3', 'Vue.js'],
     description: '研究室の冷蔵庫内食品・飲料品管理のためのWebアプリ',
     detailedDescription: {

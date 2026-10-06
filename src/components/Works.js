@@ -226,7 +226,7 @@ const WorkGrid = ({ onOpen, openId }) => {
             </button>
             <p className="work-desc">{t(work.description)}</p>
             <div className="work-foot">
-              <p className="work-meta">{t('制作期間')} {work.duration}</p>
+              <p className="work-meta">{t('制作期間')} {t(work.duration)}</p>
               <div className="work-links" onClick={(e) => e.stopPropagation()}>
                 <WorkLinks links={work.links} variant="card" />
               </div>
@@ -336,7 +336,7 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
                     </div>
                     <div>
                       <dt>{t('制作期間')}</dt>
-                      <dd>{selectedWork.duration}</dd>
+                      <dd>{t(selectedWork.duration)}</dd>
                     </div>
                     <div>
                       <dt>{t('使用技術')}</dt>
