@@ -6,7 +6,7 @@ export const worksData = [
     title: 'DreamMayday',
     featured: true,
     achievement: 'BitSummit Gamejam 2025 総合グランプリ',
-    category: 'Communication',
+    category: '2D Co-op',
     duration: '3 months',
     technology: ['Unity', 'C#'],
     description: 'BitSummit Gamejam 2025にて総合グランプリ\n（最優秀賞）を受賞した協力コミュニケーションゲーム',
@@ -52,7 +52,7 @@ export const worksData = [
   {
     id: 3,
     title: '研究室からの脱出',
-    category: 'Escape',
+    category: '3D Escape',
     duration: '2 months',
     technology: ['Unity', 'C#', 'Photon PUN2', 'Blender', 'Mixamo', '3Dスキャン'],
     description: '研究室のメンバーで制作した現実空間をゲーム舞台に落とし込んだマルチプレイ脱出ゲーム',
@@ -73,7 +73,7 @@ export const worksData = [
     title: 'POGO・Stadium',
     featured: true,
     achievement: 'Steam / Nintendo Switch で発売',
-    category: 'Action & Strategy',
+    category: '3D Strategy Action',
     duration: '10 months',
     technology: ['Unity', 'C#', 'Tiled'],
     description: 'アルバイトとして参加した新感覚のホッピング陣取りバトルゲーム',
@@ -94,7 +94,7 @@ export const worksData = [
   {
     id: 5,
     title: 'ふらちな海賊団',
-    category: 'Party',
+    category: '2D Party',
     duration: '3 days',
     technology: ['Unity', 'C#', 'Adobe After Effects'],
     description: '学生チーム対抗ゲームジャム2026に参加し、制作したパーティーゲーム',
@@ -170,7 +170,7 @@ export const worksData = [
   {
     id: 9,
     title: 'Dear you, FROM FAN （ペラ1）',
-    category: 'Proposal',
+    category: 'Game Proposal',
     duration: '1 week',
     technology: ['Unity', 'PowerPoint'],
     description: '株式会社バンダイナムコスタジオ様の主催の「ゲームアイディア創造コンテスト」にて入賞',
@@ -188,7 +188,7 @@ export const worksData = [
   {
     id: 10,
     title: '研究室在室状況可視化システム',
-    category: 'IoT / System Development',
+    category: 'IoT System',
     duration: '1 month',
     technology: ['Node.js', 'Express', 'Python', 'local-devices', 'Raspberry Pi'],
     description: 'LANスキャンとRaspberry Piを用いて研究室の在室状況を可視化し、Discordロールとも連携する在室管理システム',
@@ -210,7 +210,7 @@ export const worksData = [
   {
     id: 11,
     title: 'フリージア',
-    category: 'Adventure',
+    category: '2D Adventure',
     duration: 'under development',
     technology: ['Unity', 'C#', 'Blender', 'CLIP STUDIO PAINT'],
     description: '自身で設立した学生ゲーム制作団体「TOMSN」で制作中の第2弾のゲーム',
