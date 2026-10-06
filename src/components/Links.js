@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { linksData } from '../constants/links';
+import { useLang } from '../i18n';
 import './Links.css';
 
 const TYPE_INTERVAL = 35;
@@ -12,8 +13,9 @@ const Links = () => {
   const [selected, setSelected] = useState(0);
   const [typed, setTyped] = useState(0);
   const itemRefs = useRef([]);
+  const { lang, t } = useLang();
 
-  const message = linksData[selected].description;
+  const message = t(linksData[selected].description);
 
   useEffect(() => {
     if (prefersReducedMotion()) {
@@ -51,7 +53,7 @@ const Links = () => {
 
         <div className="warp">
           <div className="warp-window warp-menu">
-            <p className="warp-ask">どこへ ワープしますか？</p>
+            <p className="warp-ask">{t('どこへ ワープしますか？')}</p>
             <ul className="warp-list" onKeyDown={handleKeyDown}>
               {linksData.map((link, i) => (
                 <li key={link.title}>
@@ -68,7 +70,7 @@ const Links = () => {
                     <link.icon className="warp-icon" aria-hidden="true" />
                     <span className="warp-name">{link.title}</span>
                     <span className="warp-host">{new URL(link.url).hostname}</span>
-                    <span className="sr-only">：{link.description}</span>
+                    <span className="sr-only">{lang === 'ja' ? '：' : ': '}{t(link.description)}</span>
                   </a>
                 </li>
               ))}

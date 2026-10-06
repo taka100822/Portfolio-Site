@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaBookOpen, FaChevronDown, FaGamepad, FaRunning, FaTools, FaTrophy } from 'react-icons/fa';
 import { timelineByChapter, getTypeLabel } from '../constants/timeline';
+import { useLang } from '../i18n';
 import './Timeline.css';
 
 const TYPE_ICON = {
@@ -13,6 +14,7 @@ const TYPE_ICON = {
 // 普段はタイトルだけ。行を押すと説明・タグ・note が開く
 const TimelineItem = ({ item, index }) => {
   const [open, setOpen] = useState(false);
+  const { t } = useLang();
   const panelId = `timeline-${item.year}-${item.month}-${index}`;
   const TypeIcon = TYPE_ICON[item.type];
 
@@ -30,24 +32,24 @@ const TimelineItem = ({ item, index }) => {
         </time>
         <span className={`timeline-type type-${item.type}`}>
           {TypeIcon && <TypeIcon className="timeline-type-icon" aria-hidden="true" />}
-          {getTypeLabel(item.type)}
+          {t(getTypeLabel(item.type))}
         </span>
         <span className="timeline-title">
-          {item.achievement && <FaTrophy className="timeline-trophy" aria-label="受賞・発表" />}
-          {item.title}
+          {item.achievement && <FaTrophy className="timeline-trophy" aria-label={t('受賞・発表')} />}
+          {t(item.title)}
         </span>
         <FaChevronDown className="timeline-chevron" aria-hidden="true" />
       </button>
 
       <div className="timeline-panel" id={panelId}>
         <div className="timeline-panel-inner">
-          <p className="timeline-description">{item.description}</p>
+          <p className="timeline-description">{t(item.description)}</p>
           <div className="timeline-tags">
-            {item.details.map((detail) => <span key={detail}>{detail}</span>)}
+            {item.details.map((detail) => <span key={detail}>{t(detail)}</span>)}
           </div>
           {item.noteLink && (
             <a href={item.noteLink} target="_blank" rel="noopener noreferrer" className="timeline-note">
-              noteで詳しく読む<span aria-hidden="true"> ↗</span>
+              {t('noteで詳しく読む')}<span aria-hidden="true"> ↗</span>
             </a>
           )}
         </div>
@@ -57,6 +59,8 @@ const TimelineItem = ({ item, index }) => {
 };
 
 const Timeline = () => {
+  const { t } = useLang();
+
   return (
     <section id="timeline" className="section timeline-section">
       <div className="container">
@@ -72,8 +76,8 @@ const Timeline = () => {
                   </span>
                   <span>{chapter.period}</span>
                 </p>
-                <h3 className="timeline-chapter-title">{chapter.title}</h3>
-                <p className="timeline-chapter-summary">{chapter.summary}</p>
+                <h3 className="timeline-chapter-title">{t(chapter.title)}</h3>
+                <p className="timeline-chapter-summary">{t(chapter.summary)}</p>
               </header>
               <ol className="timeline-items">
                 {chapter.items.map((item, i) => (

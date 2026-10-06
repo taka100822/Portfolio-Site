@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { drawLineArt } from '../utils/lineArt';
+import { useLang } from '../i18n';
 
 const BASE_SPEED = 9;      // deg/s
 const HOVER_SPEED = 3;
@@ -61,6 +62,7 @@ const HeroRing = ({ items, heroRef, onSelect }) => {
   const radiusRef = useRef(0);
   const [ready, setReady] = useState(false);
   const [frontIndex, setFrontIndex] = useState(0);
+  const { t } = useLang();
 
   const count = items.length;
   const step = 360 / count;
@@ -227,7 +229,7 @@ const HeroRing = ({ items, heroRef, onSelect }) => {
               >
                 <RingCard
                   src={item.src}
-                  alt={item.title}
+                  alt={t(item.title)}
                   index={i}
                   cardRef={(el) => { cardRefs.current[i] = el; }}
                 />
@@ -238,10 +240,10 @@ const HeroRing = ({ items, heroRef, onSelect }) => {
       </div>
 
       <div className={`ring-caption ${ready ? 'is-ready' : ''}`} aria-hidden="true">
-        {front && front.title}
+        {front && t(front.title)}
       </div>
 
-      <span className="ring-hint" aria-hidden="true">ドラッグで回せます</span>
+      <span className="ring-hint" aria-hidden="true">{t('ドラッグで回せます')}</span>
     </>
   );
 };

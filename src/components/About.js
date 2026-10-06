@@ -1,9 +1,11 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import { skillsData } from '../constants/skills';
+import { useLang } from '../i18n';
 import './About.css';
 
-const renderText = (text) => text.split('\n').map((line, i, arr) => (
+// 日本語は書いた位置で改行し、英語は改行せずに流し込む
+const renderText = (text, lang) => (lang === 'en' ? text.replace(/\n/g, ' ') : text).split('\n').map((line, i, arr) => (
   <span key={i}>
     {line.split(/\*\*(.*?)\*\*/g).map((part, j) =>
       j % 2 === 1 ? <strong key={j}>{part}</strong> : part
@@ -43,97 +45,102 @@ const IMAGE_BASE = `${process.env.PUBLIC_URL}/Image/`;
 
 // 企画書の1項目。右の余白に青ペンの注釈が書き込まれる
 const Row = ({ label, note, className = '', children }) => {
+  const { t } = useLang();
   const [ref, inView] = useInView({ threshold: 0.4, triggerOnce: true });
 
   return (
     <div ref={ref} className={`gdd-row ${className} ${inView ? 'is-marked' : ''}`}>
-      <dt className="gdd-label">{label}</dt>
+      <dt className="gdd-label">{t(label)}</dt>
       <dd className="gdd-content">{children}</dd>
       {note && (
         <dd className="gdd-note">
           <svg className="gdd-note-arrow" viewBox="0 0 48 24" aria-hidden="true">
             <path d="M46 14 C 34 4, 20 18, 4 12 M4 12 L 12 6 M4 12 L 11 19" />
           </svg>
-          <span>{note}</span>
+          <span>{t(note)}</span>
         </dd>
       )}
     </div>
   );
 };
 
-const About = () => (
-  <section id="about" className="section about-section">
-    <div className="container">
-      <h2 className="section-title">About</h2>
+const About = () => {
+  const { lang, t } = useLang();
 
-      <article className="gdd">
-        <header className="gdd-header">
-          <span className="gdd-doc-type">GAME DESIGN DOCUMENT</span>
-          <span className="gdd-doc-meta">企画書 / 作成：Taka10</span>
-        </header>
+  return (
+    <section id="about" className="section about-section">
+      <div className="container">
+        <h2 className="section-title">About</h2>
 
-        <dl className="gdd-rows">
-          <Row label="タイトル" note="大学院生です" className="gdd-row-title">
-            <figure className="gdd-photo">
-              <img src={`${IMAGE_BASE}me.jpeg`} alt="Taka10" />
-            </figure>
-            <div>
-              <p className="gdd-title">Taka10</p>
-              <p className="gdd-subtitle">27卒 / ゲームプランナー志望</p>
-            </div>
-          </Row>
+        <article className="gdd">
+          <header className="gdd-header">
+            <span className="gdd-doc-type">GAME DESIGN DOCUMENT</span>
+            <span className="gdd-doc-meta">{t('企画書 / 作成：Taka10')}</span>
+          </header>
 
-          <Row label="コンセプト" note="ブレない軸">
-            <p className="gdd-concept">人生の一部となる体験を創造する。</p>
-          </Row>
+          <dl className="gdd-rows">
+            <Row label="タイトル" note="大学院生です" className="gdd-row-title">
+              <figure className="gdd-photo">
+                <img src={`${IMAGE_BASE}me.jpeg`} alt="Taka10" />
+              </figure>
+              <div>
+                <p className="gdd-title">Taka10</p>
+                <p className="gdd-subtitle">{t('27卒 / ゲームプランナー志望')}</p>
+              </div>
+            </Row>
 
-          <Row label="概要" note="第2弾開発中">
-            <p className="gdd-text">{renderText(ABOUT_TEXT.intro)}</p>
-          </Row>
+            <Row label="コンセプト" note="ブレない軸">
+              <p className="gdd-concept">{t('人生の一部となる体験を創造する。')}</p>
+            </Row>
 
-          <Row label="経緯" note="様々な経験！">
-            <p className="gdd-text">{renderText(ABOUT_TEXT.history)}</p>
-          </Row>
+            <Row label="概要" note="第2弾開発中">
+              <p className="gdd-text">{renderText(t(ABOUT_TEXT.intro), lang)}</p>
+            </Row>
 
-          <Row label="搭載スキル" note="企画もしつつ、開発も可能です">
-            <ul className="gdd-skills">
-              {skillsData.map(({ title, icon: CategoryIcon, items }) => (
-                <li key={title} className="gdd-skill">
-                  <h4 className="gdd-skill-title">
-                    <span className="gdd-skill-icon"><CategoryIcon aria-hidden="true" /></span>
-                    {title}
-                  </h4>
-                  <ul className="gdd-skill-items">
-                    {items.map(({ name, icon: ItemIcon }) => (
-                      <li key={name}>
-                        <ItemIcon aria-hidden="true" />
-                        {name}
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
-          </Row>
+            <Row label="経緯" note="様々な経験！">
+              <p className="gdd-text">{renderText(t(ABOUT_TEXT.history), lang)}</p>
+            </Row>
 
-          <Row label="今後の展望" note="2027年春に、　ゲーム企画職で入社予定！">
-            <p className="gdd-text">{renderText(ABOUT_TEXT.vision)}</p>
-          </Row>
+            <Row label="搭載スキル" note="企画もしつつ、開発も可能です">
+              <ul className="gdd-skills">
+                {skillsData.map(({ title, icon: CategoryIcon, items }) => (
+                  <li key={title} className="gdd-skill">
+                    <h4 className="gdd-skill-title">
+                      <span className="gdd-skill-icon"><CategoryIcon aria-hidden="true" /></span>
+                      {t(title)}
+                    </h4>
+                    <ul className="gdd-skill-items">
+                      {items.map(({ name, icon: ItemIcon }) => (
+                        <li key={name}>
+                          <ItemIcon aria-hidden="true" />
+                          {t(name)}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ul>
+            </Row>
 
-          <Row label="趣味" note="幅広く取り組んでいます">
-            <ul className="hobby-list">
-              {HOBBIES.map(({ src, label }) => (
-                <li key={label}>
-                  <img src={`${IMAGE_BASE}${src}`} alt="" loading="lazy" />
-                  <span>{label}</span>
-                </li>
-              ))}
-            </ul>
-          </Row>
-        </dl>
-      </article>
-    </div>
-  </section>
-);
+            <Row label="今後の展望" note="2027年春に、　ゲーム企画職で入社予定！">
+              <p className="gdd-text">{renderText(t(ABOUT_TEXT.vision), lang)}</p>
+            </Row>
+
+            <Row label="趣味" note="幅広く取り組んでいます">
+              <ul className="hobby-list">
+                {HOBBIES.map(({ src, label }) => (
+                  <li key={label}>
+                    <img src={`${IMAGE_BASE}${src}`} alt="" loading="lazy" />
+                    <span>{t(label)}</span>
+                  </li>
+                ))}
+              </ul>
+            </Row>
+          </dl>
+        </article>
+      </div>
+    </section>
+  );
+};
 
 export default About;

@@ -20,7 +20,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+    "translate": "node scripts/translate.mjs",
+    "predeploy": "npm run translate && npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
@@ -42,6 +43,8 @@
     ]
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.131.0",
+    "@babel/parser": "^7.29.9",
     "gh-pages": "^6.3.0"
   }
 }

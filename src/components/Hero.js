@@ -2,13 +2,28 @@ import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import HeroRing from './HeroRing';
 import { heroImages } from '../constants/hero';
 import { worksData } from '../constants/works';
+import { useLang } from '../i18n';
 import './Hero.css';
 
 const IMAGE_BASE = `${process.env.PUBLIC_URL}/Image/works/`;
 
+const TITLE = '人生の一部となる\n体験を創造する。';
+const META = '京都工芸繊維大学大学院でゲームのインタラクションを研究しながら、\n学生ゲーム制作団体「TOMSN」の代表として開発を率いています。';
+
+// 改行を <br> にする。brClass を渡すと、その改行は CSS で出し分けられる。
+// 英語は改行を消したときに単語がくっつかないよう、改行の前に空白を入れる
+const lines = (text, brClass) => text.split('\n').map((line, i, arr) => (
+  <React.Fragment key={i}>
+    {i > 0 && <br className={brClass} />}
+    {line}
+    {i < arr.length - 1 && /[\x21-\x7e]$/.test(line) && ' '}
+  </React.Fragment>
+));
+
 const Hero = ({ onSelectWork }) => {
   const heroRef = useRef(null);
   const copyRef = useRef(null);
+  const { t } = useLang();
 
   // キャプションがコピーに重ならないよう、コピーの高さを CSS に渡す
   useEffect(() => {
@@ -35,21 +50,21 @@ const Hero = ({ onSelectWork }) => {
       <HeroRing items={ringItems} heroRef={heroRef} onSelect={handleSelect} />
 
       <div className="hero-copy" ref={copyRef}>
-        <h1 className="hero-title">人生の一部となる<br />体験を創造する。</h1>
+        <h1 className="hero-title">{lines(t(TITLE))}</h1>
         <div>
           <p className="hero-meta">
-            <strong>Taka10 / 27卒ゲームプランナー</strong>
-            京都工芸繊維大学大学院でゲームのインタラクションを研究しながら、<br className="hero-meta-br" />学生ゲーム制作団体「TOMSN」の代表として開発を率いています。
+            <strong>{t('Taka10 / 27卒ゲームプランナー')}</strong>
+            {lines(t(META), 'hero-meta-br')}
           </p>
           <div className="hero-actions">
-            <a className="hero-btn hero-btn-primary" href="#works">作品を見る</a>
+            <a className="hero-btn hero-btn-primary" href="#works">{t('作品を見る')}</a>
             <a
               className="hero-btn hero-btn-ghost"
               href="https://twitter.com/Taka10822GC"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Xで連絡する
+              {t('Xで連絡する')}
             </a>
           </div>
         </div>

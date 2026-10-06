@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef } from 'react';
+import { useLang } from '../i18n';
 import './Intro.css';
 
 const BALL_SRC = `${process.env.PUBLIC_URL}/Image/favicon.png`;
@@ -100,6 +101,7 @@ const Intro = ({ onDone }) => {
   const shadowRef = useRef(null);
   const netRef = useRef(null);
   const exitRef = useRef(null); // 退場を始めた時刻（スキップ時は即座に入る）
+  const { t } = useLang();
 
   const plan = useMemo(() => buildPlan(window.innerWidth, window.innerHeight), []);
 
@@ -338,7 +340,7 @@ const Intro = ({ onDone }) => {
         <p className="intro-name">{splitChars('Taka10', 'intro-name-char')}</p>
         <p className="intro-sub">
           <span className="intro-sub-en">{splitChars('Portfolio', 'intro-sub-char')}</span>
-          <span className="intro-sub-ja">{splitChars('ゲームプランナー', 'intro-sub-char', 9)}</span>
+          <span className="intro-sub-ja">{splitChars(t('ゲームプランナー'), 'intro-sub-char', 9)}</span>
         </p>
       </div>
 

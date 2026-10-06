@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { FaExternalLinkAlt, FaGithub, FaGamepad, FaPenFancy, FaSteam, FaGlobe, FaYoutube, FaDesktop, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { SiNintendoswitch } from 'react-icons/si';
 import { worksData, workOrder } from '../constants/works';
+import { useLang } from '../i18n';
 import './Works.css';
 
 const nl = (text) => text.split('\n').map((line, i, arr) => (
@@ -24,21 +25,25 @@ const LINK_CONFIG = {
 // 遊べる・買えるリンクは目立たせる
 const PLAY_KEYS = ['itch', 'unityroom', 'steam', 'nintendo'];
 
-const WorkLinks = ({ links, variant = 'card' }) => (
-  <>
-    {Object.entries(LINK_CONFIG).map(([key, { icon, cardLabel, modalLabel }]) => {
-      if (!links[key]) return null;
-      const base = variant === 'modal' ? 'modal-link' : 'work-link';
-      const cls = PLAY_KEYS.includes(key) ? `${base} is-play` : base;
-      const label = variant === 'modal' ? modalLabel : cardLabel;
-      return (
-        <a key={key} href={links[key]} target="_blank" rel="noopener noreferrer" className={cls} data-key={key}>
-          {icon} {label}
-        </a>
-      );
-    })}
-  </>
-);
+const WorkLinks = ({ links, variant = 'card' }) => {
+  const { t } = useLang();
+
+  return (
+    <>
+      {Object.entries(LINK_CONFIG).map(([key, { icon, cardLabel, modalLabel }]) => {
+        if (!links[key]) return null;
+        const base = variant === 'modal' ? 'modal-link' : 'work-link';
+        const cls = PLAY_KEYS.includes(key) ? `${base} is-play` : base;
+        const label = variant === 'modal' ? t(modalLabel) : cardLabel;
+        return (
+          <a key={key} href={links[key]} target="_blank" rel="noopener noreferrer" className={cls} data-key={key}>
+            {icon} {label}
+          </a>
+        );
+      })}
+    </>
+  );
+};
 
 const useGalleryImages = (baseImage) => {
   const [images, setImages] = useState([baseImage]);
@@ -82,6 +87,7 @@ const getYouTubeId = (url) => {
 const ModalGallery = ({ work, expand, fade }) => {
   const allImages = useGalleryImages(work.image);
   const youtubeId = getYouTubeId(work.links.Youtube);
+  const { t } = useLang();
 
   // items: youtube first (if exists), then images
   const items = [
@@ -123,7 +129,7 @@ const ModalGallery = ({ work, expand, fade }) => {
             <motion.img
               key={current.src}
               src={current.src}
-              alt={`${work.title}`}
+              alt={t(work.title)}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -135,7 +141,7 @@ const ModalGallery = ({ work, expand, fade }) => {
           <>
             <button
               className="gallery-arrow gallery-prev"
-              aria-label="前へ"
+              aria-label={t('前へ')}
               onClick={() => setIndex(i => Math.max(0, i - 1))}
               disabled={index === 0}
             >
@@ -143,7 +149,7 @@ const ModalGallery = ({ work, expand, fade }) => {
             </button>
             <button
               className="gallery-arrow gallery-next"
-              aria-label="次へ"
+              aria-label={t('次へ')}
               onClick={() => setIndex(i => Math.min(items.length - 1, i + 1))}
               disabled={index === items.length - 1}
             >
@@ -159,7 +165,7 @@ const ModalGallery = ({ work, expand, fade }) => {
             <button
               key={i}
               className={`gallery-thumb ${i === index ? 'active' : ''}`}
-              aria-label={item.type === 'youtube' ? '動画' : `画像 ${i + 1}`}
+              aria-label={item.type === 'youtube' ? t('動画') : `${t('画像')} ${i + 1}`}
               onClick={() => setIndex(i)}
             >
               {item.type === 'youtube' ? (
@@ -171,7 +177,7 @@ const ModalGallery = ({ work, expand, fade }) => {
                   <div className="gallery-thumb-play">▶</div>
                 </div>
               ) : (
-                <img src={item.src} alt={`${work.title} ${i + 1}`} />
+                <img src={item.src} alt={`${t(work.title)} ${i + 1}`} />
               )}
             </button>
           ))}
@@ -189,6 +195,7 @@ const allWorks = [...worksData].sort((a, b) => orderOf(a.id) - orderOf(b.id));
 // 全作品をサムネ付きのカードで並べる
 const WorkGrid = ({ onOpen, openId }) => {
   const reduceMotion = useReducedMotion();
+  const { t } = useLang();
 
   return (
     <ul className="works-list">
@@ -204,7 +211,7 @@ const WorkGrid = ({ onOpen, openId }) => {
             layoutId={reduceMotion ? undefined : `work-thumb-${work.id}`}
           >
             <img src={work.image} alt="" loading="lazy" />
-            <span className="work-thumb-cta" aria-hidden="true">詳しく見る →</span>
+            <span className="work-thumb-cta" aria-hidden="true">{t('詳しく見る')} →</span>
           </motion.div>
           <div className="work-body">
             <p className="work-index">
@@ -215,11 +222,11 @@ const WorkGrid = ({ onOpen, openId }) => {
               className="work-title"
               onClick={(e) => { e.stopPropagation(); onOpen(work); }}
             >
-              {work.title}
+              {t(work.title)}
             </button>
-            <p className="work-desc">{work.description}</p>
+            <p className="work-desc">{t(work.description)}</p>
             <div className="work-foot">
-              <p className="work-meta">制作期間 {work.duration}</p>
+              <p className="work-meta">{t('制作期間')} {work.duration}</p>
               <div className="work-links" onClick={(e) => e.stopPropagation()}>
                 <WorkLinks links={work.links} variant="card" />
               </div>
@@ -234,6 +241,7 @@ const WorkGrid = ({ onOpen, openId }) => {
 const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
   const closeRef = useRef(null);
   const reduceMotion = useReducedMotion();
+  const { t } = useLang();
   // 一覧のカードから開いたときだけ、そのカードが大きくなるように見せる
   // （Hero から開いたときはカードが画面外にあるので、中央で拡大する）
   const [expandFrom, setExpandFrom] = useState(null);
@@ -290,7 +298,7 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
                 className="modal-content"
                 role="dialog"
                 aria-modal="true"
-                aria-label={selectedWork.title}
+                aria-label={t(selectedWork.title)}
                 layoutId={expand ? `work-card-${selectedWork.id}` : undefined}
                 initial={expand || reduceMotion ? false : { opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -300,11 +308,11 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
               >
                 <motion.div className="modal-scroll" layoutScroll>
                 <motion.div className="modal-bar" {...fade}>
-                  <span className="modal-bar-title">{selectedWork.title}</span>
+                  <span className="modal-bar-title">{t(selectedWork.title)}</span>
                   <button
                     ref={closeRef}
                     className="modal-close"
-                    aria-label="閉じる"
+                    aria-label={t('閉じる')}
                     onClick={() => setSelectedWork(null)}
                   >
                     ×
@@ -314,25 +322,25 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
                 <ModalGallery work={selectedWork} expand={expand} fade={fade} />
 
                 <motion.div className="modal-info" {...fade}>
-                  <h3 className="modal-title">{selectedWork.title}</h3>
+                  <h3 className="modal-title">{t(selectedWork.title)}</h3>
 
                   {selectedWork.detailedDescription.overview && (
-                    <p className="modal-lead">{nl(selectedWork.detailedDescription.overview)}</p>
+                    <p className="modal-lead">{nl(t(selectedWork.detailedDescription.overview))}</p>
                   )}
 
                   {/* 基本情報をひと目で読めるように横に並べる */}
                   <dl className="modal-facts">
                     <div>
-                      <dt>ジャンル</dt>
+                      <dt>{t('ジャンル')}</dt>
                       <dd>{selectedWork.category}</dd>
                     </div>
                     <div>
-                      <dt>制作期間</dt>
+                      <dt>{t('制作期間')}</dt>
                       <dd>{selectedWork.duration}</dd>
                     </div>
                     <div>
-                      <dt>使用技術</dt>
-                      <dd>{selectedWork.technology.join(' / ')}</dd>
+                      <dt>{t('使用技術')}</dt>
+                      <dd>{selectedWork.technology.map(t).join(' / ')}</dd>
                     </div>
                   </dl>
 
@@ -343,9 +351,9 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
                   {/* 企画書のスペック表のように、左に見出し・右に内容 */}
                   {selectedWork.detailedDescription.content && (
                     <section className="modal-section">
-                      <h4>内容</h4>
+                      <h4>{t('内容')}</h4>
                       <div className="modal-section-body">
-                        {splitLines(selectedWork.detailedDescription.content).map((line) => (
+                        {splitLines(t(selectedWork.detailedDescription.content)).map((line) => (
                           <p key={line}>{line}</p>
                         ))}
                       </div>
@@ -354,9 +362,9 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
 
                   {selectedWork.detailedDescription.role && (
                     <section className="modal-section">
-                      <h4>担当</h4>
+                      <h4>{t('担当')}</h4>
                       <ol className="modal-role modal-section-body">
-                        {splitLines(selectedWork.detailedDescription.role).map((item) => (
+                        {splitLines(t(selectedWork.detailedDescription.role)).map((item) => (
                           <li key={item}>{item}</li>
                         ))}
                       </ol>
@@ -364,9 +372,9 @@ const Works = ({ selectedWork, onSelectWork: setSelectedWork }) => {
                   )}
 
                   <section className="modal-section">
-                    <h4>キーワード</h4>
+                    <h4>{t('キーワード')}</h4>
                     <ul className="modal-keywords modal-section-body">
-                      {selectedWork.features.map((f) => <li key={f}>{f}</li>)}
+                      {selectedWork.features.map((f) => <li key={f}>{t(f)}</li>)}
                     </ul>
                   </section>
                 </motion.div>

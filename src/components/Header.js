@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useLang } from '../i18n';
 import './Header.css';
 
 const NAV_ITEMS = [
@@ -16,6 +17,7 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState(null);
+  const { lang, setLang, t } = useLang();
 
   // スクロール量と読み進めた割合（下端の進捗線に使う）
   useEffect(() => {
@@ -100,17 +102,29 @@ const Header = () => {
         </a>
 
         <button
+          type="button"
+          className="header-lang"
+          lang={lang === 'ja' ? 'en' : 'ja'}
+          aria-label={lang === 'ja' ? 'Switch to English' : '日本語に切り替える'}
+          onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')}
+        >
+          <span className={lang === 'ja' ? 'is-current' : ''}>JA</span>
+          <span className="header-lang-sep" aria-hidden="true">/</span>
+          <span className={lang === 'en' ? 'is-current' : ''}>EN</span>
+        </button>
+
+        <button
           className="header-toggle"
           aria-expanded={menuOpen}
           aria-controls="site-nav"
-          aria-label={menuOpen ? 'メニューを閉じる' : 'メニューを開く'}
+          aria-label={menuOpen ? t('メニューを閉じる') : t('メニューを開く')}
           onClick={() => setMenuOpen((open) => !open)}
         >
           <span />
           <span />
         </button>
 
-        <nav id="site-nav" className="header-nav" aria-label="ページ内リンク">
+        <nav id="site-nav" className="header-nav" aria-label={t('ページ内リンク')}>
           <ol>
             {NAV_ITEMS.map((item, i) => (
               <li key={item.name} style={{ '--i': i }}>
