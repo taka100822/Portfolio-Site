@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLang } from '../i18n';
+import { on } from '../game/bus';
 import './Header.css';
 
 const NAV_ITEMS = [
@@ -17,6 +18,8 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState(null);
+  const [score, setScore] = useState(null); // 背景シューティングで一度撃つまでは出さない
+  const [hint, setHint] = useState(null);
   const { lang, setLang, t } = useLang();
 
   // スクロール量と読み進めた割合（下端の進捗線に使う）
@@ -40,6 +43,16 @@ const Header = () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
     };
+  }, []);
+
+  // 背景シューティング（SpaceGame）のスコアと遊び方のヒント
+  useEffect(() => {
+    const offs = [
+      on('shot', () => setScore((v) => v ?? 0)),
+      on('kill', (detail) => setScore(detail.score)),
+      on('hint', setHint),
+    ];
+    return () => offs.forEach((off) => off());
   }, []);
 
   // 画面中央にあるセクションのナビを点灯させる
@@ -84,7 +97,7 @@ const Header = () => {
   return (
     <header
       ref={headerRef}
-      className={`header ${scrolled ? 'is-scrolled' : ''} ${menuOpen ? 'is-open' : ''}`}
+      className={`header ${scrolled ? 'is-scrolled' : ''} ${hint || score !== null ? 'has-hud' : ''} ${menuOpen ? 'is-open' : ''}`}
     >
       <div className="header-inner">
         <a className="header-logo" href="#top" onClick={closeMenu}>
@@ -142,7 +155,22 @@ const Header = () => {
           </ol>
         </nav>
       </div>
-      <span className="header-progress" aria-hidden="true" />
+      <span className="header-progress" aria-hidden="true">
+        <span className="header-hud">
+          {score !== null && (
+            <span className="header-hud-box">
+              <span className="header-hud-label">SCORE</span>
+              <span className="header-hud-value">{String(score).padStart(6, '0')}</span>
+            </span>
+          )}
+          {hint && (
+            <span className="header-hint">
+              <span className="header-hint-mark">▶</span>
+              {hint.touch ? t('背景をタップすると、敵を撃てます') : t('背景をクリックすると、敵を撃てます')}
+            </span>
+          )}
+        </span>
+      </span>
     </header>
   );
 };

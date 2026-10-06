@@ -1,7 +1,7 @@
 .App {
   position: relative;
   min-height: 100vh;
-  background: var(--black);
+  /* 背景色は body に任せ、背景の星空（SpaceGame の canvas）を透かす */
   color: var(--paper);
 }
 

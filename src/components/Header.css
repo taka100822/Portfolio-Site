@@ -90,8 +90,69 @@
   box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
 }
 
-.header.is-scrolled .header-progress {
+.header.is-scrolled .header-progress,
+.header.has-hud .header-progress {
   opacity: 1;
+}
+
+/* 進捗線の左端の下に下がる、背景シューティングのスコアと遊び方のヒント */
+.header-hud {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-family: var(--font-pixel);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.header-hud-box {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.45rem 0.8rem 0.5rem;
+  border: 1px solid var(--line);
+  border-top: 0;
+  background: rgba(3, 6, 12, 0.85);
+}
+
+.header-hud-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--pencil);
+}
+
+.header-hud-value {
+  font-size: 1.25rem;
+  letter-spacing: 0.06em;
+  color: var(--highlight);
+}
+
+.header-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding-top: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--paper);
+  text-shadow: 0 0 6px var(--black), 0 0 2px var(--black);
+  animation: header-hint-in 0.4s ease-out both;
+}
+
+.header-hint-mark {
+  font-size: 0.6rem;
+  color: var(--signal);
+  animation: header-blink 1s steps(2) infinite;
+}
+
+@keyframes header-hint-in {
+  from { opacity: 0; transform: translateX(-6px); }
+}
+
+@keyframes header-blink {
+  50% { opacity: 0; }
 }
 
 /* ---------- ロゴ ---------- */
@@ -418,7 +479,8 @@
     transition: none;
   }
 
-  .header-nav a:hover::before {
+  .header-nav a:hover::before,
+  .header-hint-mark {
     animation: none;
   }
 }
