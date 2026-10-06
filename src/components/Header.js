@@ -92,8 +92,8 @@ const Header = () => {
             className="header-mark"
             src={`${process.env.PUBLIC_URL}/Image/favicon.png`}
             alt=""
-            width="32"
-            height="32"
+            width="36"
+            height="36"
           />
           <span className="header-logo-text">
             <span className="header-logo-name">Taka10</span>

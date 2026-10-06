@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  height: 80px;
   padding: 0 2.5rem;
   border: 1px solid transparent;
   transition:
@@ -54,7 +54,7 @@
 }
 
 .header.is-scrolled .header-inner {
-  height: 56px;
+  height: 64px;
   padding: 0 1.5rem;
   background-color: rgba(3, 6, 12, 0.72);
   border-color: var(--line);
@@ -105,8 +105,8 @@
 
 .header-mark {
   display: block;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
   transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
@@ -123,14 +123,14 @@
 
 .header-logo-name {
   font-family: var(--font-display);
-  font-size: var(--text-20);
+  font-size: 1.5rem;
   letter-spacing: 0.02em;
 }
 
 .header-logo-sub {
   margin-top: 4px;
   font-family: var(--font-pixel);
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   letter-spacing: 0.3em;
   color: var(--pencil);
 }
@@ -147,8 +147,8 @@
   display: flex;
   align-items: baseline;
   gap: 0.4rem;
-  padding: 0.5rem 0.75rem 0.5rem 1.1rem;
-  font-size: var(--text-14);
+  padding: 0.5rem 0.85rem 0.5rem 1.2rem;
+  font-size: 1.0625rem;
   color: var(--pencil);
   text-decoration: none;
   transition: color 0.15s;
@@ -156,8 +156,8 @@
 
 .header-nav-num {
   font-family: var(--font-pixel);
-  font-size: 0.6875rem;
-  color: var(--line);
+  font-size: 0.8125rem;
+  color: var(--pencil);
   transition: color 0.15s;
 }
 
@@ -179,8 +179,8 @@
 .header-nav a::after {
   content: '';
   position: absolute;
-  left: 1.1rem;
-  right: 0.75rem;
+  left: 1.2rem;
+  right: 0.85rem;
   bottom: 0.2rem;
   height: 1px;
   background: var(--signal);
@@ -231,9 +231,9 @@
   margin-left: 1rem;
   padding: 0.4rem 0.7rem;
   font-family: var(--font-pixel);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   letter-spacing: 0.08em;
-  color: var(--line);
+  color: var(--pencil);
   background: none;
   border: 1px solid var(--line);
   cursor: pointer;
@@ -264,7 +264,7 @@
 /* ---------- スマホ ---------- */
 @media (max-width: 768px) {
   .header-inner {
-    height: 60px;
+    height: 64px;
     padding: 0 1rem;
   }
 
@@ -273,7 +273,7 @@
   }
 
   .header.is-scrolled .header-inner {
-    height: 52px;
+    height: 56px;
     padding: 0 0.5rem 0 0.75rem;
   }
 
