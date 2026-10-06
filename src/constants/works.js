@@ -15,7 +15,7 @@ export const worksData = [
       content: '通常のモニターと球状のモニターを用いた2画面マルチプレイのコミュニケーションゲーム。\n2人のプレイヤーは「ドリームサポーター」として、夢と現実それぞれの立場から住人（NPC）の睡眠を守ります。夢側のプレイヤーは眠る住人の夢を観察し、異変を検知してもう片方のプレイヤーに共有します。現実側のプレイヤーはその情報をもとに原因を特定し、適切に対処します。2人の連携によって、朝まで快適な眠りを維持することを目指すゲームです。',
       role: '企画立案 \n仕様書作成 \nマネジメント（タスク割り当てやスケジュール調整） \nマルチディスプレイ制御プログラムの実装\n 複数シーンのAdditive読み込みの実装 \nソース管理',
     },
-    features: ['総合グランプリ受賞', 'チーム開発', 'BSGM2025', '球状モニター', '2画面', 'マルチプレイ', '多数回展示'],
+    features: ['チーム開発', 'ゲームジャム', 'マルチプレイ', '2画面', '球状モニター', '総合グランプリ受賞', '多数回展示'],
     image: `${BASE}/Image/works/DreamMayday/DreamMayday.png`,
     links: {
       itch: 'https://bitsummit-gamejam.itch.io/dreammayday',
@@ -39,7 +39,7 @@ export const worksData = [
       content: '学生5人のチーム「TOMSN」（現在は8人）を設立し、制作した3Dアクションゲーム。\nユニークな敵が多数出現するステージ内にレーザーを駆使して突き進み、すべての敵を撃破することでクリアとなる、爽快感のあるゲームです。',
       role: '企画立案 \n仕様書作成 \nマネジメント（タスク割り当てやスケジュール調整） \n敵の実装（ラビット、ラムダオクトパス） \nステージ制作 \n一部敵の攻撃で使用する3Dモデルの作成',
     },
-    features: ['初の共同ゲーム開発', 'アジャイル開発', 'チーム設立', '第1弾'],
+    features: ['チーム開発', 'TOMSN第1弾', 'アジャイル開発', 'チーム設立', '初の共同ゲーム開発'],
     image: `${BASE}/Image/works/CrashReport/CRASH REPORT.png`,
     links: {
       unityroom: 'https://unityroom.com/games/crash_report',
@@ -82,7 +82,7 @@ export const worksData = [
       content: '夜のバトルスタジアムを舞台とした、アクションと戦略性を組み合わせた陣取りゲーム。\nプレイヤーはフィールドを構成するブロックの形状を読み取りながらエリアを切り取り、自身の陣地を拡大します。獲得したエネルギーを活用することで攻撃が可能となり、移動ルートの確保や陣地管理といった判断が重要です。',
       role: '演出の仕様作成 \nローカライズデータ作成 \nステージ制作 \nブロック落下演出の実装 \n背景制作補助',
     },
-    features: ['学生アルバイト', '収益化タイトル', '中規模チーム開発'],
+    features: ['中規模開発', 'アルバイト', '収益化タイトル'],
     image: `${BASE}/Image/works/PogoStadium/PogoStadium.png`,
     links: {
       steam: 'https://store.steampowered.com/app/3672410/POGO_Stadium',
@@ -103,7 +103,7 @@ export const worksData = [
       content: '武蔵野市で行われた学生チーム対抗ゲームジャム2026で制作したパーティーゲーム。\n1人のプレイヤーがターゲットとなる「ふ」を書き写し、他のプレイヤーは書き写された「ふ」をもとに、ステージ内の「ふ」の中から拉致すべき「ふ」を探し当てます。模写力と観察力が試される、みんなでワイワイ楽しめるゲームです。',
       role: '企画立案 \n仕様書作成 \nマネジメント（タスク割り当てやスケジュール調整） \n「ふ」のステージ配置',
     },
-    features: ['チーム開発', 'マルチプレイ', 'ゲームジャム'],
+    features: ['チーム開発', 'ゲームジャム', 'マルチプレイ'],
     image: `${BASE}/Image/works/Furachi/Furachi.png`,
     links: {
       unityroom: 'https://unityroom.com/games/stgj2026_team5',
@@ -123,7 +123,7 @@ export const worksData = [
       content: '返却される茶碗を確認し、お米が残っていないかチェックするゲーム。\n茶碗を半回転させて確認し、お米が残っていなければ「OK」、一粒でも残っていれば「返却」を素早く正確に選択します。3回までのミスが許される中で、いくつ茶碗を回収できるかといった食堂ゲームです。',
       role: '企画立案 \n仕様書作成',
     },
-    features: ['Xでの制作メンバー募集に応募', 'Unity1WeekGameJam2回目作品'],
+    features: ['チーム開発', 'ゲームジャム', 'unity1week 2回目参加', 'Xでの制作メンバー募集に応募'],
     image: `${BASE}/Image/works/MyFriend/MyFriend.png`,
     links: {
       unityroom: 'https://unityroom.com/games/ricefriend',
@@ -141,7 +141,7 @@ export const worksData = [
       content: 'ハートを住民に分け与えることで、暗い町を明るくしていく3Dパズルゲーム。\nプレイヤーは自身のハートを愛が不足している住民に分け与えていきますが、与えすぎてハートがなくなるとゲームオーバーとなります。\nハートをくれる住民と必要としている住民を見極めながら、町全体に愛を広げていきます。',
       role: '個人制作のためすべて',
     },
-    features: ['個人制作', 'Unity Asset使用', 'Unity1WeekGameJam初参加作品'],
+    features: ['個人開発', 'ゲームジャム', 'unity1week 初参加', 'Unity Asset使用'],
     image: `${BASE}/Image/works/Wakeai/Wakeai.png`,
     links: {
       unityroom: 'https://unityroom.com/games/wakeai',
@@ -161,7 +161,7 @@ export const worksData = [
       content: '学部研究「テキストによる視覚提示数がゲーム体験に及ぼす影響」の実験用に制作しました。\n実験参加者は3つのステージをそれぞれのテキスト表示数パターンでプレイし、各ステージ終了後にアンケートに回答しました。そこで得られた主観評価と、ゲームログから得られる客観的指標（リトライ回数やクリアタイム）をもとに、テキスト表示数がゲーム体験に与える影響を統計的に分析しました。\nこの研究は最終的に学会にて発表しました。',
       role: '個人制作のためすべて',
     },
-    features: ['Unity初作品', '研究用途', 'データ収集機能', 'TileMap', 'ゲームログ分析'],
+    features: ['個人開発', '研究用途', 'データ収集機能', 'ゲームログ分析', 'Tilemap', 'Unity初作品'],
     image: `${BASE}/Image/works/ReserchGame/ReserchGame.png`,
     links: {
       github: 'https://github.com/Taka100822/Graduation-Study',
@@ -219,7 +219,7 @@ export const worksData = [
       content: '鋭意制作中のアドベンチャーゲーム（2026年10月現在）',
       role: '企画立案 \n仕様書作成 \nマネジメント（タスク割り当てやスケジュール調整）\nシナリオ',
     },
-    features: ['チーム開発', 'アジャイル開発', '第2弾'],
+    features: ['チーム開発', 'TOMSN第2弾', 'アジャイル開発'],
     image: `${BASE}/Image/works/p-victory/p-victory.png`,
     links: {
     },
@@ -253,7 +253,7 @@ export const worksData = [
       content: '初めてチーム開発で制作した冷蔵庫内の食品・飲料品管理Webアプリケーション。\n商品のバーコードをリーダーで読み込ませることで自動で登録が行われます。主な機能は登録、削除、更新およびリストの表示です。',
       role: '登録モーダルの設計と実装',
     },
-    features: ['初チーム開発', 'フロントエンド担当', 'UI/UX設計'],
+    features: ['チーム開発', 'フロントエンド担当', 'UI/UX設計', '初の共同開発'],
     image: `${BASE}/Image/works/fridge-manager/fridge-manager.png`,
     links: {
       github: 'https://github.com/KIT-HI-ProgrammingContestGroupC/fridge-manager',
