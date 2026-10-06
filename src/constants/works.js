@@ -54,7 +54,7 @@ export const worksData = [
     title: '研究室からの脱出',
     category: 'Escape',
     duration: '2 months',
-    technology: ['Unity', 'C#', '3D Scan', 'Photon PUN2', 'Blender', 'Mixamo'],
+    technology: ['Unity', 'C#', 'Photon PUN2', 'Blender', 'Mixamo', '3Dスキャン'],
     description: '研究室のメンバーで制作した現実空間をゲーム舞台に落とし込んだマルチプレイ脱出ゲーム',
     detailedDescription: {
       overview: '研究室のメンバーで制作した研究室や教授、私が登場するマルチプレイ脱出ゲーム',
@@ -172,7 +172,7 @@ export const worksData = [
     title: 'Dear you, FROM FAN （ペラ1）',
     category: 'Proposal',
     duration: '1 week',
-    technology: ['PowerPoint', 'Unity'],
+    technology: ['Unity', 'PowerPoint'],
     description: '株式会社バンダイナムコスタジオ様の主催の「ゲームアイディア創造コンテスト」にて入賞',
     detailedDescription: {
       overview: 'バンダイナムコスタジオ様のゲームアイディア創造コンテストにて入賞したペライチ',
@@ -190,7 +190,7 @@ export const worksData = [
     title: '研究室在室状況可視化システム',
     category: 'IoT / System Development',
     duration: '1 month',
-    technology: ['Node.js', 'Express', 'Python', 'Raspberry Pi', 'local-devices'],
+    technology: ['Node.js', 'Express', 'Python', 'local-devices', 'Raspberry Pi'],
     description: 'LANスキャンとRaspberry Piを用いて研究室の在室状況を可視化し、Discordロールとも連携する在室管理システム',
     detailedDescription: {
       overview: '研究室メンバーの在室状況を、LANスキャン・物理LED・Discordロール連携によってリアルタイム可視化するシステムをチームで開発',
@@ -246,7 +246,7 @@ export const worksData = [
     title: '冷蔵庫管理アプリ',
     category: 'Web App',
     duration: '3 months',
-    technology: ['Vue.js', 'Nuxt.js'],
+    technology: ['Nuxt3', 'Vue.js'],
     description: '研究室の冷蔵庫内食品・飲料品管理のためのWebアプリ',
     detailedDescription: {
       overview: 'フロントエンドの一部分を担当した冷蔵庫内食品・飲料品管理Webアプリケーション',
