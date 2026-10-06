@@ -1,13 +1,14 @@
-// src/ の日本語の文言を集め、まだ英訳がないものだけを Claude で英訳して src/i18n/en.json に書き出す。
-//   npm run translate          … 未翻訳を英訳する（デプロイ前に自動で走る）
-//   npm run translate -- --check … 翻訳せず、未翻訳があれば一覧を出して失敗する
-//   npm run translate -- --retranslate "日本語" … 指定した文言を訳し直す
-// 訳を手で直したいときは src/i18n/en.manual.json に { "日本語": "English" } を書く（こちらが優先され、自動では上書きされない）
+// src/ の日本語の文言を集め、src/i18n/en.json に英訳がないものを確認する（API は使わない）。
+// 英訳は Claude Code に「英訳を更新して」と頼んで入れてもらう。
+//   npm run translate                         … 未翻訳がないか確認する（デプロイ前に自動で走り、未翻訳があれば止まる）
+//   npm run translate -- --json               … 未翻訳の文言を JSON の配列で出す
+//   npm run translate -- --apply 訳.json      … { "日本語": "English" } のファイルを en.json に取り込む
+//   npm run translate -- --retranslate "日本語" … 指定した文言の訳を消して未翻訳に戻す
+// 訳を手で直したいときは src/i18n/en.manual.json に { "日本語": "English" } を書く（こちらが優先される）
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from '@babel/parser';
-import Anthropic from '@anthropic-ai/sdk';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(ROOT, 'src');
@@ -15,8 +16,6 @@ const I18N = path.join(SRC, 'i18n');
 const AUTO_PATH = path.join(I18N, 'en.json');
 const MANUAL_PATH = path.join(I18N, 'en.manual.json');
 
-const MODEL = 'claude-opus-5-5';
-const BATCH_SIZE = 60;
 const JA = /[぀-ヿ㐀-鿿！-｠]/;
 
 // src/i18n/index.js の normalize と同じ
@@ -105,108 +104,43 @@ const collect = () => {
   return { texts: [...texts], warnings };
 };
 
-// ---------- 英訳 ----------
-
-const SYSTEM = `You translate the Japanese text of a personal portfolio website into natural, polished English.
-The site belongs to Taka10, a Japanese graduate student (Kyoto Institute of Technology) who researches games x AI, leads the student game studio "TOMSN", and will join a game company as a game planner (game designer) in spring 2027. Readers are recruiters and game developers outside Japan.
-
-Rules:
-- Write concise, confident English suited to a professional portfolio. Do not translate word-for-word; convey the intent.
-- Keep proper nouns, product names and handles as they are (Taka10, TOMSN, BitSummit, unityroom, note, Unity, C#, etc.).
-- Game titles: give a natural English title. For wordplay that cannot carry over, choose a playful English equivalent.
-- "\\n" is a line break. Return exactly the same number of lines as the input, in the same order (lines may be lists or paragraphs). Break English lines at natural phrase boundaries.
-- Keep "**bold**" markers around the corresponding English phrase.
-- Short UI labels (buttons, headings, tags) stay short. Use Title Case only for headings and navigation-like labels.
-- Use the existing translations as a glossary so terms stay consistent.`;
-
-const SCHEMA = {
-  type: 'object',
-  properties: {
-    translations: {
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: { id: { type: 'integer' }, en: { type: 'string' } },
-        required: ['id', 'en'],
-        additionalProperties: false,
-      },
-    },
-  },
-  required: ['translations'],
-  additionalProperties: false,
-};
+// ---------- 英訳の取り込み ----------
 
 const count = (text, token) => text.split(token).length - 1;
-const isValid = (ja, en) => en.trim() !== ''
-  && count(ja, '\n') === count(en, '\n')
-  && count(ja, '**') === count(en, '**');
 
-const translateBatch = async (client, items, glossary) => {
-  const stream = client.beta.messages.stream({
-    model: MODEL,
-    max_tokens: 64000,
-    betas: ['server-side-fallback-2026-07-01'],
-    fallbacks: 'default',
-    system: SYSTEM,
-    output_config: { effort: 'medium', format: { type: 'json_schema', schema: SCHEMA } },
-    messages: [{
-      role: 'user',
-      content: JSON.stringify({
-        existing_translations: glossary,
-        translate: items.map((ja, id) => ({ id, ja })),
-      }),
-    }],
-  });
-  const message = await stream.finalMessage();
-  if (message.stop_reason === 'refusal') throw new Error('Claude が翻訳を断りました');
-  if (message.stop_reason === 'max_tokens') throw new Error('出力が上限に達しました。BATCH_SIZE を下げてください');
-
-  const text = message.content.filter((b) => b.type === 'text').map((b) => b.text).join('');
-  const { translations } = JSON.parse(text);
-  return new Map(translations.map(({ id, en }) => [items[id], en]));
+// 改行や ** の数が原文と違うと、担当リストや太字の位置がずれる
+const problemOf = (ja, en) => {
+  if (typeof en !== 'string' || en.trim() === '') return '訳が空です';
+  if (count(ja, '\n') !== count(en, '\n')) return `改行の数が違います（原文 ${count(ja, '\n')} / 訳 ${count(en, '\n')}）`;
+  if (count(ja, '**') !== count(en, '**')) return '** の数が違います';
+  return null;
 };
 
-const translateAll = async (missing, glossary) => {
-  const client = new Anthropic();
-  const result = {};
-  let pending = missing;
-
-  // 改行数や ** の数が合わなかったものは1回だけ訳し直す
-  for (let attempt = 0; attempt < 2 && pending.length > 0; attempt += 1) {
-    const retry = [];
-    for (let i = 0; i < pending.length; i += BATCH_SIZE) {
-      const batch = pending.slice(i, i + BATCH_SIZE);
-      console.log(`  英訳中… ${Math.min(i + BATCH_SIZE, pending.length)} / ${pending.length}`);
-      const translated = await translateBatch(client, batch, { ...glossary, ...result });
-      for (const ja of batch) {
-        const en = translated.get(ja);
-        if (en && isValid(ja, en)) result[ja] = en;
-        else if (attempt === 0) retry.push(ja);
-        else if (en) {
-          console.warn(`  ! 改行または ** の数が原文と違います（そのまま採用）: ${ja.slice(0, 40)}`);
-          result[ja] = en;
-        }
-      }
+const apply = (file, texts, auto) => {
+  const incoming = JSON.parse(fs.readFileSync(path.resolve(file), 'utf8'));
+  const current = new Set(texts);
+  let added = 0;
+  let failed = 0;
+  for (const [rawJa, en] of Object.entries(incoming)) {
+    const ja = normalize(rawJa);
+    const problem = !current.has(ja) ? 'サイトで使われていない文言です' : problemOf(ja, en);
+    if (problem) {
+      console.error(`  ✗ ${ja.replace(/\n/g, '⏎').slice(0, 40)}: ${problem}`);
+      failed += 1;
+    } else {
+      auto[ja] = en;
+      added += 1;
     }
-    pending = retry;
   }
-  return result;
+  console.log(`${added} 件の英訳を src/i18n/en.json に取り込みました${failed ? `（${failed} 件は取り込めませんでした）` : ''}`);
+  return failed === 0;
 };
 
 // ---------- main ----------
 
-const main = async () => {
+const main = () => {
   const args = process.argv.slice(2);
-  const checkOnly = args.includes('--check');
-  const retranslate = new Set(args
-    .filter((_, i) => args[i - 1] === '--retranslate')
-    .map(normalize));
-
-  try {
-    process.loadEnvFile(path.join(ROOT, '.env'));
-  } catch {
-    // .env がなければ環境変数か `ant auth login` の認証情報を使う
-  }
+  const valueOf = (flag) => args[args.indexOf(flag) + 1];
 
   const { texts, warnings } = collect();
   const auto = readJson(AUTO_PATH);
@@ -217,51 +151,33 @@ const main = async () => {
     warnings.forEach((w) => console.warn(`  ${w}`));
   }
 
-  const current = new Set(texts);
-  const stale = Object.keys(auto).filter((ja) => !current.has(ja) || retranslate.has(ja));
-  const missing = texts.filter((ja) => !(ja in manual) && (!(ja in auto) || retranslate.has(ja)));
-
-  if (checkOnly) {
-    if (missing.length > 0) {
-      console.error(`未翻訳の文言が ${missing.length} 件あります:`);
-      missing.forEach((ja) => console.error(`  - ${ja.replace(/\n/g, '⏎')}`));
-      process.exit(1);
-    }
-    console.log(`✓ すべて英訳済みです（${texts.length} 件）`);
-    return;
-  }
-
   // もう使われていない文言の訳は消す
+  const current = new Set(texts);
+  const stale = Object.keys(auto).filter((ja) => !current.has(ja));
   stale.forEach((ja) => delete auto[ja]);
 
-  if (missing.length === 0) {
-    if (stale.length > 0) writeJson(AUTO_PATH, auto);
-    console.log(`✓ 未翻訳の文言はありません（${texts.length} 件${stale.length ? `、不要な訳を ${stale.length} 件削除` : ''}）`);
+  let ok = true;
+  if (args.includes('--apply')) ok = apply(valueOf('--apply'), texts, auto);
+  if (args.includes('--retranslate')) delete auto[normalize(valueOf('--retranslate'))];
+  if (stale.length > 0 || args.includes('--apply') || args.includes('--retranslate')) writeJson(AUTO_PATH, auto);
+  if (stale.length > 0) console.log(`使われなくなった訳を ${stale.length} 件削除しました`);
+
+  const missing = texts.filter((ja) => !(ja in manual) && !(ja in auto));
+
+  // Claude Code が文言を正確に受け取れるよう JSON で出す
+  if (args.includes('--json')) {
+    console.log(JSON.stringify(missing, null, 2));
     return;
   }
 
-  console.log(`未翻訳の文言が ${missing.length} 件あります。${MODEL} で英訳します`);
-  let translated;
-  try {
-    translated = await translateAll(missing, { ...auto, ...manual });
-  } catch (error) {
-    if (error instanceof Anthropic.AuthenticationError) {
-      console.error('✗ API キーが無効です。.env の ANTHROPIC_API_KEY を確認してください');
-    } else if (error instanceof Anthropic.APIError) {
-      console.error(`✗ API エラー ${error.status}: ${error.message}`);
-    } else if (/auth|api.?key/i.test(String(error?.message))) {
-      console.error('✗ API キーが見つかりません。プロジェクト直下の .env に ANTHROPIC_API_KEY=... を書いてください');
-    } else {
-      console.error(`✗ ${error.message}`);
-    }
+  if (missing.length > 0) {
+    console.error(`\n未翻訳の文言が ${missing.length} 件あります:`);
+    missing.forEach((ja) => console.error(`  - ${ja.replace(/\n/g, '⏎')}`));
+    console.error('\nClaude Code に「英訳を更新して」と頼んでください。');
     process.exit(1);
   }
-
-  writeJson(AUTO_PATH, { ...auto, ...translated });
-  console.log(`✓ ${Object.keys(translated).length} 件を英訳して src/i18n/en.json に保存しました`);
-  Object.entries(translated).forEach(([ja, en]) => {
-    console.log(`  ${ja.replace(/\n/g, '⏎').slice(0, 30)}  →  ${en.replace(/\n/g, '⏎').slice(0, 60)}`);
-  });
+  if (!ok) process.exit(1);
+  console.log(`✓ すべて英訳済みです（${texts.length} 件）`);
 };
 
 main();
