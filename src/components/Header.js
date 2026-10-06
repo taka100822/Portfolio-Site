@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLang } from '../i18n';
 import { on } from '../game/bus';
+import AchievementMenu from './AchievementMenu';
 import './Header.css';
 
 const NAV_ITEMS = [
@@ -113,6 +114,8 @@ const Header = () => {
             <span className="header-logo-sub">PORTFOLIO</span>
           </span>
         </a>
+
+        <AchievementMenu closeSignal={menuOpen} />
 
         <button
           type="button"

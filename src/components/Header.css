@@ -285,7 +285,7 @@
 }
 
 .header-lang {
-  order: 2;
+  order: 3;
   display: flex;
   align-items: center;
   gap: 0.35rem;
@@ -380,7 +380,7 @@
     z-index: 2;
     order: 0;
     height: 40px;
-    margin: 0 0.5rem 0 auto;
+    margin: 0 0.5rem 0 0; /* 左の実績カウンターが右寄せを受け持つ */
   }
 
   /* 全画面メニュー */

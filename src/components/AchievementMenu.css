@@ -1,0 +1,187 @@
+/* ヘッダー右の実績カウンターと、その下に出る一覧 */
+.ach-menu {
+  position: relative;
+  order: 2;
+  margin-left: 1rem;
+}
+
+.ach-menu-button {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.4rem 0.2rem;
+  font-family: var(--font-pixel);
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  color: var(--pencil);
+  background: none;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.ach-menu-icon {
+  display: none;
+}
+
+.ach-menu-button:hover,
+.ach-menu-button.is-open {
+  color: var(--paper);
+  border-bottom-color: var(--signal);
+}
+
+.ach-menu-button:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: 2px;
+}
+
+.ach-menu-count {
+  display: inline-block;
+  color: var(--highlight);
+}
+
+/* 解除した直後に一度だけ光る */
+.ach-menu-count.is-fresh {
+  animation: ach-menu-fresh 1.2s ease-out;
+}
+
+@keyframes ach-menu-fresh {
+  0%, 30% { color: var(--paper); text-shadow: 0 0 10px var(--signal); }
+}
+
+/* ---------- 一覧 ---------- */
+.ach-menu-pop {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 14px);
+  width: 320px;
+  padding: 0.85rem 1rem 0.5rem;
+  background: var(--black);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  animation: ach-menu-in 0.2s ease-out;
+}
+
+/* カウンターを指す小さな三角 */
+.ach-menu-pop::before {
+  content: '';
+  position: absolute;
+  right: 18px;
+  top: -6px;
+  width: 10px;
+  height: 10px;
+  background: var(--black);
+  border-left: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  transform: rotate(45deg);
+}
+
+@keyframes ach-menu-in {
+  from { opacity: 0; transform: translateY(-4px); }
+}
+
+.ach-menu-head {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid rgba(29, 58, 110, 0.6);
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--pencil);
+}
+
+.ach-menu-pop ul {
+  list-style: none;
+}
+
+.ach-menu-pop li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: baseline;
+  padding: 0.45rem 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.ach-menu-mark {
+  flex: none;
+  font-size: 0.7rem;
+  color: var(--signal);
+}
+
+.ach-menu-text {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.6rem;
+  align-items: baseline;
+}
+
+.ach-menu-text b {
+  font-weight: 500;
+  color: var(--paper);
+}
+
+.ach-menu-text span {
+  font-size: 0.75rem;
+  color: var(--pencil);
+}
+
+.ach-menu-pop li.is-locked .ach-menu-mark {
+  color: var(--line);
+}
+
+.ach-menu-pop li.is-locked b {
+  font-family: var(--font-pixel);
+  letter-spacing: 0.15em;
+  color: var(--pencil);
+}
+
+/* ---------- スマホ：言語切り替えの左に置き、一覧は画面幅に合わせる ---------- */
+@media (max-width: 768px) {
+  .ach-menu {
+    position: static;
+    z-index: 2;
+    order: 0;
+    margin: 0 0.25rem 0 auto;
+  }
+
+  .ach-menu-button {
+    height: 40px;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0 0.4rem;
+    font-size: 0.8125rem;
+  }
+
+  .ach-menu-label {
+    display: none;
+  }
+
+  .ach-menu-icon {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--highlight);
+  }
+
+  .ach-menu-pop {
+    left: 0.5rem;
+    right: 0.5rem;
+    top: calc(100% + 8px);
+    width: auto;
+  }
+
+  .ach-menu-pop::before {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ach-menu-count.is-fresh,
+  .ach-menu-pop {
+    animation: none;
+  }
+}
