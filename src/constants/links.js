@@ -4,7 +4,7 @@ import { CiWavePulse1 } from 'react-icons/ci';
 export const linksData = [
   {
     title: 'note',
-    description: 'ゲーム開発記録や活動記録、書籍に関する記事などを投稿しています',
+    description: '開発記録や活動記録などの記事を投稿しています',
     url: 'https://note.com/Taka10822',
     icon: FaStickyNote,
   },
