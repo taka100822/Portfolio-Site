@@ -113,11 +113,12 @@
   color: var(--signal);
 }
 
+/* 名前と説明は長さに関係なく、いつも2行に分ける */
 .ach-menu-text {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0 0.6rem;
-  align-items: baseline;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
 }
 
 .ach-menu-text b {
