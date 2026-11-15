@@ -18,7 +18,8 @@ const ABOUT_TEXT = {
   intro:
     `**京都工芸繊維大学大学院**で**ゲーム × AI**に関する研究を行いながら、
     ゲーム制作に取り組んでいます。
-    また、**ゲーム制作団体「TOMSN」の代表**を務めています。`,
+    また、**ゲーム制作団体「TOMSN」の代表**を務めるほか、
+    **ゲーム会社でプランナーとしてアルバイト**をしています。`,
   history:
     `個人開発からスタートし、**ゲームジャムでの受賞**や**「TOMSN」団体設立**による
     **チーム開発・マネジメント**を経験してきました。
@@ -92,7 +93,7 @@ const About = () => {
               <p className="gdd-concept">{t('人生の一部となる体験を創造する。')}</p>
             </Row>
 
-            <Row label="概要" note="第2弾開発中">
+            <Row label="概要" note="アルバイト中！">
               <p className="gdd-text">{renderText(t(ABOUT_TEXT.intro), lang)}</p>
             </Row>
 
