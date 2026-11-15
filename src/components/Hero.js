@@ -8,7 +8,7 @@ import './Hero.css';
 const IMAGE_BASE = `${process.env.PUBLIC_URL}/Image/works/`;
 
 const TITLE = '人生の一部となる\n体験を創造する。';
-const META = '京都工芸繊維大学大学院でゲームのインタラクションを研究しながら、\n学生ゲーム制作団体「TOMSN」の代表として開発を率いています。';
+const META = '京都工芸繊維大学大学院でゲームのインタラクションを研究しながら、\n学生ゲーム制作団体「TOMSN」の代表をしています。';
 
 // 改行を <br> にする。brClass を渡すと、その改行は CSS で出し分けられる。
 // 英語は改行を消したときに単語がくっつかないよう、改行の前に空白を入れる
