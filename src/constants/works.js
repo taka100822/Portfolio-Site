@@ -210,18 +210,24 @@ export const worksData = [
   {
     id: 11,
     title: 'フリージア',
-    category: '2D Adventure',
-    duration: '制作中',
-    technology: ['Unity', 'C#', 'Blender', 'CLIP STUDIO PAINT'],
-    description: '自身で設立した学生ゲーム制作団体「TOMSN」で制作中の第2弾のゲーム',
+    category: 'Adventure',
+    duration: '1年',
+    technology: ['Unity', 'C#', 'Live2D'],
+    description: '自身で設立した学生ゲーム制作団体「TOMSN」で制作した第2弾のゲーム',
     detailedDescription: {
       overview: '未知の言語が書かれたノートを解読することで、物語を進めるアドベンチャーゲーム',
-      content: '鋭意制作中のアドベンチャーゲーム（2026年10月現在）',
+      content: '読めない文字で書かれたノートを、妖精とともに読み解いていく言語解読アドベンチャー。\n記憶を失った「僕」として、ノートに隠された真実と『フリージア』というタイトルの意味に迫ります。\n'
+      + 'ノートの単語を選ぶと日本語の訳の候補が表示され、絵や記号、同じ単語がほかのページのどこに出てくるかを手がかりに、ふさわしい訳を選びます。読み解いた単語を組み合わせて起こす行動によって、結末が変わります。\n'
+      + 'どの単語から読み解くかはプレイヤーの自由で、読めた単語が次の手がかりとなり、解読が連鎖的に広がっていきます。どこから手をつけても連鎖が途切れないよう、80語を超える単語のつながりと配置を綿密に設計しました。\n'
+      + '0からデザインした未知の文字、霧と光の粒が漂う3Dの森、しなりながら1枚ずつめくれるノート、Live2Dで表情豊かに寄り添う妖精によって、物語の世界に入り込むような没入感を生み出しています。',
       role: '企画立案 \n仕様書作成 \nマネジメント（タスク割り当てやスケジュール調整）\nシナリオ',
     },
     features: ['チーム開発', 'TOMSN第2弾', 'アジャイル開発'],
-    image: `${BASE}/Image/works/p-victory/p-victory.png`,
+    image: `${BASE}/Image/works/p-victory/p-victory.gif`,
+    thumbnail: `${BASE}/Image/works/p-victory/p-victory2.png`, // 一覧のカードだけ GIF ではなくタイトル画面にする
     links: {
+      Youtube: 'https://youtu.be/7Q8nWO0R5as?si=5Co0mNDp8UmHVA2u',
+      website: 'https://gameparade.creators-guild.com/works/work-20261104-019/'
     },
   },
   {

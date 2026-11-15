@@ -55,7 +55,7 @@ const useGalleryImages = (baseImage) => {
     const [, base, ext] = match;
     let cancelled = false;
 
-    const ALT_EXTS = [ext, ...['.png', '.jpg', '.jpeg'].filter(e => e !== ext)];
+    const ALT_EXTS = [ext, ...['.png', '.jpg', '.jpeg', '.gif'].filter(e => e !== ext)];
 
     const tryExts = (n, exts) => {
       if (cancelled || exts.length === 0) return;
@@ -241,7 +241,7 @@ const WorkGrid = ({ onOpen, openId }) => {
             className="work-thumb"
             layoutId={reduceMotion ? undefined : `work-thumb-${work.id}`}
           >
-            <img src={work.image} alt="" loading="lazy" />
+            <img src={work.thumbnail || work.image} alt="" loading="lazy" />
             {getYouTubeId(work.links.Youtube) && (
               <span className="work-thumb-video">
                 <FaPlay aria-hidden="true" />
