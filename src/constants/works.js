@@ -46,7 +46,7 @@ export const worksData = [
       github: 'https://github.com/TOMSNtomsn/CRASH-REPORT',
       Youtube: 'https://youtu.be/TGv2T4rzuc0?si=Gj0YHfU6Lz7dcp_I',
       note: 'https://note.com/taka10822/n/n9265ce5cd160',
-      website: 'https://gameparade.creators-guild.com/works/3163',
+      website: 'https://gameparade.creators-guild.com/works/legacy-2291/',
     },
   },
   {
@@ -234,12 +234,12 @@ export const worksData = [
     id: 12,
     title: '研究用ゲーム',
     category: '3D RPG',
-    duration: '制作中',
+    duration: '2か月',
     technology: ['Unity', 'C#'],
     description: 'AIとゲームに関する研究のために作成した3Dアクションゲーム',
     detailedDescription: {
       overview: '修士研究用に制作中のゲーム、実験のため、詳細は伏せます',
-      content: '鋭意制作中の3DRPGゲーム（2026年7月現在）',
+      content: '研究の実験に使用中の3DRPGゲーム（2026年11月現在）',
       role: '個人制作のためすべて',
     },
     features: ['研究用途', 'データ収集機能', 'ゲームログ分析'],
