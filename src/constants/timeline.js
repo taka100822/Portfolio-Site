@@ -139,8 +139,8 @@ export const timelineData = [
   },
     {
     year: '2026', month: '10',
-    title: 'TOMSN第2弾として言語解読ADV「フリージア」を制作中',
-    description: '学生ゲーム制作団体「TOMSN」にて第2弾の言語解読ADV『フリージア』を制作中です。',
+    title: 'TOMSN第2弾として言語解読ADV「フリージア」を制作',
+    description: '学生ゲーム制作団体「TOMSN」にて第2弾の言語解読ADV『フリージア』を制作しました。',
     type: 'game',
     details: ['チーム開発', 'Unity', 'C#', 'Blender', 'GC甲子園2026'],
   },
