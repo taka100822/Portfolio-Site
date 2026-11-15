@@ -4,9 +4,9 @@ import { FiArrowUpRight } from 'react-icons/fi';
 import { useLang } from '../i18n';
 import './Contact.css';
 
-const LEAD = `ゲームプランナー採用に関するご相談や、
+const LEAD = `ゲームプランナーに関するご相談や、
 ポートフォリオについてのご質問は X の DM でお受けしています。
-ゲームジャムやインターンシップへのお誘いも歓迎です。`;
+ゲームジャムへのお誘いも歓迎です。`;
 
 const Contact = () => {
   const { t } = useLang();
